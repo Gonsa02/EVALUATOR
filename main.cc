@@ -2,7 +2,11 @@
     @mainpage EVALUATOR: plataforma de gestión de problemas y cursos de programación.
 */
 
-#include "Plataforma.hh"
+#include "Conjunto_Usuarios.hh"
+#include "Conjunto_Problemas.hh"
+#include "Conjunto_Sesiones.hh"
+#include "Conjunto_Cursos.hh"
+#include "Operaciones_auxiliares.hh"
 #include "Usuario.hh"
 #include "Problema.hh"
 #include "Sesion.hh"
@@ -18,104 +22,130 @@ using namespace std;
  */
 
 int main() {
-    Plataforma p;
-    p.leer_problemas_iniciales();
-    p.leer_sesiones_iniciales();
-    p.leer_cursos_iniciales();
+    Conjunto_Usuarios conj_u;
+    Conjunto_Problemas conj_p;
+    Conjunto_Sesiones conj_s;
+    Conjunto_Cursos conj_c;
+    conj_p.inicializar();
+    conj_s.inicializar();
+    conj_c.inicializar();
+    conj_u.inicializar();
     string c;
     cin >> c;
     while (c != "fin") {
 	if (c == "nuevo_problema" or c == "np") {
-	    string id_problema;
-	    cin >> id_problema;
-	    if (p.existe_problema(id_problema)) cout << "El problema ya existe" << endl;
-	    else p.añadir_nuevo_problema(id_problema);
+	    Problema p;
+	    p.leer();
+	    if (conj_p.existe(p)) cout << "El problema ya existe" << endl;
+	    else conj_p.añadir(p);
 	}
 	else if (c == "nueva_sesion" or c == "ns") {
-	    string id_sesion;
-	    cin >> id_sesion;
-	    if (p.existe_sesion(id_sesion)) cout << "La sesión ya existe" << endl;
-	    else p.añadir_nueva_sesion(id_sesion);
+	    Sesion s;
+	    s.leer();
+	    if (conj_s.existe(s) or conj_s.existe_con_mismos_problemas(s)) cout << "La sesión ya existe" << endl;
+	    else conj_s.añadir(s);
 	}
-	else if (c == "nuevo_curso" or c == "nc") p.añadir_nuevo_curso();
+	else if (c == "nuevo_curso" or c == "nc") {
+	    Curso c;
+	    c.leer();
+	    if (conj_c.existe(c) or conj_c.existe_con_mismas_sesiones(c)) cout << "El curso ya existe" << endl;
+	    else if (c.existe_interseccion()) cout << "Hay interseccion en los problemas" << endl;
+	    else conj_c.añadir(c);
+	}
 	else if (c == "alta_usuario") {
-	    string nombre;
-	    cin >> nombre;
-	    if (p.existe_usuario(nombre)) cout << "El usuario ya existe" << endl;
-	    else p.dar_alta_usuario(nombre);
+	    Usuario u;
+	    u.leer();
+	    if (conj_u.existe(u)) cout << "El usuario ya existe" << endl;
+	    else {
+		conj_u.añadir(u);
+		cout << conj_u.numero_usuarios() << endl;
+	    }
 	}
 	else if (c == "baja_usuario") {
-	    string nombre;
-	    cin >> nombre;
-	    if (p.existe_usuario(nombre)) p.dar_baja_usuario(nombre);
+	    Usuario u;
+	    u.leer();
+	    if (conj_u.existe(u)) {
+		dar_baja(conj_u, conj_c, u);
+		cout << conj_u.numero_usuarios() << endl;
+	    }
 	    else cout << "El usuario no existe" << endl;
 	}
 	else if (c == "inscribir_curso" or c == "i") {
-	    string nombre;
-	    int id_curso;
-	    cin >> nombre >> id_curso;
-	    if (not p.existe_usuario(nombre) or p.usuario_cursando_curso(nombre) or not p.existe_curso(id_curso))
-		cout << "El usuario no se puede inscribir_curso al curso" << endl;
-	    else p.inscribir_curso(nombre, id_curso);
+	    Usuario u;
+	    Curso c;
+	    u.leer();
+	    c.leer_id();
+	    if (not conj_u.existe(u) or u.inscrito_a_curso() or not conj_c.existe(c))
+		cout << "El usuario no se puede inscribir al curso" << endl;
+	    else inscribir_usuario_a_curso(u, c);
 	}
 	else if (c == "curso_usuario" or c == "cu") {
-	    string nombre;
-	    cin >> nombre;
-	    if (not p.existe_usuario(nombre)) cout << "El usuario no existe" << endl;
-	    else cout << p.curso_usuario(nombre) << endl;
+	    Usuario u;
+	    u.leer();
+	    if (not conj_u.existe(u)) cout << "El usuario no existe" << endl;
+	    else cout << u.curso() << endl;
 	}
 	else if (c == "sesion_problema" or c == "sp") {
-	    int id_curso;
-	    string id_problema;
-	    if (not p.existe_curso(id_curso) or not p.existe_problema(id_problema)) 
+	    Curso c;
+	    Problema p;
+	    c.leer_id();
+	    p.leer();
+	    if (conj_c.existe(c) or not conj_p.existe(p)) 
 		cout << "No se ha podido encontrar la sesión del problema" << endl;
-	    else cout << p.sesion_problema(id_curso, id_problema) << endl;
+	    else cout << c.sesion_problema(p.obtener_id()) << endl;
 	}
 	else if (c == "problemas_resueltos" or c == "pr") {
-	    string nombre;
-	    cin >> nombre;
-	    if (not p.existe_usuario(nombre)) cout << "El usuario no existe" << endl;
-	    else p.escribir_problemas_resueltos_usuario(nombre);
+	    Usuario u;
+	    u.leer();
+	    if (not conj_u.existe(u)) cout << "El usuario no existe" << endl;
+	    else u.escribir_problemas_resueltos();
 	}
 	else if (c == "problemas_enviables" or c == "pe") {
-	    string nombre;
-	    cin >> nombre;
-	    if (not p.existe_usuario(nombre) or not p.usuario_cursando_curso(nombre)) 
+	    Usuario u;
+	    u.leer();
+	    if (conj_u.existe(u) or not u.inscrito_a_curso()) 
 		cout << "No se pueden escribir los problemas enviables" << endl;
-	    else p.escribir_problemas_enviables_usuario(nombre);
+	    else u.escribir_problemas_enviables();
 	}
 	else if (c == "envio" or c =="e") {
-	    string nombre, id_problema;
+	    Usuario u;
+	    Problema p;
 	    int r;
-	    cin >> nombre >> id_problema >> r;
-	    p.envio(nombre, id_problema, r);
+	    u.leer();
+	    p.leer();
+	    cin >> r;
+	    Curso c;
+	    conj_u.obtener(u);
+	    conj_c.obtener_con_id(u.curso(), c);
+	    conj_p.obtener(p);
+	    envio(c, u, p, r);
 	}
-	else if (c == "listar_problemas" or c =="lp") p.listar_problemas();
+	else if (c == "listar_problemas" or c =="lp") conj_p.listar();
 	else if (c == "escribir_problema" or c == "ep") {
-	    string id_problema;
-	    cin >> id_problema;
-	    if (p.existe_problema(id_problema)) p.escribir_un_problema(id_problema);
+	    Problema p;
+	    p.leer();
+	    if (conj_p.existe(p)) p.escribir_problema();
 	    else cout << "El problema no existe" << endl;
 	}
-	else if (c == "listar_sesiones" or c == "ls") p.listar_sesiones();
+	else if (c == "listar_sesiones" or c == "ls") conj_s.listar();
 	else if (c == "escribir_sesion" or c == "es") {
-	    string id_sesion;
-	    cin >> id_sesion;
-	    if (p.existe_sesion(id_sesion)) p.escribir_una_sesion(id_sesion);
+	    Sesion s;
+	    s.leer_id();
+	    if (conj_s.existe(s)) s.escribir_sesion();
 	    else cout << "La sesion no existe" << endl;
 	}
-	else if (c == "listar_cursos" or c == "lc") p.listar_cursos();
+	else if (c == "listar_cursos" or c == "lc") conj_c.listar();
 	else if (c == "escribir_curso" or c == "ec") {
-	    int id_curso;
-	    cin >> id_curso;
-	    if (p.existe_curso(id_curso)) p.escribir_un_curso(id_curso);
+	    Curso c;
+	    c.leer_id();
+	    if (conj_c.existe(c)) c.escribir_curso();
 	    else cout << "El curso no existe" << endl;
 	}
-	else if (c == "listar_usuarios" or c == "lu") p.listar_usuarios();
+	else if (c == "listar_usuarios" or c == "lu") conj_u.listar();
 	else if (c == "escribir_usuario" or c == "eu") {
-	    string nombre;
-	    cin >> nombre;
-	    if (p.existe_usuario(nombre)) p.escribir_un_usuario(nombre);
+	    Usuario u;
+	    u.leer();
+	    if (conj_u.existe(u)) u.escribir_usuario();
 	    else cout << "El usuario no existe" << endl;
 	}
 	cin >> c;

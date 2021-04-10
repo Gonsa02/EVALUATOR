@@ -14,11 +14,8 @@
 /** @class Curso
     @brief Representa un Curso.
 
-    Cada curso esta formado por un conjunto de sesiones donde la intersección entre cualquier par de sesiones del curso es nula y también consta de un valor entero entre 1 y N que lo identifica.
 */
 
-
-// Comentario para mi: la gestion de los usuarios del curso, és decir, algunos de las modificadoras que tengo aquí, deberian ser responsabilidad de la clase Plataforma.
 
 class Curso
 {
@@ -29,16 +26,9 @@ public:
      
 	Se ejecuta automáticamente al declarar un Curso.
 	\pre <em>cierto</em>
-	\post El resultado es un Curso sin usuarios ni sesiones.
+	\post El resultado es un Curso.
     */
     Curso();
-
-    /** @brief Creadora de un Curso con sesiones.
-     
-	\pre En el parámetro "id_sesiones" se encuentra un vector con todas las sesiones que debe contener el Curso.
-	\post El resultado es un Curso con todos las sesiones que contenia el vector "id_sesiones" y sin usuarios que lo esten cursando.
-    */
-    Curso(vector<string> id_sesiones);
 
     //Destructora
 
@@ -59,6 +49,13 @@ public:
     */
     void usuario_inscribir_curso();
 
+    /** @brief Incrementa el decrementa el numero de usuarios que estan cursando el Curso.
+
+	\pre <em>cierto</em>
+	\post Se ha decrementado en una unidad el numero de estudiantes que estan cursando el Curso.
+    */
+    void usuario_dar_baja_curso();
+
     /** @brief Incrementa el numero de usuarios que han completado el Curso.
 
 	\pre <em>cierto</em>
@@ -66,8 +63,14 @@ public:
     */
     void usuario_finaliza_curso();
 
-
     //Consultoras
+
+    /** @brief Consulta el identificador de un Curso.
+
+      \pre El parámetro implícito tiene asignado un identificador.
+      \post Retorna el identificador del parámetro implícito.
+    */
+    int identificador() const;
 
     /** @brief Consulta el numero de usuarios actuales o pasados que han completado el Curso.
 
@@ -99,6 +102,13 @@ public:
 
     bool contiene_problema(string ID) const;
 
+    /** @brief Consulta si existe intersección entre los problemas de las diferentes sesiones.
+     
+     \pre El parámetro implícito contiene un conjunto de Sesiones.
+     \post El resultado indica si existe intersección entro los problemas de las diferentes sesiones del parámetro implícito.
+     */
+    bool existe_interseccion() const;
+
     /** @brief Consulta la sesion de un problema
 	
 	\pre El curso contiene un problema con el "ID" que le pasen al parámetro de la función.
@@ -123,6 +133,20 @@ public:
 
     */
     void escribir_curso() const;
+
+    /** @brief Operación de lectura
+
+      \pre En el canal standard de entrada se encuentra el numero de sesiones de las cuales va a constar el Curso (N) y posteriormente van a entrar N sesiones del curso.
+      \post Se han añadido las sesiones al parámetro implícito.
+    */
+    void leer();
+
+    /** @brief Operación de lectura del identificador
+
+      \pre En el canal standard de entrada se encuentra el identificador del parámetro implícito.
+      \post Se ha añadido el identificador al parámetro implícito.
+    */
+    void leer_id();
 };
 
 #endif

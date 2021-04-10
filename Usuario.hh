@@ -23,10 +23,18 @@ class Usuario
 public:
     //Constructoras
 
+    /** @brief Creadora por defecto de la clase Usuario.
+     
+	Se ejecuta automáticamente al declarar un Usuario.
+	\pre <em>cierto</em>
+	\post El resultado es un Usuario.
+    */
+    Usuario();
+
     /** @brief Creadora con identificador
      
 	\pre En el parámetro ID se encuentra el identificador del usuario.
-	\post El resultado es un Usuario.
+	\post El resultado es un Usuario con identificador = ID.
     */
     Usuario(string ID);
 
@@ -156,6 +164,27 @@ public:
       \post Escribe cuantos envios en total ha realizado, cuantos problemas ha resuelto, cuentos ha intentado resolver y el id del curso en el cual está inscrito o cero si no está inscrito en ninguno.
     */
     void escribir_usuario() const;
+
+    /** @brief Escribe los problemas enviables del parámetro implícito.
+
+      \pre <em>cierto</em>
+      \post Se han escrito por orden creciente de identificador los problemas que el usuario no ha solucionado todavía en el curso en el que está inscrito actualmente, pero a los cuales ya puede realizar un envío.
+      */
+    void escribir_problemas_enviables();
+
+    /** @brief Escribe los problemas resueltos del parámetro implícito.
+
+      \pre <em>cierto</em>
+      \post Se han escrito por orden creciente de identificador los problemas que el parámetro implícito ya ha solucionado con éxito, ya sea en el curso en el que está inscrito actualmente (si lo está) como los resueltos en curssos anteriores. Además también se imprime el número de enviós realizados por el usuario a cada problema del listado.
+      */
+    void escribir_problemas_resueltos();
+
+    /** @brief Operación de lectura
+
+      \pre En el canal standard de entrada se encuentra el nombre del Usuario.
+      \post Se ha añadido el nombre al parámetro implícito.
+    */
+    void leer();
 
     /** @internal
 private:

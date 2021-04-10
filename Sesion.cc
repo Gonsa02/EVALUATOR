@@ -20,9 +20,8 @@ vector<string> Sesion::problemas_sucesores(string id_problema)
 {
     vector<string> sucesores(0);
     BinTree<string> sub = subarbol(prerequisitos, id_problema);
-    if (not sub.left().empty()) sucesores.push_back(sub.left().value());
-    if (not sub.right().empty()) sucesores.push_back(sub.right().value());
-    if (not sub.empty()) sucesores.push_back(sub.value());
+    if (not sub.empty() and not sub.left().empty()) sucesores.push_back(sub.left().value());
+    if (not sub.empty() and not sub.right().empty()) sucesores.push_back(sub.right().value());
     return sucesores;
 }
 

@@ -23,6 +23,15 @@ class Sesion
 public:
     //Constructoras
 
+    /** @brief Creadora por defecto de la clase Sesion.
+     
+	Se ejecuta automáticamente al declarar una Sesion.
+	\pre <em>cierto</em>
+	\post El resultado es un Sesion.
+    */
+
+    Sesion();
+
     /** @brief Creadora de la clase Sesion con identificador y con estructura de prerequisitos.
 	
 	\pre En "id_sesion" se encuentra el identificador de la Sesion y en el parámetro b se encuentra la estructura de prerequisitos de problemas de la Sesion.
@@ -36,11 +45,18 @@ public:
     /** @brief  Destructora de la clase Sesion.
 	
 	\pre <em>cierto</em>
-	\post Se destruye el parametro implícito
+	\post Se destruye el parámetro implícito
     */
     ~Sesion();
 
     //Consultoras
+    
+    /** @brief Consulta el identificador de una Sesion.
+
+      \pre El parámetro implícito tiene un identificador asignado.
+      \post Retorna el identificador del parámetro implícito.
+    */
+    string identificador() const;
     
     /** @brief Consulta el número de Problemas que forman parte de la Sesion.
 
@@ -65,6 +81,20 @@ public:
 
     */
     void escribir_sesion() const;
+
+    /** @brief Operación de lectura
+
+      \pre En el canal standard de entrada se encuentra el identificador de la sesion y la estructura de los prerequisitos de los problemas de la Sesion.
+      \post Se ha añadido el identificador y la estructura de prerequisitos de problemas al parámetro implícito.
+    */
+    void leer();
+
+    /** @brief Operación de lectura del identificador
+
+      \pre En el canal standard de entrada se encuentra el identificador del parámetro implícito.
+      \post Se ha añadido el identificador al parámetro implícito.
+    */
+    void leer_id();
 
 /** @internal
 private:

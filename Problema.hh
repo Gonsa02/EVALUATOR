@@ -21,6 +21,15 @@ class Problema
 public:
     //Constructoras
 
+    /** @brief Creadora por defecto de la clase Problema.
+     
+	Se ejecuta automáticamente al declarar un Problema.
+	\pre <em>cierto</em>
+	\post El resultado es un Problema.
+    */
+
+    Problema();
+
     /** @brief Creadora con identificador de la clase Problema.
 
 	\pre en "ID" se encuentra el identificador del problema
@@ -79,7 +88,7 @@ public:
     */
     int envios_totales() const;
 
-    //Escritura de Problema
+    //Escritura i lectura de Problema
 
     /** @brief Operación de escritura
 
@@ -88,6 +97,13 @@ public:
 
     */
     void escribir_problema() const;
+
+    /** @brief Operación de lectura
+
+      \pre En el canal standard de entrada se encuentra el identificador del Problema.
+      \post Se ha añadido el identificador al parámetro implícito.
+    */
+    void leer();
 
 /** @internal
 private:
