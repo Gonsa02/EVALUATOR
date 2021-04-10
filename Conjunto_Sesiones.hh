@@ -56,13 +56,6 @@ public:
     bool existe(Sesion& s);
 
     
-    /** @brief Consulta si existe una Sesion con el mismo identificador.
-
-      \pre <em>cierto</em>
-      \post El resultado indica si el parámetro implícito contiene una Sesion "s" con los mismos problemas que s.
-      */
-    bool existe_con_mismos_problemas(const Sesion& s) const;
-
     //Lectura y escritura
 
     /** @brief Lectura inicial de sesiones.

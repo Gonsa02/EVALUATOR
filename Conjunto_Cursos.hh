@@ -55,13 +55,6 @@ public:
       */
     bool existe(Curso& c);
     
-    /** @brief Consulta si existe un Curso con las mismas sesiones.
-
-      \pre <em>cierto</em>
-      \post El resultado indica si el parámetro implícito contiene un Curso "c" con las mismas sesiones.
-      */
-    bool existe_con_mismas_sesiones(const Curso& c) const;
-
     /** @brief Obtiene el curso mediante identificador.
 
     \pre Existe un Curso con identificador "id".

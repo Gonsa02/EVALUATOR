@@ -58,10 +58,10 @@ public:
 
     /** @brief Obtiene un Problema del Conjunto_Problemas
 
-	\pre Existe un Problema "p" en el parámetro implícito.
-	\post En "p" se encuentra el Problema "p" del parámetro implícito.	
+	\pre Existe un Problema con identificador = "id_problema" en el parámetro implícito.
+	\post En "p" se encuentra el Problema con identificador = "id_problema" del parámetro implícito.	
     */
-    void obtener(Problema& p);
+    void obtener(const string& id_problema, Problema& p);
 
     //Lectura y Escritura
 

@@ -6,11 +6,11 @@
 #include "Conjunto_Problemas.hh"
 #include "Conjunto_Sesiones.hh"
 #include "Conjunto_Cursos.hh"
-#include "Operaciones_auxiliares.hh"
 #include "Usuario.hh"
 #include "Problema.hh"
 #include "Sesion.hh"
 #include "Curso.hh"
+#include "Operaciones_auxiliares.hh"
 
 #ifndef NO_DIAGRAM
 #include <iostream>
@@ -18,6 +18,7 @@ using namespace std;
 #endif
 
 /** 
+ @file main.cc
  @brief Programa principal para la <em>Gestión del EVALUATOR</em>.
  */
 
@@ -42,13 +43,13 @@ int main() {
 	else if (c == "nueva_sesion" or c == "ns") {
 	    Sesion s;
 	    s.leer();
-	    if (conj_s.existe(s) or conj_s.existe_con_mismos_problemas(s)) cout << "La sesión ya existe" << endl;
+	    if (conj_s.existe(s)) cout << "La sesión ya existe" << endl;
 	    else conj_s.añadir(s);
 	}
 	else if (c == "nuevo_curso" or c == "nc") {
 	    Curso c;
 	    c.leer();
-	    if (conj_c.existe(c) or conj_c.existe_con_mismas_sesiones(c)) cout << "El curso ya existe" << endl;
+	    if (conj_c.existe(c)) cout << "El curso ya existe" << endl;
 	    else if (c.existe_interseccion()) cout << "Hay interseccion en los problemas" << endl;
 	    else conj_c.añadir(c);
 	}
@@ -108,16 +109,15 @@ int main() {
 	    else u.escribir_problemas_enviables();
 	}
 	else if (c == "envio" or c =="e") {
+	    int r;
+	    string nombre, id_problema;
+	    cin >> nombre >> id_problema >> r;
+	    Curso c;
 	    Usuario u;
 	    Problema p;
-	    int r;
-	    u.leer();
-	    p.leer();
-	    cin >> r;
-	    Curso c;
-	    conj_u.obtener(u);
+	    conj_u.obtener(nombre, u);
 	    conj_c.obtener_con_id(u.curso(), c);
-	    conj_p.obtener(p);
+	    conj_p.obtener(id_problema, p);
 	    envio(c, u, p, r);
 	}
 	else if (c == "listar_problemas" or c =="lp") conj_p.listar();

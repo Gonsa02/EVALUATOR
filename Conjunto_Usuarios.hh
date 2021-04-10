@@ -65,10 +65,10 @@ public:
 
     /** @brief Obtiene un Usuario del Conjunto_Usuarios
 
-	\pre Existe un Usuario "u" en el parámetro implícito.
-	\post En "u" se encuentra el Usuario "u" del parámetro implícito.	
+	\pre Existe un Usuario con nombre = "nombre" en el parámetro implícito.
+	\post En "u" se encuentra el Usuario con nombre = "nombre" del parámetro implícito.	
     */
-    void obtener(Usuario& u);
+    void obtener(const string& nombre, Usuario& u);
 
     /** @brief Consulta el número de usuarios que pertenecen al parámetro implícito.
      

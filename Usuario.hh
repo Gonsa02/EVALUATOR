@@ -3,7 +3,6 @@
 */
 
 #ifndef _USUARIO_HH_
-#include "Problema.hh"
 #define _USUARIO_HH_
 
 #ifndef NO_DIAGRAM
