@@ -78,7 +78,11 @@ int main() {
 	    c.leer_id();
 	    if (not conj_u.existe(u) or u.inscrito_a_curso() or not conj_c.existe(c))
 		cout << "El usuario no se puede inscribir al curso" << endl;
-	    else inscribir_usuario_a_curso(u, c);
+	    else {
+		inscribir_usuario_a_curso(u, c);
+		conj_u.actualizar(u);
+		conj_c.actualizar(c);
+	    }
 	}
 	else if (c == "curso_usuario" or c == "cu") {
 	    Usuario u;
@@ -112,13 +116,7 @@ int main() {
 	    int r;
 	    string nombre, id_problema;
 	    cin >> nombre >> id_problema >> r;
-	    Curso c;
-	    Usuario u;
-	    Problema p;
-	    conj_u.obtener(nombre, u);
-	    conj_c.obtener_con_id(u.curso(), c);
-	    conj_p.obtener(id_problema, p);
-	    envio(c, u, p, r);
+	    envio(conj_u, conj_c, conj_p, nombre, id_problema, r);
 	}
 	else if (c == "listar_problemas" or c =="lp") conj_p.listar();
 	else if (c == "escribir_problema" or c == "ep") {

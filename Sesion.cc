@@ -1,14 +1,10 @@
 #include "Sesion.hh"
 #include "BinTree.hh"
 
-Sesion::Sesion(string id_sesion, BinTree<string> b)
+string Sesion::obtener_id() const
 {
-    id = id_sesion;
-    prerequisitos = b;
-    num_problemas = calcular_nodos(b);
+    return id;
 }
-
-Sesion::~Sesion(){}
 
 int Sesion::numero_problemas() const
 {
@@ -25,16 +21,53 @@ vector<string> Sesion::problemas_sucesores(string id_problema)
     return sucesores;
 }
 
-void Sesion::escribir_sesion() const
+bool Sesion::interseccion_vacia(const Sesion& s) const
 {
-    postorden(prerequisitos);
+    set<string> s_aux = s.conj_id_problemas;
+    for (set<string>::const_iterator const_it = conj_id_problemas.begin(); const_it != conj_id_problemas.end(); ++const_it) {
+	set<string>::const_iterator it_aux = s_aux.find(*const_it);
+	if (it_aux != s_aux.end()) return false;
+    }
+    return true;
 }
 
-void Sesion::postorden(const BinTree<string> &arbol) const
+bool Sesion::contine_problema(string id) const
+{
+    set<string>::const_iterator const_it = conj_id_problemas.find(id);
+    if (const_it == conj_id_problemas.end()) return false;
+    else return true;
+}
+
+void Sesion::escribir_sesion() const
+{
+    escribir_postorden(prerequisitos);
+}
+
+void Sesion::leer()
+{
+    string id;
+    BinTree<string> b;
+    set<string> conj_p;
+    cin >> id;
+    this -> id = id;
+    leer_bin_tree(b, conj_p, "0");
+    prerequisitos = b;
+    conj_id_problemas = conj_p;
+
+}
+
+void Sesion::leer_id()
+{
+    string id;
+    cin >> id;
+    this -> id = id;
+}
+
+void Sesion::escribir_postorden(const BinTree<string> &arbol) const
 {
     if (not arbol.empty()) {
-	postorden(arbol.left());
-	postorden(arbol.right());
+	escribir_postorden(arbol.left());
+	escribir_postorden(arbol.right());
 	cout << arbol.value() << endl;
     }
 }
@@ -58,4 +91,18 @@ BinTree<string> subarbol(BinTree<string> arbol, string id_problema)
     if (not right.empty()) return right;
     BinTree<string> empty;
     return empty;
+}
+
+void leer_bin_tree(BinTree<string>& a, set<string>& conj_p, string marca)
+{
+  string x;
+  cin >> x;
+  if (x!=marca){
+	conj_p.insert(x);
+	BinTree<string> l;
+	leer_bin_tree(l, conj_p, marca);
+	BinTree<string> r;
+	leer_bin_tree(r, conj_p, marca);
+	a=BinTree<string>(x,l,r);
+  }
 }

@@ -8,7 +8,6 @@
 #include "Sesion.hh"
 
 #ifndef NO_DIAGRAM
-#include <vector>
 #endif
 
 /** @class Curso
@@ -70,7 +69,7 @@ public:
       \pre El parámetro implícito tiene asignado un identificador.
       \post Retorna el identificador del parámetro implícito.
     */
-    int identificador() const;
+    int obtener_id() const;
 
     /** @brief Consulta el numero de usuarios actuales o pasados que han completado el Curso.
 
@@ -129,7 +128,7 @@ public:
     /** @brief Operación de escritura del parametro implícito
 
       \pre <em>cierto</em>
-      \post Escribe el numero de usuarios actualos o pasados que lo han completado, el numero de usuarios inscritos actualmente, el numero de sesiones qeu lo forman y los identificadores de dichas sesiones, en el mismo orden en el que se leyeron cuando se creó el curso.
+      \post Escribe el numero de usuarios actuales o pasados que lo han completado, el numero de usuarios inscritos actualmente, el numero de sesiones qeu lo forman y los identificadores de dichas sesiones, en el mismo orden en el que se leyeron cuando se creó el curso.
 
     */
     void escribir_curso() const;
@@ -147,6 +146,11 @@ public:
       \post Se ha añadido el identificador al parámetro implícito.
     */
     void leer_id();
+
+private:
+    int id, usuarios_curso_completado, usuarios_cursando_curso;
+    set<Sesion> conj_s;
+    vector<string> id_sesiones;
 };
 
 #endif

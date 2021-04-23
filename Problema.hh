@@ -30,14 +30,6 @@ public:
 
     Problema();
 
-    /** @brief Creadora con identificador de la clase Problema.
-
-	\pre en "ID" se encuentra el identificador del problema
-	\post El resultado es un nuevo Problema con identificador = ID.
-
-    */
-    Problema(string ID);
-
     //Destructora
 
     /** @brief  Destructora de la clase Problema.
@@ -105,13 +97,20 @@ public:
     */
     void leer();
 
-/** @internal
+    // Comparadoras
+
+    /** @brief Operación de comparación
+
+     \pre <em>cierto</em>
+     \post El resultado indica si el parámetro implícito es menor que el Problema "p".
+    */
+    bool operator<(const Problema &p) const;
+
 private:
     string id;
     int env_totales, env_exito;
     double ratio;
     void actualizar_ratio();
-*/
 };
 
 #endif

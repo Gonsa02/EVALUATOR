@@ -30,13 +30,6 @@ public:
     */
     Usuario();
 
-    /** @brief Creadora con identificador
-     
-	\pre En el parámetro ID se encuentra el identificador del usuario.
-	\post El resultado es un Usuario con identificador = ID.
-    */
-    Usuario(string ID);
-
     //Destructora
 
     /** @brief Destructora de la clase Usuario.
@@ -92,6 +85,13 @@ public:
 
     //Consultoras
 
+    /** @brief Consulta el nombre del Usuario
+
+      \pre El parámetro implícito tiene un nombre asignado.
+      \post Retorna el nombre del parámetro implícito.
+    */
+    string obtener_nombre() const; 
+
     /** @brief Consulta el número de problemas que el Usuario ha intentado resolver.
 
       \pre <em>cierto</em>
@@ -127,27 +127,6 @@ public:
     */
     int curso() const;
 
-    /** @brief Consulta los identificadores de los problemas que ha resuelto el Usuario en el Curso actual.
-
-      \pre El parametro implícito está cursando un Curso.
-      \post Retorna una lista con todos los identificadores de los problemas que el parametro implícito ha resuelto en el Curso actual, listados crecientemente por ID.
-    */
-    list<string> problemas_resueltos_curso_acutal() const;
-
-    /** @brief Consulta todos los indentificadores de los problemas que ha resuelto el Usuario.
-
-      \pre <em>cierto</em>
-      \post Retorna una lista con todos los identificadores de los problemas que el parametro implícito ha resuelto, listados crecientemente por ID.
-    */
-    list<string> problemas_resueltos() const;
-
-    /** @brief Consulta los identificadores de los problemas que puede resolver el Usuario, es decir, que ya cumple los requisitos para poder hacer el envio al problema.
-
-      \pre El parametro implícito está cursando un Curso.
-      \post Retorna un lista con todos los identificadores de los problemas que el parametro implícito puede resolver en el Curso actual.
-    */
-    list<string> problemas_enviables() const;
-
     /** @brief Consulta si un Usuario puede hacer un envio a un Problema.
 
       \pre El parámetro implícito está cursando un Curso. En el parámetro "id_problema" se encuentra el identificador del problema el cual queremos consultar si el parámetro implícitopuede hacer un envio o no.
@@ -169,14 +148,14 @@ public:
       \pre <em>cierto</em>
       \post Se han escrito por orden creciente de identificador los problemas que el usuario no ha solucionado todavía en el curso en el que está inscrito actualmente, pero a los cuales ya puede realizar un envío.
       */
-    void escribir_problemas_enviables();
+    void escribir_problemas_enviables() const;
 
     /** @brief Escribe los problemas resueltos del parámetro implícito.
 
       \pre <em>cierto</em>
       \post Se han escrito por orden creciente de identificador los problemas que el parámetro implícito ya ha solucionado con éxito, ya sea en el curso en el que está inscrito actualmente (si lo está) como los resueltos en curssos anteriores. Además también se imprime el número de enviós realizados por el usuario a cada problema del listado.
       */
-    void escribir_problemas_resueltos();
+    void escribir_problemas_resueltos() const;
 
     /** @brief Operación de lectura
 
@@ -185,7 +164,6 @@ public:
     */
     void leer();
 
-    /** @internal
 private:
     int intentos_problemas, envios_totales, id_curso_inscrito;
     bool inscrito;
@@ -196,7 +174,6 @@ private:
 
     void añadir_problema_a_lista(list<string>& l, string id_problema);
     void quitar_problema_a_lista(list<string>& l, string id_problema);
-    */
 };
 
 #endif

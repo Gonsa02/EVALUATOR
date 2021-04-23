@@ -8,6 +8,7 @@
 #include "Usuario.hh"
 
 #ifndef NO_DIAGRAM
+#include <map>
 #endif
 
 /** @class Conjunto_Usuarios
@@ -53,6 +54,12 @@ public:
       */
     void borrar(const Usuario& u);
 
+    /** @brief Actualiza un Usuario del Conjunto_Usuarios
+
+    \pre El Usuario "u" existe en el parámetro implícito.
+    \post Se ha sustituido el Usuario del parámetro implícito con el mismo nombre que "u" por "u".
+    */
+    void actualizar(const Usuario& u);
 
     //Consultoras
     
@@ -79,7 +86,7 @@ public:
 
     /** @brief Lectura inicial de usuarios.
     
-      \pre En el canal standard de entrada estan preparados los diferentes usuarios que se desea añadir inicialmente al conjunto de usuarios.
+      \pre En el canal standard de entrada estan preparados los diferentes usuarios que se desea añadir inicialmente al conjunto de usuarios. Primero entra el número N de usuarios que se desea introducir.
       \post Se han añadido los usuarios al conjunto de usuarios.
       */
     void inicializar();
@@ -90,5 +97,8 @@ public:
       \post Para cada Usuario en el parametro implícito, escribe cuantos envios en total ha realizado, cuantos problemas ha resuelto, cuentos ha intentado resolver y el id del curso en el cual está inscrito o cero si no está inscrito en ninguno.
     */
     void listar() const;
+
+private:
+    map<string, Usuario> conj_u;
 };
 #endif

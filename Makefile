@@ -1,5 +1,15 @@
-object: Curso.cc Plataforma.cc Problema.cc Sesion.cc Usuario.cc
-	g++ -c Curso.cc Plataforma.cc Problema.cc Sesion.cc Usuario.cc
+OPCIONS = -D_JUDGE_ -D_GLIBCXX_DEBUG -O2 -Wall -Wextra -Werror -Wno-sign-compare -std=c++11
 
-exe: main.cc Curso.o Plataforma.o Problema.o Sesion.o Usuario.o
-	g++ -o exe main.cc Curso.o Plataforma.o Problema.o Sesion.o Usuario.o
+program.exe:
+	g++ -o program.exe program.cc *.o $(OPCIONS)
+
+object:
+	g++ -c *.cc $(OPCIONS)
+
+tar:
+	tar -cvf practica.tar *.hh *.cc Makefile
+
+clean:
+	rm *.o
+	rm *.exe
+	rm *.tar

@@ -8,6 +8,7 @@
 #include "Curso.hh"
 
 #ifndef NO_DIAGRAM
+#include <map>
 #endif
 
 /** @class Conjunto_Cursos
@@ -46,6 +47,13 @@ public:
     */
     void añadir(const Curso& c);
 
+    /** @brief Actualiza un Curso del Conjunto_Cursos
+
+    \pre El Curso "c" existe en el parámetro implícito.
+    \post Se ha sustituido el Curso del parámetro implícito con el mismo identificador que "c" por "c".
+    */
+    void actualizar(const Curso& c);
+
     //Consultoras
     
     /** @brief Consulta si existe un Curso con el mismo identificador.
@@ -66,7 +74,7 @@ public:
 
     /** @brief Lectura inicial de cursos.
     
-      \pre En el canal standard de entrada estan preparados los diferentes cursos que se desea añadir inicialmente al conjunto de cursos.
+      \pre En el canal standard de entrada estan preparados los diferentes cursos que se desea añadir inicialmente al conjunto de cursos. Primero se lee el numero N que indica cuantos cursos van a entrar.
       \post Se han añadido los cursos al conjunto de cursos.
       */
     void inicializar();
@@ -77,5 +85,8 @@ public:
       \post Para cada Curso que haya en el parametro implícito, se escribe el numero de usuarios actualos o pasados que lo han completado, el numero de usuarios inscritos actualmente, el numero de sesiones qeu lo forman y los identificadores de dichas sesiones, en el mismo orden en el que se leyeron cuando se creó el Curso.
       */
     void listar() const;    
+
+private:
+    map<int, Curso> conj_c;
 };
 #endif

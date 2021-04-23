@@ -8,6 +8,7 @@
 #include "Sesion.hh"
 
 #ifndef NO_DIAGRAM
+#include <map>
 #endif
 
 /** @class Conjunto_Sesiones
@@ -72,5 +73,7 @@ public:
       */
     void listar() const;    
 
+private:
+    map<string, Sesion> conj_s;
 };
 #endif

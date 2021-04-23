@@ -8,6 +8,8 @@
 #include "Problema.hh"
 
 #ifndef NO_DIAGRAM
+#include <map>
+#include <set>
 #endif
 
 /** @class Conjunto_Problemas
@@ -47,6 +49,13 @@ public:
     */
     void añadir(const Problema& p);
 
+    /** @brief Actualiza un Problema del Conjunto_Problemas
+
+    \pre El Problema "p" existe en el parámetro implícito.
+    \post Se ha sustituido el Problema "p" del parámetro implícito con el mismo identificador que "p" por "p".
+    */
+    void actualizar(const Problema& p);
+
     //Consultoras
     
     /** @brief Consulta si existe un Problema
@@ -78,5 +87,9 @@ public:
       \post Se han listado todos los problemas de la del parámetro implícito en orden creciente del ratio, indicando para cada uno el número de envios totales t, el número e de envíos con éxito a cada Problema, en ambos casos de usuarios presentes o pasados, se ha escrito el ratio (t+1)/(e+1). En caso de empate se han listado por orden creciente de identificador.
       */
     void listar() const;
+
+
+private:
+    map<string, Problema> conj_p;
 };
 #endif

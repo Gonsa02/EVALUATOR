@@ -1,16 +1,5 @@
 #include "Usuario.hh"
 
-Usuario::Usuario(string nombre)
-{
-    this -> nombre = nombre;
-    id_curso_inscrito = 0;
-    intentos_problemas = 0;
-    envios_totales = 0;
-    inscrito = false;
-}
-
-Usuario::~Usuario(){}
-
 void Usuario::incrementar_intentos_problemas()
 {
     ++intentos_problemas;
@@ -33,6 +22,11 @@ void Usuario::finalizar_curso()
     inscrito = false;
     list<string> l;
     pro_resueltos_curso_actual = l;
+}
+
+string Usuario::obtener_nombre() const
+{
+    return nombre;
 }
 
 int Usuario::num_intentos_problemas() const
@@ -60,26 +54,11 @@ int Usuario::curso() const
     return id_curso_inscrito;
 }
 
-list<string> Usuario::problemas_resueltos_curso_acutal() const
-{
-    return pro_resueltos_curso_actual;
-}
-
-list<string> Usuario::problemas_resueltos() const
-{
-    return pro_resueltos;
-}
-
-list<string> Usuario::problemas_enviables() const
-{
-    return pro_enviables;
-}
-
 bool Usuario::cumple_requisitos(string id_problema) const
 {
     bool found = false;
     list<string>::const_iterator const_it = pro_enviables.begin();
-    while (not found and const_it != problemas_enviables().end()) {
+    while (not found and const_it != pro_enviables.end()) {
 	if (*const_it == id_problema) found = true;
 	++const_it;
     }
@@ -88,7 +67,30 @@ bool Usuario::cumple_requisitos(string id_problema) const
 
 void Usuario::escribir_usuario() const
 {
-    cout << envios_totales << " " << problemas_resueltos().size() << " " << intentos_problemas << " " << id_curso_inscrito << endl;
+    cout << envios_totales << " " << pro_resueltos.size() << " " << intentos_problemas << " " << id_curso_inscrito << endl;
+}
+
+void Usuario::escribir_problemas_enviables() const
+{
+    for (list<string>::const_iterator const_it = pro_enviables.begin(); const_it != pro_enviables.end(); ++const_it)
+	cout << *const_it << " ";
+}
+
+void Usuario::escribir_problemas_resueltos() const
+{
+    for (list<string>::const_iterator const_it = pro_resueltos.begin(); const_it != pro_resueltos.end(); ++const_it)
+	cout << *const_it << " ";
+}
+
+void Usuario::leer()
+{
+    string n;
+    cin >> n;
+    nombre = n;
+    intentos_problemas = 0;
+    envios_totales = 0;
+    id_curso_inscrito = -1;
+    inscrito = false;
 }
 
 void Usuario::añadir_problema_correcto(string id_problema)

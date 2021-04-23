@@ -10,6 +10,7 @@
 #ifndef NO_DIAGRAM
 #include "BinTree.hh"
 #include <vector>
+#include <set>
 #endif
 
 /** @class Sesion
@@ -32,14 +33,6 @@ public:
 
     Sesion();
 
-    /** @brief Creadora de la clase Sesion con identificador y con estructura de prerequisitos.
-	
-	\pre En "id_sesion" se encuentra el identificador de la Sesion y en el parámetro b se encuentra la estructura de prerequisitos de problemas de la Sesion.
-	\post El resultado es una Sesion con identificador "id_sesion" y con la estructura de prerequisitos que se encuentra en b.
-    */
-
-    Sesion(string id_sesion, BinTree<string> b);
-
     //Destructora
 
     /** @brief  Destructora de la clase Sesion.
@@ -56,7 +49,7 @@ public:
       \pre El parámetro implícito tiene un identificador asignado.
       \post Retorna el identificador del parámetro implícito.
     */
-    string identificador() const;
+    string obtener_id() const;
     
     /** @brief Consulta el número de Problemas que forman parte de la Sesion.
 
@@ -72,6 +65,21 @@ public:
       */
     vector<string> problemas_sucesores(string id_problema);
 
+    /** @brief Consulta si hay intersección de problemas.
+
+      \pre <em>Cierto</em>
+      \post El resultado indica si la intersección es vacia entre el parámetro implícito y la Sesion "s".
+    */
+
+    bool interseccion_vacia(const Sesion & s) const;
+
+    /** @brief Consulta si existe un Problema en la Sesion
+
+      \pre <em>cierto</em>
+      \post El resultado indica si el parámetro implícito contiene el Problema que tiene el identificador "id"
+      */
+    bool contine_problema(string id) const;
+
     //Lectura y escritura
 
     /** @brief Operación de escritura
@@ -84,7 +92,7 @@ public:
 
     /** @brief Operación de lectura
 
-      \pre En el canal standard de entrada se encuentra el identificador de la sesion y la estructura de los prerequisitos de los problemas de la Sesion.
+      \pre En el canal standard de entrada se encuentra el identificador de la Sesion y la estructura de los prerequisitos de los problemas de la Sesion en preorden.
       \post Se ha añadido el identificador y la estructura de prerequisitos de problemas al parámetro implícito.
     */
     void leer();
@@ -96,15 +104,16 @@ public:
     */
     void leer_id();
 
-/** @internal
 private:
     string id;
     int num_problemas;
     BinTree<string> prerequisitos;
+    set<string> conj_id_problemas;
+
     int calcular_nodos(BinTree<string> b);
     BinTree<string> subarbol(const BinTree<string> &arbol, string id_problema) const;
-    void postorden(const BinTree<string> &arbol) const;
-    */
+    void escribir_postorden(const BinTree<string> &arbol) const;
+    void leer_bin_tree(BinTree<string>& a, set<string>& conj_id_problemas, string marca);
 };
 
 #endif
