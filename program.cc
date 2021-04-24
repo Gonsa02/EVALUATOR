@@ -79,7 +79,7 @@ int main() {
 	    if (not conj_u.existe(u) or u.inscrito_a_curso() or not conj_c.existe(c))
 		cout << "El usuario no se puede inscribir al curso" << endl;
 	    else {
-		inscribir_usuario_a_curso(u, c);
+		inscribir_usuario_a_curso(conj_u, conj_c, u, c);
 		conj_u.actualizar(u);
 		conj_c.actualizar(c);
 	    }
