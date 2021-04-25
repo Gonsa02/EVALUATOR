@@ -18,25 +18,6 @@
 class Conjunto_Usuarios
 {
 public:
-    //Constructoras
-    
-    /** @brief Creadora por defecto de la clase Conjunto_Usuarios.
-     
-	Se ejecuta automáticamente al declarar un conjunto de usuarios.
-	\pre <em>cierto</em>
-	\post El resultado es un conjunto de usuarios.
-    */
-
-    Conjunto_Usuarios();
-
-    //Destructora
-
-    /** @brief Destructora de la clase Conjunto_Usuarios.
-
-      \pre <em>cierto</em>
-      \post Se destruye el parametro implícito
-    */
-    ~Conjunto_Usuarios();
 
     //Modificadoras
     

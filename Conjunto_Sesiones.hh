@@ -19,25 +19,6 @@
 class Conjunto_Sesiones
 {
 public:
-    //Constructoras
-    
-    /** @brief Creadora por defecto de la clase Conjunto_Sesiones.
-     
-	Se ejecuta automáticamente al declarar un Conjunto_Sesiones.
-	\pre <em>cierto</em>
-	\post El resultado es un Conjunto de Sesiones.
-    */
-
-    Conjunto_Sesiones();
-
-    //Destructora
-
-    /** @brief Destructora de la clase Conjunto_Sesiones.
-
-      \pre <em>cierto</em>
-      \post Se destruye el parametro implícito.
-    */
-    ~Conjunto_Sesiones();
 
     //Modificadoras
     

@@ -20,24 +20,6 @@ using namespace std;
 class Usuario
 {
 public:
-    //Constructoras
-
-    /** @brief Creadora por defecto de la clase Usuario.
-     
-	Se ejecuta automáticamente al declarar un Usuario.
-	\pre <em>cierto</em>
-	\post El resultado es un Usuario.
-    */
-    Usuario();
-
-    //Destructora
-
-    /** @brief Destructora de la clase Usuario.
-
-      \pre <em>cierto</em>
-      \post Se destruye el parametro implícito
-    */
-    ~Usuario();
 
     //Modificadoras
 

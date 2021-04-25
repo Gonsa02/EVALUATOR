@@ -20,26 +20,6 @@ class Conjunto_Problemas
 {
 public:
 
-    //Constructoras
-    
-    /** @brief Creadora por defecto de la clase Conjunto_Problemas.
-     
-	Se ejecuta automáticamente al declarar un Conjunto de Problemas.
-	\pre <em>cierto</em>
-	\post El resultado es un Conjunto de Problemas.
-    */
-
-    Conjunto_Problemas();
-
-    //Destructora
-
-    /** @brief Destructora de la clase Conjunto_Problemas.
-
-      \pre <em>cierto</em>
-      \post Se destruye el parametro implícito
-    */
-    ~Conjunto_Problemas();
-
     //Modificadoras
     
     /** @brief Añade un Problema al Conjunto_Problemas.

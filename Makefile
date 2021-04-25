@@ -1,7 +1,7 @@
 OPCIONS = -D_JUDGE_ -D_GLIBCXX_DEBUG -O2 -Wall -Wextra -Werror -Wno-sign-compare -std=c++11
 
 program.exe: object
-	g++ -o program.exe program.cc *.o $(OPCIONS)
+	g++ -o program.exe *.o $(OPCIONS)
 
 object:
 	g++ -c *.cc $(OPCIONS)

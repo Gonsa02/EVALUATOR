@@ -24,25 +24,6 @@ using namespace std;
 class Sesion
 {
 public:
-    //Constructoras
-
-    /** @brief Creadora por defecto de la clase Sesion.
-     
-	Se ejecuta automáticamente al declarar una Sesion.
-	\pre <em>cierto</em>
-	\post El resultado es un Sesion.
-    */
-
-    Sesion();
-
-    //Destructora
-
-    /** @brief  Destructora de la clase Sesion.
-	
-	\pre <em>cierto</em>
-	\post Se destruye el parámetro implícito
-    */
-    ~Sesion();
 
     //Consultoras
     

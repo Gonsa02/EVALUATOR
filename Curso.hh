@@ -22,25 +22,6 @@ using namespace std;
 class Curso
 {
 public:
-    //Constructoras
-
-    /** @brief Creadora por defecto de la clase Curso.
-     
-	Se ejecuta automáticamente al declarar un Curso.
-	\pre <em>cierto</em>
-	\post El resultado es un Curso.
-    */
-    Curso();
-
-    //Destructora
-
-    /** @brief Destructora.
-
-      \pre <em>cierto</em>
-      \post Se destruye el parametro implícito
-    */
-    ~Curso();
-
 
     //Modificadoras
 

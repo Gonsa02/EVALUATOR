@@ -82,11 +82,9 @@ int Sesion::calcular_nodos(BinTree<string> b)
     return 0;
 }
 
-BinTree<string> subarbol(BinTree<string> arbol, string id_problema)
+BinTree<string> Sesion::subarbol(const BinTree<string>& arbol, string id_problema) const
 {
-    if (arbol.value() == id_problema) {
-	return arbol;
-    }
+    if (arbol.value() == id_problema) return arbol;
     BinTree<string> left;
     BinTree<string> right;
     if (not arbol.left().empty()) left = subarbol(arbol.left(), id_problema);
@@ -97,7 +95,7 @@ BinTree<string> subarbol(BinTree<string> arbol, string id_problema)
     return empty;
 }
 
-void leer_bin_tree(BinTree<string>& a, set<string>& conj_p, string marca)
+void Sesion::leer_bin_tree(BinTree<string>& a, set<string>& conj_p, string marca)
 {
   string x;
   cin >> x;

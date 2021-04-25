@@ -19,25 +19,6 @@
 class Conjunto_Cursos
 {
 public:
-    //Constructoras
-    
-    /** @brief Creadora por defecto de la clase Conjunto_Cursos.
-     
-	Se ejecuta automáticamente al declarar un conjunto de cursos.
-	\pre <em>cierto</em>
-	\post El resultado es un conjunto de cursos.
-    */
-
-    Conjunto_Cursos();
-
-    //Destructora
-
-    /** @brief Destructora de la clase Conjunto_Cursos.
-
-      \pre <em>cierto</em>
-      \post Se destruye el parametro implícito
-    */
-    ~Conjunto_Cursos();
 
     //Modificadoras
     

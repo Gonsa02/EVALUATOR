@@ -30,15 +30,6 @@ public:
 
     Problema();
 
-    //Destructora
-
-    /** @brief  Destructora de la clase Problema.
-	
-	\pre <em>cierto</em>
-	\post Se destruye el parametro implícito
-    */
-    ~Problema();
-
     //Modificadoras
 
     /** @brief Incrementa el número de envios totales de un Problema.
