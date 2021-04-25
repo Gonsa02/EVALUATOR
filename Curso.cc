@@ -43,10 +43,37 @@ bool Curso::contiene_problema(string ID) const
     return false;
 }
 
-// Falta implementar este método
 bool Curso::existe_interseccion() const
 {
-   return true; 
+    for (int i = 0; i <= conj_s.size(); ++i) {
+	set<Sesion>::const_iterator const_it = conj_s.begin();
+	for (set<Sesion>::const_iterator aux_it = conj_s.begin(); aux_it != conj_s.end(); ++aux_it) {
+	    if (const_it != aux_it) {
+		if (not const_it -> interseccion_vacia(*aux_it)) return true;
+	    }
+	}
+	++const_it;
+    }
+    return false;
+}
+
+string Curso::sesion_problema(string ID) const
+{
+    bool found = false;
+    set<Sesion>::const_iterator const_it = conj_s.begin();
+    while (not found and const_it != conj_s.end()) {
+	if (const_it -> contine_problema(ID)) found = true;
+	else ++const_it;
+    }
+    return const_it -> obtener_id();
+}
+
+vector<string> Curso::problemas_iniciales() const
+{
+    vector<string> v;
+    for (set<Sesion>::const_iterator const_it = conj_s.begin(); const_it != conj_s.end(); ++const_it)
+	v.push_back(const_it -> problema_inicial());
+    return v;
 }
 
 void Curso::escribir_sesiones() const

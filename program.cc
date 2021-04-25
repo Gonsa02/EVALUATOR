@@ -116,7 +116,7 @@ int main() {
 	    int r;
 	    string nombre, id_problema;
 	    cin >> nombre >> id_problema >> r;
-	    envio(conj_u, conj_c, conj_p, nombre, id_problema, r);
+	    envio(conj_u, conj_c, conj_p, conj_s, nombre, id_problema, r);
 	}
 	else if (c == "listar_problemas" or c =="lp") conj_p.listar();
 	else if (c == "escribir_problema" or c == "ep") {

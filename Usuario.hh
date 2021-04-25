@@ -7,7 +7,7 @@
 
 #ifndef NO_DIAGRAM
 #include <iostream>
-#include <list>
+#include <set>
 using namespace std;
 #endif
 
@@ -55,12 +55,26 @@ public:
       */
     void añadir_problema_correcto(string id_problema);
 
-    /** @brief Añade un problema enviable al Usuario.
+    /** @brief Añade un Problema enviable al Usuario.
 
       \pre En el parámetro "id_problema" se encuentra el identificador de un problema que el parametro implicito ya tiene disponible para enviar por el parámetro implícito.
-      \post Se ha añadido al registro de problemas enviable del parámetro implícito el identificador del problema.
+      \post Se ha añadido al registro de problemas enviables del parámetro implícito el identificador del Problema.
       */
     void añadir_problema_enviable(string id_problema);
+
+    /** @brief Quita un Problema enviable al Usuario.
+
+      \pre Existe un problema con id "id_problema" en el registro de problemas enviables del parámetro implícito.
+      \post Se ha quitado al registro de problemas enviables del parámetro implícito el identificador del Problema.
+      */
+    void quitar_problema_enviable(string id_problema);
+
+    /** @brief Añade un Problema intentado al Usuario.
+
+      \pre <em>cierto</em>
+      \post Se ha añadido al registro de problemas intentados del parámetro implícito el identificador del Problema.
+      */
+    void añadir_problema_intentado(string id_problema);
 
     /** @brief Incrementa el número de envios totales que el Usuario ha hecho.
 
@@ -127,12 +141,26 @@ public:
     */
     int curso() const;
 
+    /** @brief Consulta el número de problemas a los que tiene acceso a hacer un envio el Usuario.
+
+      \pre <em>cierto</em>
+      \post Retorna el número de problemas enviables que tiene el parámetro implícito.
+      */
+    int num_problemas_enviables() const;
+
     /** @brief Consulta si un Usuario puede hacer un envio a un Problema.
 
       \pre El parámetro implícito está cursando un Curso. En el parámetro "id_problema" se encuentra el identificador del problema el cual queremos consultar si el parámetro implícitopuede hacer un envio o no.
       \post El resultado indica si el parametro implícito cumple los prerequisitos para poder hacer un envio al Problema con identificador = "id_problema".
     */
     bool cumple_requisitos(string id_problema) const;
+
+    /** @brief Consulta si el Usuario ha intentado solucionar un Problema.
+
+      \pre <em>cierto</em>
+      \post El resultado indica si el Usuario ha intentado solucionar el Problema con identificador "id_problema".
+      */
+    bool problema_intentado(string id_problema) const;
 
     //Escritura
 
@@ -168,12 +196,11 @@ private:
     int intentos_problemas, envios_totales, id_curso_inscrito;
     bool inscrito;
     string nombre;
-    list<string> pro_resueltos;
-    list<string> pro_resueltos_curso_actual;
-    list<string> pro_enviables;
+    set<string> pro_resueltos;
+    set<string> pro_resueltos_curso_actual;
+    set<string> pro_intentados;
+    set<string> pro_enviables;
 
-    void añadir_problema_a_lista(list<string>& l, string id_problema);
-    void quitar_problema_a_lista(list<string>& l, string id_problema);
 };
 
 #endif

@@ -31,3 +31,8 @@ void Conjunto_Sesiones::listar() const
     for (map<string, Sesion>::const_iterator const_it = conj_s.begin(); const_it != conj_s.end(); ++const_it)
 	const_it -> second.escribir_sesion();
 }
+
+void Conjunto_Sesiones::obtener_con_id(string id_sesion, Sesion &s)
+{
+    s = conj_s[id_sesion];
+}

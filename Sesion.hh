@@ -58,6 +58,13 @@ public:
       */
     int numero_problemas() const;
 
+    /** @brief Consulta el primer Problema de la Sesion.
+
+      \pre <em>ciert</em>
+      \post Devuelve el identificador del Problema inicial de la Sesion.
+      */
+    string problema_inicial() const;
+
     /** @brief Consulta a que problemas nos dará acceso el solucionar el Problema actual.
 
       \pre En el parámetro "id_problema" se encuentra el identificador del problema el cual queremos consultar los problemas sucesores. Existe un problema en el arbol con identificador = "id_problema".

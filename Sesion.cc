@@ -11,6 +11,10 @@ int Sesion::numero_problemas() const
     return num_problemas;
 }
 
+string Sesion::problema_inicial() const
+{
+    return prerequisitos.value();
+}
 
 vector<string> Sesion::problemas_sucesores(string id_problema)
 {

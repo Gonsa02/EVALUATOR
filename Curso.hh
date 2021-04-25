@@ -8,6 +8,7 @@
 #include "Sesion.hh"
 
 #ifndef NO_DIAGRAM
+#include <vector>
 #endif
 
 /** @class Curso
@@ -115,6 +116,13 @@ public:
     */
     string sesion_problema(string ID) const;
 
+    /** @brief Consulta el Problema inicial de cada Sesion que forma el Curso.
+
+      \pre <em>cierto</em>
+      \post Devuelve un vector con el identificador del Problema inicial de cada Sesion que forma parte del parámetro implícito.
+    vector<string> problemas_iniciales() const;
+    */
+    vector<string> problemas_iniciales() const;
 
     //Lectura y escritura
 

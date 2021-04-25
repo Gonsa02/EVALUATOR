@@ -20,8 +20,7 @@ void Usuario::finalizar_curso()
 {
     id_curso_inscrito = 0;
     inscrito = false;
-    list<string> l;
-    pro_resueltos_curso_actual = l;
+    pro_resueltos_curso_actual.clear();
 }
 
 string Usuario::obtener_nombre() const
@@ -37,6 +36,11 @@ int Usuario::num_intentos_problemas() const
 int Usuario::num_problemas_correctos() const
 {
     return pro_resueltos.size();
+}
+
+int Usuario::num_problemas_enviables() const
+{
+    return pro_enviables.size();
 }
 
 int Usuario::num_envios_totales() const
@@ -56,13 +60,16 @@ int Usuario::curso() const
 
 bool Usuario::cumple_requisitos(string id_problema) const
 {
-    bool found = false;
-    list<string>::const_iterator const_it = pro_enviables.begin();
-    while (not found and const_it != pro_enviables.end()) {
-	if (*const_it == id_problema) found = true;
-	++const_it;
-    }
-    return found;
+    set<string>::const_iterator const_it = pro_enviables.find(id_problema);
+    if (const_it != pro_enviables.end()) return true;
+    else return false;
+}
+
+bool Usuario::problema_intentado(string id_problema) const
+{
+    set<string>::const_iterator const_it = pro_intentados.find(id_problema);
+    if (const_it == pro_intentados.end()) return false;
+    else return true;
 }
 
 void Usuario::escribir_usuario() const
@@ -72,13 +79,13 @@ void Usuario::escribir_usuario() const
 
 void Usuario::escribir_problemas_enviables() const
 {
-    for (list<string>::const_iterator const_it = pro_enviables.begin(); const_it != pro_enviables.end(); ++const_it)
+    for (set<string>::const_iterator const_it = pro_enviables.begin(); const_it != pro_enviables.end(); ++const_it)
 	cout << *const_it << " ";
 }
 
 void Usuario::escribir_problemas_resueltos() const
 {
-    for (list<string>::const_iterator const_it = pro_resueltos.begin(); const_it != pro_resueltos.end(); ++const_it)
+    for (set<string>::const_iterator const_it = pro_resueltos.begin(); const_it != pro_resueltos.end(); ++const_it)
 	cout << *const_it << " ";
 }
 
@@ -95,26 +102,23 @@ void Usuario::leer()
 
 void Usuario::añadir_problema_correcto(string id_problema)
 {
-    añadir_problema_a_lista(pro_resueltos, id_problema);
-    añadir_problema_a_lista(pro_resueltos_curso_actual, id_problema);
-    quitar_problema_a_lista(pro_enviables, id_problema);
+    pro_resueltos.insert(id_problema);
+    pro_resueltos_curso_actual.insert(id_problema);
+    pro_enviables.erase(id_problema);
+    pro_intentados.insert(id_problema);
 }
 
 void Usuario::añadir_problema_enviable(string id_problema)
 {
-    añadir_problema_a_lista(pro_enviables, id_problema);
+    pro_enviables.insert(id_problema);
 }
 
-void Usuario::añadir_problema_a_lista(list<string>& l, string id_problema) 
+void Usuario::quitar_problema_enviable(string id_problema)
 {
-    list<string>::iterator it = l.begin();
-    while (it != l.end() and *it < id_problema) ++it;
-    l.insert(it, id_problema);
+    pro_enviables.erase(id_problema);
 }
 
-void Usuario::quitar_problema_a_lista(list<string>& l, string id_problema) 
+void Usuario::añadir_problema_intentado(string id_problema)
 {
-    list<string>::iterator it = l.begin();
-    while (it != l.end() and *it != id_problema) ++it;
-    it = l.erase(it);
+    pro_intentados.insert(id_problema);
 }
