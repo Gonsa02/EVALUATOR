@@ -5,12 +5,14 @@
 #ifndef _SESION_HH_
 #define _SESION_HH_
 
-#include "Problema.hh"
 
 #ifndef NO_DIAGRAM
 #include "BinTree.hh"
 #include <vector>
 #include <set>
+#include <string>
+#include <iostream>
+using namespace std;
 #endif
 
 /** @class Sesion
@@ -110,6 +112,15 @@ public:
       \post Se ha añadido el identificador al parámetro implícito.
     */
     void leer_id();
+
+    // Comparadoras
+    
+    /** @brief Operación de comparación de la Sesion
+
+      \pre <em>cierto</em>
+      \post El resultado indica si el parámetro implícito es menor que la Sesion "s".
+      */
+    bool operator<(const Sesion& s) const;
 
 private:
     string id;

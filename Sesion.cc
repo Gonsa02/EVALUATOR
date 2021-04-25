@@ -110,3 +110,8 @@ void leer_bin_tree(BinTree<string>& a, set<string>& conj_p, string marca)
 	a=BinTree<string>(x,l,r);
   }
 }
+
+bool Sesion::operator<(const Sesion &s) const
+{
+    return id < s.obtener_id();
+}

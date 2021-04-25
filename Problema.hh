@@ -99,7 +99,7 @@ public:
 
     // Comparadoras
 
-    /** @brief Operación de comparación
+    /** @brief Operación de comparación del Problema
 
      \pre <em>cierto</em>
      \post El resultado indica si el parámetro implícito es menor que el Problema "p".

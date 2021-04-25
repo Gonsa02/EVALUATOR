@@ -9,6 +9,8 @@
 
 #ifndef NO_DIAGRAM
 #include <vector>
+#include <iostream>
+using namespace std;
 #endif
 
 /** @class Curso
