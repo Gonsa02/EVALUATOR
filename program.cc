@@ -92,8 +92,8 @@ int main() {
 	    cur.leer_id();
 	    cout << '#' << c << ' ' << u.obtener_nombre() << ' ' << cur.obtener_id() << endl;
 	    if (not conj_u.existe(u)) cout << "error: el usuario no existe" << endl;
-	    else if (u.inscrito_a_curso()) cout << "error: usuario inscrito en otro curso" << endl;
 	    else if (not conj_c.existe(cur)) cout << "error: el curso no existe" << endl;
+	    else if (u.inscrito_a_curso()) cout << "error: usuario inscrito en otro curso" << endl;
 	    else {
 		inscribir_usuario_a_curso(conj_u, conj_c, conj_s, u, cur);
 		conj_u.actualizar(u);
@@ -106,7 +106,10 @@ int main() {
 	    u.leer();
 	    cout << '#' << c << ' ' << u.obtener_nombre() << endl;
 	    if (not conj_u.existe(u)) cout << "error: el usuario no existe" << endl;
-	    else cout << u.curso() << endl;
+	    else {
+		if (u.inscrito_a_curso()) cout << u.curso() << endl;
+		else cout << 0 << endl;
+	    }
 	}
 	else if (c == "sesion_problema" or c == "sp") {
 	    Curso cur;
