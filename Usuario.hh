@@ -36,14 +36,14 @@ public:
       \pre En el parámetro "id_problema" se encuentra el identificador de un problema que ha sido resuelto correctamente por el parámetro implícito y que además, forma parte del curso que está cursando actualmente.
       \post Se ha añadido al registro de problemas resueltos del parámetro implícito el identificador del problema resuelto y se ha quitado de la lista de problemas enviables.
       */
-    void añadir_problema_correcto(string id_problema);
+    void anadir_problema_correcto(string id_problema);
 
     /** @brief Añade un Problema enviable al Usuario.
 
       \pre En el parámetro "id_problema" se encuentra el identificador de un problema que el parametro implicito ya tiene disponible para enviar por el parámetro implícito.
       \post Se ha añadido al registro de problemas enviables del parámetro implícito el identificador del Problema.
       */
-    void añadir_problema_enviable(string id_problema);
+    void anadir_problema_enviable(string id_problema);
 
     /** @brief Quita un Problema enviable al Usuario.
 
@@ -57,7 +57,7 @@ public:
       \pre <em>cierto</em>
       \post Se ha añadido al registro de problemas intentados del parámetro implícito el identificador del Problema.
       */
-    void añadir_problema_intentado(string id_problema);
+    void anadir_problema_intentado(string id_problema);
 
     /** @brief Incrementa el número de envios totales que el Usuario ha hecho.
 

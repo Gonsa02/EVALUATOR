@@ -40,7 +40,7 @@ public:
       \pre <em>cierto</em>
       \post El prarámetro implícidto tiene el identficador = "id".
       */
-    void añadir_id(int id);
+    void anadir_id(int id);
 
     /** @brief Incrementa el numero de usuarios que estan cursando el Curso.
 

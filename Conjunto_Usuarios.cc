@@ -1,6 +1,6 @@
 #include "Conjunto_Usuarios.hh"
 
-void Conjunto_Usuarios::añadir(const Usuario &u)
+void Conjunto_Usuarios::anadir(const Usuario &u)
 {
     conj_u.insert(make_pair(u.obtener_nombre(), u));
 }

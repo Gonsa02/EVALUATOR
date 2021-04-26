@@ -1,6 +1,6 @@
 #include "Conjunto_Problemas.hh"
 
-void Conjunto_Problemas::añadir(const Problema &p)
+void Conjunto_Problemas::anadir(const Problema &p)
 {
     conj_p.insert(make_pair(p.obtener_id(), p)); 
 }
@@ -10,7 +10,7 @@ void Conjunto_Problemas::actualizar(const Problema &p)
     conj_p[p.obtener_id()] = p;
 }
 
-int Conjunto_Problemas::tamaño() const
+int Conjunto_Problemas::tamano() const
 {
     return conj_p.size();
 }

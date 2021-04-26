@@ -1,11 +1,11 @@
 #include "Conjunto_Sesiones.hh"
 
-void Conjunto_Sesiones::añadir(const Sesion &s)
+void Conjunto_Sesiones::anadir(const Sesion &s)
 {
     conj_s.insert(make_pair(s.obtener_id(), s)); 
 }
 
-int Conjunto_Sesiones::tamaño() const
+int Conjunto_Sesiones::tamano() const
 {
     return conj_s.size();
 }

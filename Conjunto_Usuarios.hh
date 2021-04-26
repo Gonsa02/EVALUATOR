@@ -26,7 +26,7 @@ public:
     \pre El Usuario "u" no existe en el parámetro implícito.
     \post Se ha añadido el Usuario "u" al parámetro implícito. 
     */
-    void añadir(const Usuario& u);
+    void anadir(const Usuario& u);
 
     /** @brief Borra un Usuario del Conjunto_Usuarios.
 

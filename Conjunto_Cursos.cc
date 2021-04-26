@@ -1,9 +1,9 @@
 #include "Conjunto_Cursos.hh"
 #include "Conjunto_Sesiones.hh"
 
-void Conjunto_Cursos::añadir(Curso &c)
+void Conjunto_Cursos::anadir(Curso &c)
 {
-    c.añadir_id(conj_c.size());
+    c.anadir_id(conj_c.size());
     conj_c.insert(make_pair(c.obtener_id(), c));
 }
 
@@ -29,7 +29,7 @@ void Conjunto_Cursos::obtener_con_id(int id, Curso &c)
     c = const_it -> second;
 }
 
-int Conjunto_Cursos::tamaño() const
+int Conjunto_Cursos::tamano() const
 {
     return conj_c.size();
 }
@@ -40,7 +40,7 @@ void Conjunto_Cursos::inicializar()
     cin >> n;
     for (int i = 0; i < n; ++i) {
 	Curso c;
-	c.añadir_id(conj_c.size()+1);
+	c.anadir_id(conj_c.size()+1);
 	c.leer();
 	conj_c.insert(make_pair(c.obtener_id(), c));
     }

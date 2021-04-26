@@ -107,14 +107,14 @@ void Usuario::leer()
     inscrito = false;
 }
 
-void Usuario::añadir_problema_correcto(string id_problema)
+void Usuario::anadir_problema_correcto(string id_problema)
 {
     pro_resueltos.insert(id_problema);
     pro_resueltos_curso_actual.insert(id_problema);
     pro_enviables.erase(id_problema);
 }
 
-void Usuario::añadir_problema_enviable(string id_problema)
+void Usuario::anadir_problema_enviable(string id_problema)
 {
     pro_enviables.insert(id_problema);
 }
@@ -124,7 +124,7 @@ void Usuario::quitar_problema_enviable(string id_problema)
     pro_enviables.erase(id_problema);
 }
 
-void Usuario::añadir_problema_intentado(string id_problema)
+void Usuario::anadir_problema_intentado(string id_problema)
 {
     map<string,int>::iterator it = pro_intentados.find(id_problema);
     if (it == pro_intentados.end()) pro_intentados.insert(make_pair(id_problema,1));

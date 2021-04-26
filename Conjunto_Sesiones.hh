@@ -27,7 +27,7 @@ public:
     \pre La Sesion "s" no existe en el parámetro implícito.
     \post Se ha añadido la Sesion "s" al parámetro implícito. 
     */
-    void añadir(const Sesion& s);
+    void anadir(const Sesion& s);
 
     //Consultoras
     
@@ -50,7 +50,7 @@ public:
       \pre <em>cierto</em>
       \post Retorna el número de sesiones que tiene el parámetro implícito.
     */
-    int tamaño() const;
+    int tamano() const;
     
     //Lectura y escritura
 

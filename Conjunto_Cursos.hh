@@ -28,7 +28,7 @@ public:
     \pre El Curso cumple con la restricción de no repetición de problemas del mismo Curso.
     \post Se ha añadido el Curso "c" al parámetro implícito. 
     */
-    void añadir(Curso& c);
+    void anadir(Curso& c);
 
     /** @brief Actualiza un Curso del Conjunto_Cursos
 
@@ -58,7 +58,7 @@ public:
       \pre <em>cierto</em>
       \post Retorna el número de cursos que tiene el parámetro implícito.
     */
-    int tamaño() const;
+    int tamano() const;
 
     //Lectura y escritura
 

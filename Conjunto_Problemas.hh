@@ -27,7 +27,7 @@ public:
     \pre El Problema "p" no existe en el parámetro implícito.
     \post Se ha añadido el Problema "p" al parámetro implícito. 
     */
-    void añadir(const Problema& p);
+    void anadir(const Problema& p);
 
     /** @brief Actualiza un Problema del Conjunto_Problemas
 
@@ -57,7 +57,7 @@ public:
       \pre <em>cierto</em>
       \post Retorna el número de sesiones que tiene el parámetro implícito.
     */
-    int tamaño() const;
+    int tamano() const;
 
     //Lectura y Escritura
 

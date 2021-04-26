@@ -40,8 +40,8 @@ int main() {
 	    cout << '#' << c << ' ' << p.obtener_id() << endl;
 	    if (conj_p.existe(p)) cout << "error: el problema ya existe" << endl;
 	    else {
-		conj_p.añadir(p);
-		cout << conj_p.tamaño() << endl;
+		conj_p.anadir(p);
+		cout << conj_p.tamano() << endl;
 	    }
 	}
 	else if (c == "nueva_sesion" or c == "ns") {
@@ -50,8 +50,8 @@ int main() {
 	    cout << '#' << c << ' ' << s.obtener_id() << endl;
 	    if (conj_s.existe(s)) cout << "error: la sesion ya existe" << endl;
 	    else {
-		conj_s.añadir(s);
-		cout << conj_s.tamaño() << endl;
+		conj_s.anadir(s);
+		cout << conj_s.tamano() << endl;
 	    }
 	}
 	else if (c == "nuevo_curso" or c == "nc") {
@@ -61,8 +61,8 @@ int main() {
 	    if (conj_c.existe(cur)) cout << "El curso ya existe" << endl;
 	    else if (cur.existe_interseccion(conj_s)) cout << "Hay interseccion en los problemas" << endl;
 	    else {
-		conj_c.añadir(cur);
-		cout << conj_c.tamaño() << endl;
+		conj_c.anadir(cur);
+		cout << conj_c.tamano() << endl;
 	    }
 	}
 	else if (c == "alta_usuario" or c == "a") {
@@ -71,7 +71,7 @@ int main() {
 	    cout << '#' << c << ' ' << u.obtener_nombre() << endl;
 	    if (conj_u.existe(u)) cout << "error: el usuario ya existe" << endl;
 	    else {
-		conj_u.añadir(u);
+		conj_u.anadir(u);
 		cout << conj_u.numero_usuarios() << endl;
 	    }
 	}

@@ -8,7 +8,7 @@ Curso::Curso()
    usuarios_cursando_curso = 0;
 }
 
-void Curso::añadir_id(int id)
+void Curso::anadir_id(int id)
 {
     this -> id = id;
 }
