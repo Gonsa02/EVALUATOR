@@ -44,7 +44,9 @@ bool Sesion::contine_problema(string id) const
 
 void Sesion::escribir_sesion() const
 {
+    cout << id << ' ' << conj_id_problemas.size() << ' ';
     escribir_postorden(prerequisitos);
+    cout << endl;
 }
 
 void Sesion::leer()
@@ -70,9 +72,10 @@ void Sesion::leer_id()
 void Sesion::escribir_postorden(const BinTree<string> &arbol) const
 {
     if (not arbol.empty()) {
+	cout << '(';
 	escribir_postorden(arbol.left());
 	escribir_postorden(arbol.right());
-	cout << arbol.value() << endl;
+	cout << arbol.value() << ')';
     }
 }
 

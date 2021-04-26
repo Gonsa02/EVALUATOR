@@ -1,25 +1,28 @@
 #include "Operaciones_auxiliares.hh"
+#include "Conjunto_Sesiones.hh"
 
 void dar_baja(Conjunto_Usuarios &conj_u, Conjunto_Cursos &conj_c, const Usuario &u)
 {
     // Borramos el Usuario del Curso
-    Curso c;
-    conj_c.obtener_con_id(u.curso(), c);
-    c.usuario_dar_baja_curso();
-    conj_c.actualizar(c);
+    if (u.inscrito_a_curso()) {
+	Curso c;
+	conj_c.obtener_con_id(u.curso(), c);
+	c.usuario_dar_baja_curso();
+	conj_c.actualizar(c);
+    }
     
     // Eliminamos el Usuario del Conjunto_Usuarios
     conj_u.borrar(u);
 }
 
-void inscribir_usuario_a_curso(Conjunto_Usuarios &conj_u, Conjunto_Cursos &conj_c, Usuario &u, Curso &c)
+void inscribir_usuario_a_curso(Conjunto_Usuarios &conj_u, Conjunto_Cursos &conj_c, Conjunto_Sesiones &conj_s, Usuario &u, Curso &c)
 {
     conj_c.obtener_con_id(c.obtener_id(), c);
     conj_u.obtener(u.obtener_nombre(), u);
 
     // Inscribimos al Usuario, le ponemos los problemas iniciales del Curso y lo registramos
     u.inscribir_a_curso(c.obtener_id());
-    vector<string> v = c.problemas_iniciales();
+    vector<string> v = c.problemas_iniciales(conj_s);
     for (int i = 0; i < v.size(); ++i) u.añadir_problema_enviable(v[i]);
     conj_u.actualizar(u);
 
@@ -33,6 +36,7 @@ void envio(Conjunto_Usuarios &conj_u, Conjunto_Cursos &conj_c, Conjunto_Problema
     Usuario u;
     conj_u.obtener(nombre, u);
     u.incrementar_envios_totales();
+    u.añadir_problema_intentado(id_problema);
     Problema p;
     conj_p.obtener(id_problema, p);
     p.incrementar_envios_totales();
@@ -46,7 +50,7 @@ void envio(Conjunto_Usuarios &conj_u, Conjunto_Cursos &conj_c, Conjunto_Problema
 	u.quitar_problema_enviable(id_problema);
 	Curso c;
 	conj_c.obtener_con_id(u.curso(), c);
-	string id_sesion = c.sesion_problema(id_problema);
+	string id_sesion = c.sesion_problema(id_problema, conj_s);
 	Sesion s;
 	conj_s.obtener_con_id(id_sesion, s);
 	vector<string> v = s.problemas_sucesores(id_problema);

@@ -5,6 +5,11 @@ void Conjunto_Sesiones::añadir(const Sesion &s)
     conj_s.insert(make_pair(s.obtener_id(), s)); 
 }
 
+int Conjunto_Sesiones::tamaño() const
+{
+    return conj_s.size();
+}
+
 bool Conjunto_Sesiones::existe(Sesion &s)
 {
     map<string,Sesion>::const_iterator const_it = conj_s.find(s.obtener_id());
@@ -34,5 +39,6 @@ void Conjunto_Sesiones::listar() const
 
 void Conjunto_Sesiones::obtener_con_id(string id_sesion, Sesion &s)
 {
-    s = conj_s[id_sesion];
+    map<string, Sesion>::const_iterator const_it = conj_s.find(id_sesion);
+    s = const_it -> second;
 }

@@ -67,26 +67,33 @@ bool Usuario::cumple_requisitos(string id_problema) const
 
 bool Usuario::problema_intentado(string id_problema) const
 {
-    set<string>::const_iterator const_it = pro_intentados.find(id_problema);
+    map<string,int>::const_iterator const_it = pro_intentados.find(id_problema);
     if (const_it == pro_intentados.end()) return false;
     else return true;
 }
 
 void Usuario::escribir_usuario() const
 {
-    cout << envios_totales << " " << pro_resueltos.size() << " " << intentos_problemas << " " << id_curso_inscrito << endl;
+    cout << nombre<< '(' << envios_totales << "," << pro_resueltos.size() << "," << intentos_problemas << "," << id_curso_inscrito << ')' << endl;
 }
 
 void Usuario::escribir_problemas_enviables() const
 {
-    for (set<string>::const_iterator const_it = pro_enviables.begin(); const_it != pro_enviables.end(); ++const_it)
-	cout << *const_it << " ";
+    for (set<string>::const_iterator const_it = pro_enviables.begin(); const_it != pro_enviables.end(); ++const_it) {
+	map<string,int>::const_iterator aux_it = pro_intentados.find(*const_it);
+	cout << *const_it << '(';
+	if (aux_it == pro_intentados.end()) cout << '0';
+	else cout << aux_it -> second;
+	cout << ')' << endl;
+    }
 }
 
 void Usuario::escribir_problemas_resueltos() const
 {
-    for (set<string>::const_iterator const_it = pro_resueltos.begin(); const_it != pro_resueltos.end(); ++const_it)
-	cout << *const_it << " ";
+    for (set<string>::const_iterator const_it = pro_resueltos.begin(); const_it != pro_resueltos.end(); ++const_it) {
+	map<string,int>::const_iterator aux_it = pro_intentados.find(*const_it);
+	cout << *const_it << '(' << aux_it -> second << ')' << endl;
+    }
 }
 
 void Usuario::leer()
@@ -96,7 +103,7 @@ void Usuario::leer()
     nombre = n;
     intentos_problemas = 0;
     envios_totales = 0;
-    id_curso_inscrito = -1;
+    id_curso_inscrito = 0;
     inscrito = false;
 }
 
@@ -105,7 +112,6 @@ void Usuario::añadir_problema_correcto(string id_problema)
     pro_resueltos.insert(id_problema);
     pro_resueltos_curso_actual.insert(id_problema);
     pro_enviables.erase(id_problema);
-    pro_intentados.insert(id_problema);
 }
 
 void Usuario::añadir_problema_enviable(string id_problema)
@@ -120,5 +126,7 @@ void Usuario::quitar_problema_enviable(string id_problema)
 
 void Usuario::añadir_problema_intentado(string id_problema)
 {
-    pro_intentados.insert(id_problema);
+    map<string,int>::iterator it = pro_intentados.find(id_problema);
+    if (it == pro_intentados.end()) pro_intentados.insert(make_pair(id_problema,1));
+    else it -> second++;
 }

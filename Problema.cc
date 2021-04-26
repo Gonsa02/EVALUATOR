@@ -5,7 +5,7 @@ Problema::Problema()
     id = "-1";
     env_exito = 0;
     env_totales = 0;
-    ratio = 0;
+    ratio = 1;
 }
 
 void Problema::incrementar_envios_totales()
@@ -37,7 +37,7 @@ double Problema::obtener_ratio() const
 
 void Problema::escribir_problema() const
 {
-    cout << env_totales << " " << env_exito << " " << ratio << endl;
+    cout << id << '('<< env_totales << ',' << env_exito << "," << ratio << ')' << endl;
 }
 
 void Problema::leer()

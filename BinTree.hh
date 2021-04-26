@@ -1,11 +1,8 @@
 #ifndef BINTREE_HH
 #define BINTREE_HH
 
-#ifndef NO_DIAGRAM
 #include <cassert>
 #include <memory>
-#endif
-
 using namespace std;
 
 
@@ -46,12 +43,12 @@ public:
     {   }
 
     // Constructs a tree with a value x and no subtrees. Θ(1).
-    explicit BinTree (const T& x) {
+    BinTree (const T& x) {
         p = make_shared<Node>(x, nullptr, nullptr);
     }
 
     // Constructs a tree with a value x and two subtrees left and right. Θ(1).
-    explicit BinTree (const T& x, const BinTree& left, const BinTree& right) {
+    BinTree (const T& x, const BinTree& left, const BinTree& right) {
         p = make_shared<Node>(x, left.p, right.p);
     }
 
@@ -79,4 +76,6 @@ public:
     }
 
 };
+
+
 #endif

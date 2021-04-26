@@ -5,6 +5,7 @@
 #ifndef _CONJUNTO_CURSOS_HH_
 #define _CONJUNTO_CURSOS_HH_
 
+#include "Conjunto_Sesiones.hh"
 #include "Curso.hh"
 
 #ifndef NO_DIAGRAM
@@ -27,7 +28,7 @@ public:
     \pre El Curso cumple con la restricción de no repetición de problemas del mismo Curso.
     \post Se ha añadido el Curso "c" al parámetro implícito. 
     */
-    void añadir(const Curso& c);
+    void añadir(Curso& c);
 
     /** @brief Actualiza un Curso del Conjunto_Cursos
 
@@ -52,6 +53,13 @@ public:
     */
     void obtener_con_id(int id, Curso& c);
 
+    /** @brief Consulta el número de cursos que tiene el Conjunto_Cursos
+
+      \pre <em>cierto</em>
+      \post Retorna el número de cursos que tiene el parámetro implícito.
+    */
+    int tamaño() const;
+
     //Lectura y escritura
 
     /** @brief Lectura inicial de cursos.
@@ -66,7 +74,7 @@ public:
       \pre <em>cierto</em>
       \post Para cada Curso que haya en el parametro implícito, se escribe el numero de usuarios actualos o pasados que lo han completado, el numero de usuarios inscritos actualmente, el numero de sesiones qeu lo forman y los identificadores de dichas sesiones, en el mismo orden en el que se leyeron cuando se creó el Curso.
       */
-    void listar() const;    
+    void listar();    
 
 private:
     map<int, Curso> conj_c;

@@ -1,4 +1,17 @@
 #include "Curso.hh"
+#include "Conjunto_Sesiones.hh"
+
+Curso::Curso()
+{
+   id = 0;
+   usuarios_curso_completado = 0;
+   usuarios_cursando_curso = 0;
+}
+
+void Curso::añadir_id(int id)
+{
+    this -> id = id;
+}
 
 void Curso::usuario_inscribir_curso()
 {
@@ -36,20 +49,27 @@ int Curso::numero_sesiones() const
     return conj_s.size();
 }
 
-bool Curso::contiene_problema(string ID) const
+bool Curso::contiene_problema(string ID, Conjunto_Sesiones& conjunto_sesiones) const
 {
-    for (set<Sesion>::const_iterator const_it = conj_s.begin(); const_it != conj_s.end(); ++const_it)
-	if (const_it -> contine_problema(ID)) return true;
+    for (set<string>::const_iterator const_it = conj_s.begin(); const_it != conj_s.end(); ++const_it) {
+	Sesion s;
+	conjunto_sesiones.obtener_con_id(*const_it, s);
+	if (s.contine_problema(ID)) return true;
+    }
     return false;
 }
 
-bool Curso::existe_interseccion() const
+bool Curso::existe_interseccion(Conjunto_Sesiones& conjunto_sesiones) const
 {
-    for (int i = 0; i <= conj_s.size(); ++i) {
-	set<Sesion>::const_iterator const_it = conj_s.begin();
-	for (set<Sesion>::const_iterator aux_it = conj_s.begin(); aux_it != conj_s.end(); ++aux_it) {
+    for (int i = 0; i/2 <= conj_s.size(); ++i) {
+	set<string>::const_iterator const_it = conj_s.begin();
+	Sesion s;
+	conjunto_sesiones.obtener_con_id(*const_it, s);
+	for (set<string>::const_iterator aux_it = conj_s.begin(); aux_it != conj_s.end(); ++aux_it) {
 	    if (const_it != aux_it) {
-		if (not const_it -> interseccion_vacia(*aux_it)) return true;
+		Sesion s_aux;
+		conjunto_sesiones.obtener_con_id(*aux_it, s_aux);
+		if (not s.interseccion_vacia(s_aux)) return true;
 	    }
 	}
 	++const_it;
@@ -57,47 +77,56 @@ bool Curso::existe_interseccion() const
     return false;
 }
 
-string Curso::sesion_problema(string ID) const
+string Curso::sesion_problema(string ID, Conjunto_Sesiones& conjunto_sesiones) const
 {
     bool found = false;
-    set<Sesion>::const_iterator const_it = conj_s.begin();
+    set<string>::const_iterator const_it = conj_s.begin();
     while (not found and const_it != conj_s.end()) {
-	if (const_it -> contine_problema(ID)) found = true;
+	Sesion s;
+	conjunto_sesiones.obtener_con_id(*const_it, s);
+	if (s.contine_problema(ID)) found = true;
 	else ++const_it;
     }
-    return const_it -> obtener_id();
+    return *const_it;
 }
 
-vector<string> Curso::problemas_iniciales() const
+vector<string> Curso::problemas_iniciales(Conjunto_Sesiones& conjunto_sesiones) const
 {
     vector<string> v;
-    for (set<Sesion>::const_iterator const_it = conj_s.begin(); const_it != conj_s.end(); ++const_it)
-	v.push_back(const_it -> problema_inicial());
+    for (set<string>::const_iterator const_it = conj_s.begin(); const_it != conj_s.end(); ++const_it) {
+	Sesion s;
+	conjunto_sesiones.obtener_con_id(*const_it, s);
+	v.push_back(s.problema_inicial());
+    }
     return v;
 }
 
 void Curso::escribir_sesiones() const
 {
-    for (int i = 0; i < id_sesiones.size(); ++i) cout << id_sesiones[i] << " ";
-    cout << endl;
+    bool space = false;
+    for (int i = 0; i < id_conj_s.size(); ++i) {
+	if (space) cout << ' ';
+	else space = true;
+	cout << id_conj_s[i];
+    }
 }
 
 void Curso::escribir_curso() const
 {
-    cout << usuarios_curso_completado << " " << usuarios_curso_completado << " " << id_sesiones.size();
+    cout << id << " " << usuarios_curso_completado << " " << usuarios_cursando_curso << " " << conj_s.size() << " (";
     escribir_sesiones();
+    cout << ')' << endl;
 }
 
 void Curso::leer()
 {
     int n;
     cin >> n;
-    vector<string> v(n);
     for (int i = 0; i < n; ++i) {
-	Sesion s;
-	s.leer();
-	conj_s.insert(s);
-	v.push_back(s.obtener_id());
+	string id_s;
+	cin >> id_s;
+	conj_s.insert(id_s);
+	id_conj_s.push_back(id_s);
     }
 }
 

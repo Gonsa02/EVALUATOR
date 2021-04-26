@@ -52,6 +52,13 @@ public:
     */
     void obtener(const string& id_problema, Problema& p);
 
+    /** @brief Consulta el número de problemas que tiene el Conjunto_Problemas
+
+      \pre <em>cierto</em>
+      \post Retorna el número de sesiones que tiene el parámetro implícito.
+    */
+    int tamaño() const;
+
     //Lectura y Escritura
 
     /** @brief Lectura inicial de problemas.

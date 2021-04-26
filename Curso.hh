@@ -6,6 +6,7 @@
 #define _CURSO_HH_
 
 #include "Sesion.hh"
+#include "Conjunto_Sesiones.hh"
 
 #ifndef NO_DIAGRAM
 #include <vector>
@@ -23,7 +24,23 @@ class Curso
 {
 public:
 
+    //Constructoras
+
+    /** @brief Constructora de la clase Curso.
+
+      \pre <em>cierto</em>
+      \post Retorna una instancia de la clase Curso.
+      */
+    Curso();
+
     //Modificadoras
+
+    /** @brief Añade o modifica el id de un Curso.
+
+      \pre <em>cierto</em>
+      \post El prarámetro implícidto tiene el identficador = "id".
+      */
+    void añadir_id(int id);
 
     /** @brief Incrementa el numero de usuarios que estan cursando el Curso.
 
@@ -83,29 +100,28 @@ public:
 
     */
 
-    bool contiene_problema(string ID) const;
+    bool contiene_problema(string ID, Conjunto_Sesiones& conjunto_sesiones) const;
 
     /** @brief Consulta si existe intersección entre los problemas de las diferentes sesiones.
      
-     \pre El parámetro implícito contiene un conjunto de Sesiones.
+     \pre <em>cierto</em>
      \post El resultado indica si existe intersección entro los problemas de las diferentes sesiones del parámetro implícito.
      */
-    bool existe_interseccion() const;
+    bool existe_interseccion(Conjunto_Sesiones& conjunto_sesiones) const;
 
     /** @brief Consulta la sesion de un problema
 	
 	\pre El curso contiene un problema con el "ID" que le pasen al parámetro de la función.
 	\post La función retorna el identificador de la sesion en la cual se encuentra el problema con identificador "ID" en este curso.
     */
-    string sesion_problema(string ID) const;
+    string sesion_problema(string ID, Conjunto_Sesiones& conjunto_sesiones) const;
 
     /** @brief Consulta el Problema inicial de cada Sesion que forma el Curso.
 
       \pre <em>cierto</em>
       \post Devuelve un vector con el identificador del Problema inicial de cada Sesion que forma parte del parámetro implícito.
-    vector<string> problemas_iniciales() const;
     */
-    vector<string> problemas_iniciales() const;
+    vector<string> problemas_iniciales(Conjunto_Sesiones& conjunto_sesiones) const;
 
     //Lectura y escritura
 
@@ -140,8 +156,8 @@ public:
 
 private:
     int id, usuarios_curso_completado, usuarios_cursando_curso;
-    set<Sesion> conj_s;
-    vector<string> id_sesiones;
+    set<string> conj_s;
+    vector<string> id_conj_s;
 };
 
 #endif

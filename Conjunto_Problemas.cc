@@ -10,6 +10,11 @@ void Conjunto_Problemas::actualizar(const Problema &p)
     conj_p[p.obtener_id()] = p;
 }
 
+int Conjunto_Problemas::tamaño() const
+{
+    return conj_p.size();
+}
+
 bool Conjunto_Problemas::existe(Problema &p)
 {
     map<string,Problema>::const_iterator const_it = conj_p.find(p.obtener_id());

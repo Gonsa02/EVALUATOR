@@ -8,6 +8,7 @@
 #ifndef NO_DIAGRAM
 #include <iostream>
 #include <set>
+#include <map>
 using namespace std;
 #endif
 
@@ -180,8 +181,8 @@ private:
     string nombre;
     set<string> pro_resueltos;
     set<string> pro_resueltos_curso_actual;
-    set<string> pro_intentados;
     set<string> pro_enviables;
+    map<string,int> pro_intentados;
 
 };
 

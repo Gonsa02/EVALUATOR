@@ -45,6 +45,13 @@ public:
     */
     void obtener_con_id(string id_sesion, Sesion& s);
     
+    /** @brief Consulta el número de sesiones que tiene el Conjunto_Sesiones
+
+      \pre <em>cierto</em>
+      \post Retorna el número de sesiones que tiene el parámetro implícito.
+    */
+    int tamaño() const;
+    
     //Lectura y escritura
 
     /** @brief Lectura inicial de sesiones.

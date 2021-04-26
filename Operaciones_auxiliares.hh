@@ -27,7 +27,7 @@ void dar_baja(Conjunto_Usuarios& conj_u, Conjunto_Cursos& conj_c, const Usuario&
   \pre existe un Usuario "u" en el Conjunto_Usuarios, "u" no está cursando un Curso actualmente y además el Curso "c" debe existir en el Conjunto_Cursos.
   \post El Usuario "u" ha sido inscrito al Curso "c", es decir, "u" consta de que está inscrito a un Curso y además de que ese Curso és "c". El Curso "c" consta de que hay un Usuario más que lo está cursando.
 */
-void inscribir_usuario_a_curso(Conjunto_Usuarios& conj_u, Conjunto_Cursos& conj_c, Usuario& u, Curso& c);
+void inscribir_usuario_a_curso(Conjunto_Usuarios& conj_u, Conjunto_Cursos& conj_c, Conjunto_Sesiones& conj_s, Usuario& u, Curso& c);
 
 /** @brief Realiza un envio.
  
