@@ -5,13 +5,10 @@
 #ifndef _CURSO_HH_
 #define _CURSO_HH_
 
-#include "Sesion.hh"
 #include "Conjunto_Sesiones.hh"
+#include "Sesion.hh"
 
 #ifndef NO_DIAGRAM
-#include <vector>
-#include <iostream>
-using namespace std;
 #endif
 
 /** @class Curso
@@ -100,28 +97,28 @@ public:
 
     */
 
-    bool contiene_problema(string ID, Conjunto_Sesiones& conjunto_sesiones) const;
+    bool contiene_problema(string ID) const;
 
     /** @brief Consulta si existe intersección entre los problemas de las diferentes sesiones.
      
      \pre <em>cierto</em>
      \post El resultado indica si existe intersección entro los problemas de las diferentes sesiones del parámetro implícito.
      */
-    bool existe_interseccion(Conjunto_Sesiones& conjunto_sesiones) const;
+    bool existe_interseccion() const;
 
     /** @brief Consulta la sesion de un problema
 	
-	\pre El curso contiene un problema con el "ID" que le pasen al parámetro de la función.
-	\post La función retorna el identificador de la sesion en la cual se encuentra el problema con identificador "ID" en este curso.
+	\pre El Curso contiene un problema con el "ID" que le pasen al parámetro de la función.
+	\post "s" es la Sesion en la cual se encuentra el Problema con identificador "ID" en el parámetro implícito.
     */
-    string sesion_problema(string ID, Conjunto_Sesiones& conjunto_sesiones) const;
+    void sesion_problema(string ID, Sesion& s) const;
 
     /** @brief Consulta el Problema inicial de cada Sesion que forma el Curso.
 
-      \pre <em>cierto</em>
-      \post Devuelve un vector con el identificador del Problema inicial de cada Sesion que forma parte del parámetro implícito.
+      \pre v.size() = 0.
+      \post En "v" se encuentra el identificador del Problema inicial de cada Sesion que forma parte del parámetro implícito.
     */
-    vector<string> problemas_iniciales(Conjunto_Sesiones& conjunto_sesiones) const;
+    void problemas_iniciales(vector<string>& v) const;
 
     //Lectura y escritura
 
@@ -145,7 +142,7 @@ public:
       \pre En el canal standard de entrada se encuentra el numero de sesiones de las cuales va a constar el Curso (N) y posteriormente van a entrar N sesiones del curso.
       \post Se han añadido las sesiones al parámetro implícito.
     */
-    void leer();
+    void leer(const Conjunto_Sesiones& conj_s);
 
     /** @brief Operación de lectura del identificador
 
@@ -156,7 +153,7 @@ public:
 
 private:
     int id, usuarios_curso_completado, usuarios_cursando_curso;
-    set<string> conj_s;
+    set<Sesion> conj_s;
     vector<string> id_conj_s;
 };
 

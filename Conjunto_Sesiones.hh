@@ -43,7 +43,7 @@ public:
       \pre Existe una Sesión en el parámetro implícito con identificador "id_sesion".
       \post En la Sesion "s" se encuentra la Sesion con identificador "id_sesion".
     */
-    void obtener_con_id(string id_sesion, Sesion& s);
+    void obtener_con_id(string id_sesion, Sesion& s) const;
     
     /** @brief Consulta el número de sesiones que tiene el Conjunto_Sesiones
 

@@ -4,6 +4,8 @@
 
 #ifndef _USUARIO_HH_
 #define _USUARIO_HH_
+#include "Conjunto_Sesiones.hh"
+#include "Curso.hh"
 
 #ifndef NO_DIAGRAM
 #include <iostream>
@@ -38,13 +40,6 @@ public:
       */
     void anadir_problema_correcto(string id_problema);
 
-    /** @brief Añade un Problema enviable al Usuario.
-
-      \pre En el parámetro "id_problema" se encuentra el identificador de un problema que el parametro implicito ya tiene disponible para enviar por el parámetro implícito.
-      \post Se ha añadido al registro de problemas enviables del parámetro implícito el identificador del Problema.
-      */
-    void anadir_problema_enviable(string id_problema);
-
     /** @brief Quita un Problema enviable al Usuario.
 
       \pre Existe un problema con id "id_problema" en el registro de problemas enviables del parámetro implícito.
@@ -68,10 +63,10 @@ public:
 
     /** @brief Inscribe al Usuario en un Curso.
 
-      \pre El Usuario no está inscrito a ningún curso y en el parámetro "id_curso" se encuentre el número identificador del curso al cual lo vamos a inscribir.
-      \post El parámetro implícito cuenta con el registro de que está cursando un Curso y también de el id del Curso.
+      \pre El Usuario no está inscrito a ningún curso.
+      \post El parámetro implícito cuenta con el registro de que está cursando un Curso y también de el id del Curso y además se le han añadido los problemas a los que tiene aceso del curso.
       */
-    void inscribir_a_curso(int id_curso);
+    void inscribir_a_curso(const Curso& c);
 
     /** @brief Prepara al Usuario para cursar otro curso.
 
@@ -79,6 +74,13 @@ public:
       \post El parametro implícito está preparado para cursar otro curso correctamente.
       */
     void finalizar_curso();
+
+    /** @brief Actualiza los Problemas enviables del Usuario a partir de un Problema.
+     
+      \pre El id_problema se encuentra en la Sesion "s".
+      \post Se han añadido los problemas enviables a los que tiene acceso el parámetro implícito gracias a haber resuelto ahora o anteriormente el Problema con id_problema.
+    */
+    void actualizar_problemas_enviables(string id_problema, const Sesion& s);
 
     //Consultoras
 
@@ -145,6 +147,13 @@ public:
       */
     bool problema_intentado(string id_problema) const;
 
+    /** @brief Consulta si el Usuario ha resuelto un Problema.
+
+      \pre <em>cierto</em>
+      \post El resultado indica si el Usuario ha resuelto el Problema con identificador "id_problema".
+      */
+    bool problema_resuelto(string id_problema) const;
+
     //Escritura
 
     /** @brief Escribe información del parámetro implícito.
@@ -180,10 +189,8 @@ private:
     bool inscrito;
     string nombre;
     set<string> pro_resueltos;
-    set<string> pro_resueltos_curso_actual;
     set<string> pro_enviables;
     map<string,int> pro_intentados;
-
 };
 
 #endif

@@ -67,7 +67,7 @@ public:
       \pre En el canal standard de entrada estan preparados los diferentes cursos que se desea añadir inicialmente al conjunto de cursos. Primero se lee el numero N que indica cuantos cursos van a entrar.
       \post Se han añadido los cursos al conjunto de cursos.
       */
-    void inicializar();
+    void inicializar(const Conjunto_Sesiones& conj_s);
 
     /** @brief Lista todos los cursos del Conjunto_Cursos.
      

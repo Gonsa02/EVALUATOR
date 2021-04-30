@@ -1,5 +1,4 @@
 #include "Operaciones_auxiliares.hh"
-#include "Conjunto_Sesiones.hh"
 
 void dar_baja(Conjunto_Usuarios &conj_u, Conjunto_Cursos &conj_c, const Usuario &u)
 {
@@ -15,15 +14,12 @@ void dar_baja(Conjunto_Usuarios &conj_u, Conjunto_Cursos &conj_c, const Usuario 
     conj_u.borrar(u);
 }
 
-void inscribir_usuario_a_curso(Conjunto_Usuarios &conj_u, Conjunto_Cursos &conj_c, Conjunto_Sesiones &conj_s, Usuario &u, Curso &c)
+void inscribir_usuario_a_curso(Conjunto_Usuarios &conj_u, Conjunto_Cursos &conj_c, Usuario &u, Curso &c)
 {
     conj_c.obtener_con_id(c.obtener_id(), c);
     conj_u.obtener(u.obtener_nombre(), u);
 
-    // Inscribimos al Usuario, le ponemos los problemas iniciales del Curso y lo registramos
-    u.inscribir_a_curso(c.obtener_id());
-    vector<string> v = c.problemas_iniciales(conj_s);
-    for (int i = 0; i < v.size(); ++i) u.anadir_problema_enviable(v[i]);
+    u.inscribir_a_curso(c);
     conj_u.actualizar(u);
 
     // Incrementamos en numero de usuarios del Curso
@@ -31,7 +27,7 @@ void inscribir_usuario_a_curso(Conjunto_Usuarios &conj_u, Conjunto_Cursos &conj_
     conj_c.actualizar(c);
 }
 
-void envio(Conjunto_Usuarios &conj_u, Conjunto_Cursos &conj_c, Conjunto_Problemas &conj_p, Conjunto_Sesiones &conj_s, string nombre, string id_problema, int r)
+void envio(Conjunto_Usuarios &conj_u, Conjunto_Cursos &conj_c, Conjunto_Problemas &conj_p, string nombre, string id_problema, int r)
 {
     Usuario u;
     conj_u.obtener(nombre, u);
@@ -50,11 +46,9 @@ void envio(Conjunto_Usuarios &conj_u, Conjunto_Cursos &conj_c, Conjunto_Problema
 	u.quitar_problema_enviable(id_problema);
 	Curso c;
 	conj_c.obtener_con_id(u.curso(), c);
-	string id_sesion = c.sesion_problema(id_problema, conj_s);
 	Sesion s;
-	conj_s.obtener_con_id(id_sesion, s);
-	vector<string> v = s.problemas_sucesores(id_problema);
-	for (int i = 0; i < v.size(); ++i) u.anadir_problema_enviable(v[i]);
+	c.sesion_problema(id_problema, s);
+	u.actualizar_problemas_enviables(id_problema, s);
 	if (u.num_problemas_enviables() == 0) {
 	    u.finalizar_curso();
 	    c.usuario_finaliza_curso();

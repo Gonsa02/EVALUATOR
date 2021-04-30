@@ -10,17 +10,40 @@ void Usuario::incrementar_envios_totales()
     ++envios_totales;
 }
 
-void Usuario::inscribir_a_curso(int id_curso)
+void Usuario::inscribir_a_curso(const Curso& c)
 {
-    id_curso_inscrito = id_curso;
+    id_curso_inscrito = c.obtener_id();
     inscrito = true;
+    vector<string> v(0);
+    c.problemas_iniciales(v);
+    for (int i = 0; i < v.size(); ++i) {
+	Sesion s;
+	c.sesion_problema(v[i], s);
+	if (problema_resuelto(v[i])) actualizar_problemas_enviables(v[i], s);
+	else pro_enviables.insert(v[i]);
+    }
 }
 
 void Usuario::finalizar_curso()
 {
     id_curso_inscrito = 0;
     inscrito = false;
-    pro_resueltos_curso_actual.clear();
+}
+
+void Usuario::actualizar_problemas_enviables(string id_problema, const Sesion& s)
+{
+    string sucesor_1, sucesor_2;
+    int sucesores = s.problemas_sucesores(id_problema, sucesor_1, sucesor_2);
+    if (sucesores == 1 or sucesores == 2) {
+	set<string>::const_iterator const_it = pro_resueltos.find(sucesor_1);
+	if (const_it == pro_resueltos.end()) pro_enviables.insert(sucesor_1);
+	else actualizar_problemas_enviables(sucesor_1, s);
+    }
+    if (sucesores == 2) {
+	set<string>::const_iterator const_it = pro_resueltos.find(sucesor_2);
+	if (const_it == pro_resueltos.end()) pro_enviables.insert(sucesor_2);
+	else actualizar_problemas_enviables(sucesor_2, s);
+    }
 }
 
 string Usuario::obtener_nombre() const
@@ -72,6 +95,13 @@ bool Usuario::problema_intentado(string id_problema) const
     else return true;
 }
 
+bool Usuario::problema_resuelto(string id_problema) const
+{
+    set<string>::const_iterator const_it = pro_resueltos.find(id_problema);
+    if (const_it == pro_resueltos.end()) return false;
+    else return true;
+}
+
 void Usuario::escribir_usuario() const
 {
     cout << nombre<< '(' << envios_totales << "," << pro_resueltos.size() << "," << intentos_problemas << "," << id_curso_inscrito << ')' << endl;
@@ -110,13 +140,7 @@ void Usuario::leer()
 void Usuario::anadir_problema_correcto(string id_problema)
 {
     pro_resueltos.insert(id_problema);
-    pro_resueltos_curso_actual.insert(id_problema);
     pro_enviables.erase(id_problema);
-}
-
-void Usuario::anadir_problema_enviable(string id_problema)
-{
-    pro_enviables.insert(id_problema);
 }
 
 void Usuario::quitar_problema_enviable(string id_problema)

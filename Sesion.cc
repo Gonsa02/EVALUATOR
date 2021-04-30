@@ -1,5 +1,6 @@
 #include "Sesion.hh"
 #include "BinTree.hh"
+#include <string>
 
 string Sesion::obtener_id() const
 {
@@ -16,21 +17,19 @@ string Sesion::problema_inicial() const
     return prerequisitos.value();
 }
 
-vector<string> Sesion::problemas_sucesores(string id_problema)
-{
-    vector<string> sucesores(0);
-    BinTree<string> sub = subarbol(prerequisitos, id_problema);
-    if (not sub.empty() and not sub.left().empty()) sucesores.push_back(sub.left().value());
-    if (not sub.empty() and not sub.right().empty()) sucesores.push_back(sub.right().value());
-    return sucesores;
+int Sesion::problemas_sucesores(string id_problema, string& sucesor_1, string& sucesor_2) const 
+{ 
+    return problemas_sucesores_i(prerequisitos, id_problema, sucesor_1, sucesor_2);
 }
 
 bool Sesion::interseccion_vacia(const Sesion& s) const
 {
-    set<string> s_aux = s.conj_id_problemas;
-    for (set<string>::const_iterator const_it = conj_id_problemas.begin(); const_it != conj_id_problemas.end(); ++const_it) {
-	set<string>::const_iterator it_aux = s_aux.find(*const_it);
-	if (it_aux != s_aux.end()) return false;
+    set<string>::const_iterator const_it = conj_id_problemas.begin(); 
+    set<string>::const_iterator aux_const_it = s.conj_id_problemas.begin(); 
+    while (const_it != conj_id_problemas.end() and aux_const_it != s.conj_id_problemas.end()) {
+	if (*const_it == *aux_const_it) return false;
+	else if (*const_it < *aux_const_it) ++const_it;
+	else ++aux_const_it;
     }
     return true;
 }
@@ -79,12 +78,6 @@ void Sesion::escribir_postorden(const BinTree<string> &arbol) const
     }
 }
 
-int Sesion::calcular_nodos(BinTree<string> b)
-{
-    if (not b.empty()) return 1 + calcular_nodos(b.left()) + calcular_nodos(b.right());
-    return 0;
-}
-
 BinTree<string> Sesion::subarbol(const BinTree<string>& arbol, string id_problema) const
 {
     if (arbol.value() == id_problema) return arbol;
@@ -96,6 +89,36 @@ BinTree<string> Sesion::subarbol(const BinTree<string>& arbol, string id_problem
     if (not right.empty()) return right;
     BinTree<string> empty;
     return empty;
+}
+
+int Sesion::problemas_sucesores_i(const BinTree<string>& a, string id_problema, string& sucesor_1, string& sucesor_2) const
+{
+    int n = -1;
+    if (not a.empty()) {
+	if (id_problema == a.value()) {
+	    ++n;
+	    if (a.left().empty()) {
+		if (not a.right().empty()) {
+		    sucesor_1 = a.right().value();
+		    ++n;
+		}
+	    }
+	    else {
+		sucesor_1 = a.left().value();
+		++n;
+		if (not a.right().empty()) {
+		    sucesor_2 = a.right().value();
+		    ++n;
+		}
+	    }
+	}
+	else {
+	    int l = problemas_sucesores_i(a.left(), id_problema, sucesor_1, sucesor_2);
+	    if (l != -1) n = l;
+	    else n = problemas_sucesores_i(a.right(), id_problema, sucesor_1, sucesor_2);
+	}
+    }
+    return n;
 }
 
 void Sesion::leer_bin_tree(BinTree<string>& a, set<string>& conj_p, string marca)

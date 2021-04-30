@@ -29,7 +29,7 @@ int main() {
     Conjunto_Cursos conj_c;
     conj_p.inicializar();
     conj_s.inicializar();
-    conj_c.inicializar();
+    conj_c.inicializar(conj_s);
     conj_u.inicializar();
     string c;
     cin >> c;
@@ -56,10 +56,10 @@ int main() {
 	}
 	else if (c == "nuevo_curso" or c == "nc") {
 	    Curso cur;
-	    cur.leer();
+	    cur.leer(conj_s);
 	    cout << '#' << c << ' ' << cur.obtener_id() << endl;
 	    if (conj_c.existe(cur)) cout << "El curso ya existe" << endl;
-	    else if (cur.existe_interseccion(conj_s)) cout << "Hay interseccion en los problemas" << endl;
+	    else if (cur.existe_interseccion()) cout << "Hay interseccion en los problemas" << endl;
 	    else {
 		conj_c.anadir(cur);
 		cout << conj_c.tamano() << endl;
@@ -95,7 +95,7 @@ int main() {
 	    else if (not conj_c.existe(cur)) cout << "error: el curso no existe" << endl;
 	    else if (u.inscrito_a_curso()) cout << "error: usuario inscrito en otro curso" << endl;
 	    else {
-		inscribir_usuario_a_curso(conj_u, conj_c, conj_s, u, cur);
+		inscribir_usuario_a_curso(conj_u, conj_c, u, cur);
 		conj_u.actualizar(u);
 		conj_c.actualizar(cur);
 		cout << cur.usuarios_actuales() << endl;
@@ -119,8 +119,12 @@ int main() {
 	    cout << '#' << c << ' ' << cur.obtener_id() << ' ' << p.obtener_id() << endl;
 	    if (not conj_c.existe(cur)) cout << "error: el curso no existe" << endl;
 	    else if (not conj_p.existe(p)) cout << "error: el problema no existe" << endl;
-	    else if (not cur.contiene_problema(p.obtener_id(), conj_s)) cout << "error: el problema no pertenece al curso" << endl;
-	    else cout << cur.sesion_problema(p.obtener_id(), conj_s) << endl;
+	    else if (not cur.contiene_problema(p.obtener_id())) cout << "error: el problema no pertenece al curso" << endl;
+	    else {
+		Sesion s;
+		cur.sesion_problema(p.obtener_id(), s);
+		cout << s.obtener_id() << endl;
+	    }
 	}
 	else if (c == "problemas_resueltos" or c == "pr") {
 	    Usuario u;
@@ -141,7 +145,7 @@ int main() {
 	    int r;
 	    string nombre, id_problema;
 	    cin >> nombre >> id_problema >> r;
-	    envio(conj_u, conj_c, conj_p, conj_s, nombre, id_problema, r);
+	    envio(conj_u, conj_c, conj_p, nombre, id_problema, r);
 	}
 	else if (c == "listar_problemas" or c =="lp") {
 	    cout << '#' << c << endl;

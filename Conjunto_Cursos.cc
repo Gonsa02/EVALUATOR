@@ -34,14 +34,14 @@ int Conjunto_Cursos::tamano() const
     return conj_c.size();
 }
 
-void Conjunto_Cursos::inicializar()
+void Conjunto_Cursos::inicializar(const Conjunto_Sesiones& conj_s)
 {
     int n;
     cin >> n;
     for (int i = 0; i < n; ++i) {
 	Curso c;
 	c.anadir_id(conj_c.size()+1);
-	c.leer();
+	c.leer(conj_s);
 	conj_c.insert(make_pair(c.obtener_id(), c));
     }
 }

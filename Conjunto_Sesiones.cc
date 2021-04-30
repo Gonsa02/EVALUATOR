@@ -37,7 +37,7 @@ void Conjunto_Sesiones::listar() const
 	const_it -> second.escribir_sesion();
 }
 
-void Conjunto_Sesiones::obtener_con_id(string id_sesion, Sesion &s)
+void Conjunto_Sesiones::obtener_con_id(string id_sesion, Sesion &s) const
 {
     map<string, Sesion>::const_iterator const_it = conj_s.find(id_sesion);
     s = const_it -> second;

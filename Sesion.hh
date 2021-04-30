@@ -43,7 +43,7 @@ public:
 
     /** @brief Consulta el primer Problema de la Sesion.
 
-      \pre <em>ciert</em>
+      \pre <em>cierto</em>
       \post Devuelve el identificador del Problema inicial de la Sesion.
       */
     string problema_inicial() const;
@@ -51,9 +51,9 @@ public:
     /** @brief Consulta a que problemas nos dará acceso el solucionar el Problema actual.
 
       \pre En el parámetro "id_problema" se encuentra el identificador del problema el cual queremos consultar los problemas sucesores. Existe un problema en el arbol con identificador = "id_problema".
-      \post El resultado retorna un vector con los problemas que son sucesores del Problema, en caso que no haya problemas sucesores retorna un vector vacio.
+      \post El método retorna el valor de sucesores que tenia el problema. En caso que tenga 2 sucesores, estos se encuentran en sucesor_1 y sucesor_2; en caso de que solo haya un sucesor, este se encuentra en sucesor_1.
       */
-    vector<string> problemas_sucesores(string id_problema);
+    int problemas_sucesores(string id_problema, string& sucesor_1, string& sucesor_2) const;
 
     /** @brief Consulta si hay intersección de problemas.
 
@@ -109,10 +109,10 @@ private:
     BinTree<string> prerequisitos;
     set<string> conj_id_problemas;
 
-    int calcular_nodos(BinTree<string> b);
     BinTree<string> subarbol(const BinTree<string> &arbol, string id_problema) const;
     void escribir_postorden(const BinTree<string> &arbol) const;
     void leer_bin_tree(BinTree<string>& a, set<string>& conj_id_problemas, string marca);
+    int problemas_sucesores_i(const BinTree<string>& a, string id_problema, string& sucesor_1, string& sucesor_2) const;
 };
 
 #endif
