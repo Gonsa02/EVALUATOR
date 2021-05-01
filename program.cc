@@ -57,9 +57,9 @@ int main() {
 	else if (c == "nuevo_curso" or c == "nc") {
 	    Curso cur;
 	    cur.leer(conj_s);
-	    cout << '#' << c << ' ' << cur.obtener_id() << endl;
-	    if (conj_c.existe(cur)) cout << "El curso ya existe" << endl;
-	    else if (cur.existe_interseccion()) cout << "Hay interseccion en los problemas" << endl;
+	    cout << '#' << c << endl;
+	    if (conj_c.existe(cur)) cout << "error: el curso ya existe" << endl;
+	    else if (cur.existe_interseccion()) cout << "error: curso mal formado" << endl;
 	    else {
 		conj_c.anadir(cur);
 		cout << conj_c.tamano() << endl;
@@ -145,6 +145,7 @@ int main() {
 	    int r;
 	    string nombre, id_problema;
 	    cin >> nombre >> id_problema >> r;
+	    cout << '#' << c << ' ' << nombre << ' ' << id_problema << ' ' << r << endl;
 	    envio(conj_u, conj_c, conj_p, nombre, id_problema, r);
 	}
 	else if (c == "listar_problemas" or c =="lp") {

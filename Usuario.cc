@@ -104,7 +104,7 @@ bool Usuario::problema_resuelto(string id_problema) const
 
 void Usuario::escribir_usuario() const
 {
-    cout << nombre<< '(' << envios_totales << "," << pro_resueltos.size() << "," << intentos_problemas << "," << id_curso_inscrito << ')' << endl;
+    cout << nombre<< '(' << envios_totales << "," << pro_resueltos.size() << "," << pro_intentados.size() << "," << id_curso_inscrito << ')' << endl;
 }
 
 void Usuario::escribir_problemas_enviables() const

@@ -3,7 +3,7 @@
 
 void Conjunto_Cursos::anadir(Curso &c)
 {
-    c.anadir_id(conj_c.size());
+    c.anadir_id(conj_c.size()+1);
     conj_c.insert(make_pair(c.obtener_id(), c));
 }
 
