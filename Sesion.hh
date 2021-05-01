@@ -8,11 +8,8 @@
 
 #ifndef NO_DIAGRAM
 #include "BinTree.hh"
-#include <vector>
 #include <set>
-#include <string>
 #include <iostream>
-using namespace std;
 #endif
 
 /** @class Sesion
@@ -34,13 +31,6 @@ public:
     */
     string obtener_id() const;
     
-    /** @brief Consulta el número de Problemas que forman parte de la Sesion.
-
-      \pre <em>cierto</em>
-      \post La función retorna el número de Problemas que contiene el parametro implícito.
-      */
-    int numero_problemas() const;
-
     /** @brief Consulta el primer Problema de la Sesion.
 
       \pre <em>cierto</em>
@@ -68,7 +58,7 @@ public:
       \pre <em>cierto</em>
       \post El resultado indica si el parámetro implícito contiene el Problema que tiene el identificador "id"
       */
-    bool contine_problema(string id) const;
+    bool contiene_problema(string id) const;
 
     //Lectura y escritura
 
@@ -109,7 +99,6 @@ private:
     BinTree<string> prerequisitos;
     set<string> conj_id_problemas;
 
-    BinTree<string> subarbol(const BinTree<string> &arbol, string id_problema) const;
     void escribir_postorden(const BinTree<string> &arbol) const;
     void leer_bin_tree(BinTree<string>& a, set<string>& conj_id_problemas, string marca);
     int problemas_sucesores_i(const BinTree<string>& a, string id_problema, string& sucesor_1, string& sucesor_2) const;

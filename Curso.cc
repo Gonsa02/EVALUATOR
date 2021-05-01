@@ -34,25 +34,15 @@ int Curso::obtener_id() const
     return id;
 }
 
-int Curso::usuarios_curso_complteado() const
-{
-    return usuarios_curso_completado;
-}
-
 int Curso::usuarios_actuales() const
 {
     return usuarios_cursando_curso;
 }
 
-int Curso::numero_sesiones() const
-{
-    return conj_s.size();
-}
-
 bool Curso::contiene_problema(string ID) const
 {
     for (set<Sesion>::const_iterator const_it = conj_s.begin(); const_it != conj_s.end(); ++const_it) {
-	if (const_it -> contine_problema(ID)) return true;
+	if (const_it -> contiene_problema(ID)) return true;
     }
     return false;
 }
@@ -72,7 +62,7 @@ void Curso::sesion_problema(string ID, Sesion& s) const
     bool found = false;
     set<Sesion>::const_iterator const_it = conj_s.begin();
     while (not found and const_it != conj_s.end()) {
-	if (const_it -> contine_problema(ID)) found = true;
+	if (const_it -> contiene_problema(ID)) found = true;
 	else ++const_it;
     }
     s = *const_it;

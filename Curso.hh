@@ -9,6 +9,7 @@
 #include "Sesion.hh"
 
 #ifndef NO_DIAGRAM
+#include <vector>
 #endif
 
 /** @class Curso
@@ -69,26 +70,12 @@ public:
     */
     int obtener_id() const;
 
-    /** @brief Consulta el numero de usuarios actuales o pasados que han completado el Curso.
-
-      \pre <em>cierto</em>
-      \post Retorna el numero de usuarios actuales o pasados que han completado el Curso.
-    */
-    int usuarios_curso_complteado() const;
-    
     /** @brief Consulta el numero de usuarios inscritos actualmente.
 
       \pre <em>cierto</em>
       \post Retorna el numero de usuarios inscritos actualmente en el Curso.
       */
     int usuarios_actuales() const;
-
-    /** @brief Consulta el numero de sesiones que tiene el parametro implícito.
-
-      \pre <em>cierto</em>
-      \post Retorna el numero de sesiones que tiene el parametro implícito.
-      */
-    int numero_sesiones() const;
 
     /** @brief Consulta si existe un problema en el curso
 	

@@ -7,11 +7,6 @@ string Sesion::obtener_id() const
     return id;
 }
 
-int Sesion::numero_problemas() const
-{
-    return num_problemas;
-}
-
 string Sesion::problema_inicial() const
 {
     return prerequisitos.value();
@@ -34,7 +29,7 @@ bool Sesion::interseccion_vacia(const Sesion& s) const
     return true;
 }
 
-bool Sesion::contine_problema(string id) const
+bool Sesion::contiene_problema(string id) const
 {
     set<string>::const_iterator const_it = conj_id_problemas.find(id);
     if (const_it == conj_id_problemas.end()) return false;
@@ -76,19 +71,6 @@ void Sesion::escribir_postorden(const BinTree<string> &arbol) const
 	escribir_postorden(arbol.right());
 	cout << arbol.value() << ')';
     }
-}
-
-BinTree<string> Sesion::subarbol(const BinTree<string>& arbol, string id_problema) const
-{
-    if (arbol.value() == id_problema) return arbol;
-    BinTree<string> left;
-    BinTree<string> right;
-    if (not arbol.left().empty()) left = subarbol(arbol.left(), id_problema);
-    if (not arbol.right().empty()) right = subarbol(arbol.right(), id_problema);
-    if (not left.empty()) return left;
-    if (not right.empty()) return right;
-    BinTree<string> empty;
-    return empty;
 }
 
 int Sesion::problemas_sucesores_i(const BinTree<string>& a, string id_problema, string& sucesor_1, string& sucesor_2) const

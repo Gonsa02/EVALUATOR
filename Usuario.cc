@@ -1,10 +1,5 @@
 #include "Usuario.hh"
 
-void Usuario::incrementar_intentos_problemas()
-{
-    ++intentos_problemas;
-}
-
 void Usuario::incrementar_envios_totales()
 {
     ++envios_totales;
@@ -51,24 +46,9 @@ string Usuario::obtener_nombre() const
     return nombre;
 }
 
-int Usuario::num_intentos_problemas() const
-{
-  return intentos_problemas;  
-}
-
-int Usuario::num_problemas_correctos() const
-{
-    return pro_resueltos.size();
-}
-
 int Usuario::num_problemas_enviables() const
 {
     return pro_enviables.size();
-}
-
-int Usuario::num_envios_totales() const
-{
-    return envios_totales;
 }
 
 bool Usuario::inscrito_a_curso() const
@@ -86,13 +66,6 @@ bool Usuario::cumple_requisitos(string id_problema) const
     set<string>::const_iterator const_it = pro_enviables.find(id_problema);
     if (const_it != pro_enviables.end()) return true;
     else return false;
-}
-
-bool Usuario::problema_intentado(string id_problema) const
-{
-    map<string,int>::const_iterator const_it = pro_intentados.find(id_problema);
-    if (const_it == pro_intentados.end()) return false;
-    else return true;
 }
 
 bool Usuario::problema_resuelto(string id_problema) const
@@ -131,7 +104,6 @@ void Usuario::leer()
     string n;
     cin >> n;
     nombre = n;
-    intentos_problemas = 0;
     envios_totales = 0;
     id_curso_inscrito = 0;
     inscrito = false;

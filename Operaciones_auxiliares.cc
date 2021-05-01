@@ -36,7 +36,6 @@ void envio(Conjunto_Usuarios &conj_u, Conjunto_Cursos &conj_c, Conjunto_Problema
     Problema p;
     conj_p.obtener(id_problema, p);
     p.incrementar_envios_totales();
-    if (not u.problema_intentado(id_problema)) u.anadir_problema_intentado(id_problema);
     if (r == 1) {
 	// Acutalizamos el Problema
 	p.incrementar_envios_exitosos();

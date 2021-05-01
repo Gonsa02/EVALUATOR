@@ -12,7 +12,7 @@ using namespace std;
 #endif
 
 /** @class Problema
-    @brief Representa un Problema de la Plataforma.
+    @brief Representa un Problema.
 
 */
 
@@ -56,20 +56,6 @@ public:
 	\post Retorna el identificador del parametro implícito.
     */
     string obtener_id() const;
-
-    /** @brief Consulta el ratio del Problema.
-
-	\pre <em>cierto</em>
-	\post Retorna el ratio del parametro implícito.
-    */
-    double obtener_ratio() const;
-
-    /** @brief Consulta el numero de envios que tiene un Problema.
-	
-	\pre <em>cierto</em>
-	\post Retorna el numero de envios totales que tiene el parametro implícito.
-    */
-    int envios_totales() const;
 
     //Escritura i lectura de Problema
 

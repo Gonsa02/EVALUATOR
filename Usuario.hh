@@ -26,13 +26,6 @@ public:
 
     //Modificadoras
 
-    /** @brief Incrementa el número de problemas que el Usuario ha intentado resolver.
-
-      \pre <em>cierto</em>
-      \post Se ha incrementado en una unidad el número de problemas que el parámetro implícito ha intentado resolver.
-      */
-    void incrementar_intentos_problemas();
-
     /** @brief Añade un problema correcto al Usuario.
 
       \pre En el parámetro "id_problema" se encuentra el identificador de un problema que ha sido resuelto correctamente por el parámetro implícito y que además, forma parte del curso que está cursando actualmente.
@@ -91,27 +84,6 @@ public:
     */
     string obtener_nombre() const; 
 
-    /** @brief Consulta el número de problemas que el Usuario ha intentado resolver.
-
-      \pre <em>cierto</em>
-      \post Retorna el número de problemas que el parámetro implícito ha intentado resolver.
-    */
-    int num_intentos_problemas() const;
-
-    /** @brief Consulta el número cuantos problemas ha resuelto correctamente el Usuario.
-
-      \pre <em>cierto</em>
-      \post Retorna el número de problemas que el parámetro implícito ha resuelto correctamente.
-    */
-    int num_problemas_correctos() const;
-
-    /** @brief Consulta el número de envios totales que el Usuario ha hecho.
-
-      \pre <em>cierto</em>
-      \post Retorna el número de envios totales que el parámetro implícito ha hecho.
-    */
-    int num_envios_totales() const;
-
     /** @brief Consulta si el parámetro implícito está cursando un curso.
 	
 	\pre <em>cierto</em>
@@ -139,13 +111,6 @@ public:
       \post El resultado indica si el parametro implícito cumple los prerequisitos para poder hacer un envio al Problema con identificador = "id_problema".
     */
     bool cumple_requisitos(string id_problema) const;
-
-    /** @brief Consulta si el Usuario ha intentado solucionar un Problema.
-
-      \pre <em>cierto</em>
-      \post El resultado indica si el Usuario ha intentado solucionar el Problema con identificador "id_problema".
-      */
-    bool problema_intentado(string id_problema) const;
 
     /** @brief Consulta si el Usuario ha resuelto un Problema.
 
@@ -185,7 +150,7 @@ public:
     void leer();
 
 private:
-    int intentos_problemas, envios_totales, id_curso_inscrito;
+    int envios_totales, id_curso_inscrito;
     bool inscrito;
     string nombre;
     set<string> pro_resueltos;

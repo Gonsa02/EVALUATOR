@@ -25,16 +25,6 @@ string Problema::obtener_id() const
     return id;
 }
 
-int Problema::envios_totales() const
-{
-    return env_totales;
-}
-
-double Problema::obtener_ratio() const
-{
-    return ratio;
-}
-
 void Problema::escribir_problema() const
 {
     cout << id << '('<< env_totales << ',' << env_exito << "," << ratio << ')' << endl;
@@ -54,6 +44,6 @@ void Problema::actualizar_ratio()
 
 bool Problema::operator<(const Problema &p) const
 {
-    if (ratio != p.obtener_ratio()) return ratio < p.obtener_ratio();
+    if (ratio != p.ratio) return ratio < p.ratio;
     else return id < p.obtener_id();
 }
