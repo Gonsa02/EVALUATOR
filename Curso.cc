@@ -95,14 +95,16 @@ void Curso::leer(const Conjunto_Sesiones& conjunto_sesiones)
 {
     int n;
     cin >> n;
+    vector<string> v(n);
     for (int i = 0; i < n; ++i) {
 	string id_s;
 	cin >> id_s;
 	Sesion s;
 	conjunto_sesiones.obtener_con_id(id_s, s);
 	conj_s.insert(s);
-	id_conj_s.push_back(id_s);
+	v[i] = id_s;
     }
+    id_conj_s = v;
 }
 
 void Curso::leer_id()

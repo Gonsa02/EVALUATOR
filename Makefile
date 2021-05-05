@@ -13,3 +13,4 @@ clean:
 	rm *.o
 	rm *.exe
 	rm *.tar
+	rm *.txt
