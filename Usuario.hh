@@ -54,6 +54,13 @@ public:
       */
     void incrementar_envios_totales();
 
+    /** @brief Incrementa el número de problemas intentados que el Usuario ha hecho.
+
+      \pre <em>cierto</em>
+      \post Se ha incrementado en una unidad el número de problemas intentados que el parámetro implícito ha hecho.
+      */
+    void incrementar_problemas_intentados();
+
     /** @brief Inscribe al Usuario en un Curso.
 
       \pre El Usuario no está inscrito a ningún curso.
@@ -119,6 +126,13 @@ public:
       */
     bool problema_resuelto(string id_problema) const;
 
+    /** @brief Consulta si el Usuario ha intentado un Problema.
+
+      \pre <em>cierto</em>
+      \post El resultado indica si el Usuario ha intentado el Problema con identificador "id_problema".
+      */
+    bool problema_intentado(string id_problema) const;
+
     //Escritura
 
     /** @brief Escribe información del parámetro implícito.
@@ -150,12 +164,11 @@ public:
     void leer();
 
 private:
-    int envios_totales, id_curso_inscrito;
+    int envios_totales, problemas_intentados, id_curso_inscrito;
     bool inscrito;
     string nombre;
-    set<string> pro_resueltos;
-    set<string> pro_enviables;
-    map<string,int> pro_intentados;
+    map<string,int> pro_resueltos;
+    map<string,int> pro_enviables;
 };
 
 #endif

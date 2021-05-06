@@ -33,6 +33,7 @@ void envio(Conjunto_Usuarios &conj_u, Conjunto_Cursos &conj_c, const Conjunto_Se
     Usuario u;
     conj_u.obtener(nombre, u);
     u.incrementar_envios_totales();
+    if (not u.problema_intentado(id_problema)) u.incrementar_problemas_intentados();
     u.anadir_problema_intentado(id_problema);
     Problema p;
     conj_p.obtener(id_problema, p);
