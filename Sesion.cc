@@ -121,3 +121,23 @@ bool Sesion::operator<(const Sesion &s) const
 {
     return id < s.obtener_id();
 }
+
+void Sesion::inizializar_iterador()
+{
+    iterador_problemas = conj_id_problemas.begin();
+}
+
+void Sesion::incrementar_iterador()
+{
+    ++iterador_problemas;
+}
+
+bool Sesion::end() const
+{
+    return iterador_problemas == conj_id_problemas.end();
+}
+
+string Sesion::valor() const
+{
+    return *iterador_problemas;
+}

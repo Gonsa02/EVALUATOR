@@ -1,11 +1,13 @@
 #include "Curso.hh"
 #include "Conjunto_Sesiones.hh"
+#include <string>
 
 Curso::Curso()
 {
    id = 0;
    usuarios_curso_completado = 0;
    usuarios_cursando_curso = 0;
+   interseccion = false;
 }
 
 void Curso::anadir_id(int id)
@@ -41,37 +43,24 @@ int Curso::usuarios_actuales() const
 
 bool Curso::contiene_problema(string ID) const
 {
-    for (set<Sesion>::const_iterator const_it = conj_s.begin(); const_it != conj_s.end(); ++const_it) {
-	if (const_it -> contiene_problema(ID)) return true;
-    }
-    return false;
+    map<string,string>::const_iterator const_it = problema_sesion.find(ID);
+    if (const_it == problema_sesion.end()) return false;
+    else return true;
 }
 
 bool Curso::existe_interseccion() const
 {
-    for (set<Sesion>::const_iterator const_it = conj_s.begin(); const_it != conj_s.end(); ++const_it) {
-	for (set<Sesion>::const_iterator aux_it = const_it; aux_it != conj_s.end(); ++aux_it) {
-	    if (const_it != aux_it and not const_it -> interseccion_vacia(*aux_it)) return true;
-	}
-    }
-    return false;
+    return interseccion;
 }
 
-void Curso::sesion_problema(string ID, Sesion& s) const
+string Curso::sesion_problema(string ID) const
 {
-    bool found = false;
-    set<Sesion>::const_iterator const_it = conj_s.begin();
-    while (not found and const_it != conj_s.end()) {
-	if (const_it -> contiene_problema(ID)) found = true;
-	else ++const_it;
-    }
-    s = *const_it;
+    return problema_sesion.find(ID) -> second;
 }
 
-void Curso::problemas_iniciales(vector<string>& v) const
+int Curso::tamano() const
 {
-    for (set<Sesion>::const_iterator const_it = conj_s.begin(); const_it != conj_s.end(); ++const_it)
-	v.push_back(const_it -> problema_inicial());
+    return id_conj_s.size();
 }
 
 void Curso::escribir_sesiones() const
@@ -86,7 +75,7 @@ void Curso::escribir_sesiones() const
 
 void Curso::escribir_curso() const
 {
-    cout << id << " " << usuarios_curso_completado << " " << usuarios_cursando_curso << " " << conj_s.size() << " (";
+    cout << id << " " << usuarios_curso_completado << " " << usuarios_cursando_curso << " " << id_conj_s.size() << " (";
     escribir_sesiones();
     cout << ')' << endl;
 }
@@ -101,7 +90,11 @@ void Curso::leer(const Conjunto_Sesiones& conjunto_sesiones)
 	cin >> id_s;
 	Sesion s;
 	conjunto_sesiones.obtener_con_id(id_s, s);
-	conj_s.insert(s);
+	s.inizializar_iterador();
+	while (not s.end() and not interseccion) {
+	    interseccion = not problema_sesion.insert(make_pair(s.valor(), id_s)).second;
+	    s.incrementar_iterador();
+	}
 	v[i] = id_s;
     }
     id_conj_s = v;
@@ -112,4 +105,24 @@ void Curso::leer_id()
     int id;
     cin >> id;
     this -> id = id;
+}
+
+void Curso::inizializar_iterador()
+{
+   iterador = 0; 
+}
+
+void Curso::incrementar_iterador()
+{
+    ++iterador;
+}
+
+bool Curso::end() const
+{
+    return iterador == id_conj_s.size();
+}
+
+string Curso::valor() const
+{
+    return id_conj_s[iterador];
 }

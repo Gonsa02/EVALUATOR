@@ -10,6 +10,8 @@
 
 #ifndef NO_DIAGRAM
 #include <vector>
+#include <map>
+#include <set>
 #endif
 
 /** @class Curso
@@ -93,19 +95,19 @@ public:
      */
     bool existe_interseccion() const;
 
-    /** @brief Consulta la sesion de un problema
+    /** @brief Consulta la Sesion de un Problema
 	
-	\pre El Curso contiene un problema con el "ID" que le pasen al parámetro de la función.
-	\post "s" es la Sesion en la cual se encuentra el Problema con identificador "ID" en el parámetro implícito.
+	\pre El Curso contiene un Problema con el "ID" que le pasen al parámetro de la función.
+	\post Retorna el identificador de la Sesion en la cual se encuentra el Problema con identificador "ID" en el parámetro implícito.
     */
-    void sesion_problema(string ID, Sesion& s) const;
+    string sesion_problema(string ID) const;
 
-    /** @brief Consulta el Problema inicial de cada Sesion que forma el Curso.
+    /** @brief Consulta el número de sesiones que tiene el Curso
 
-      \pre v.size() = 0.
-      \post En "v" se encuentra el identificador del Problema inicial de cada Sesion que forma parte del parámetro implícito.
+      \pre <em>cierto</em>
+      \post Retorna el número de sesiones que tiene el parámetro implícito.
     */
-    void problemas_iniciales(vector<string>& v) const;
+    int tamano() const;
 
     //Lectura y escritura
 
@@ -138,10 +140,42 @@ public:
     */
     void leer_id();
 
+    // Iterador
+
+    /** @brief Inizializa el iterador de sesiones al inicio en la primera Sesion del Curso.
+    
+      \pre <em>cierto</em>
+      \post El iterador del parámetro implícito apunta a la primera Sesion del parámetro implícito.
+    */
+    void inizializar_iterador();
+
+    /** @brief Icrementa el iterador para que apunte a la siguiente Sesion del parámetro implícito.
+    
+      \pre El iterador no apunta al elemento end().
+      \post El iterador del parámetro implícito apunta a la siguiente Sesion del parámetro implícito.
+    */
+    void incrementar_iterador();
+
+    /** @brief Consulta si el iterador ya ha llegado al final.
+
+      \pre <em>cierto</em>
+      \post Retorna si el iterador apunta al último elemento del parámetro implícito o no.
+    */
+    bool end() const;
+
+    /** @brief Consulta el valor al qual apunta el iterador del Curso.
+
+      \pre El iterador apunta a una Sesion del parámetro implícito.
+      \post Retorna el identificador de la Sesion al cual apunta el iterador del parámetro implícito.
+    */
+    string valor() const;
+
 private:
     int id, usuarios_curso_completado, usuarios_cursando_curso;
-    set<Sesion> conj_s;
+    bool interseccion;
     vector<string> id_conj_s;
+    map<string,string> problema_sesion;
+    int iterador;
 };
 
 #endif

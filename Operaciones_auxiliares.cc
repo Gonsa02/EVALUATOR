@@ -1,4 +1,5 @@
 #include "Operaciones_auxiliares.hh"
+#include "Conjunto_Sesiones.hh"
 
 void dar_baja(Conjunto_Usuarios &conj_u, Conjunto_Cursos &conj_c, const Usuario &u)
 {
@@ -14,12 +15,12 @@ void dar_baja(Conjunto_Usuarios &conj_u, Conjunto_Cursos &conj_c, const Usuario 
     conj_u.borrar(u);
 }
 
-void inscribir_usuario_a_curso(Conjunto_Usuarios &conj_u, Conjunto_Cursos &conj_c, Usuario &u, Curso &c)
+void inscribir_usuario_a_curso(Conjunto_Usuarios &conj_u, Conjunto_Cursos &conj_c, const Conjunto_Sesiones& conj_s, Usuario &u, Curso &c)
 {
     conj_c.obtener_con_id(c.obtener_id(), c);
     conj_u.obtener(u.obtener_nombre(), u);
 
-    u.inscribir_a_curso(c);
+    u.inscribir_a_curso(c, conj_s);
     conj_u.actualizar(u);
 
     // Incrementamos en numero de usuarios del Curso
@@ -27,7 +28,7 @@ void inscribir_usuario_a_curso(Conjunto_Usuarios &conj_u, Conjunto_Cursos &conj_
     conj_c.actualizar(c);
 }
 
-void envio(Conjunto_Usuarios &conj_u, Conjunto_Cursos &conj_c, Conjunto_Problemas &conj_p, string nombre, string id_problema, int r)
+void envio(Conjunto_Usuarios &conj_u, Conjunto_Cursos &conj_c, const Conjunto_Sesiones &conj_s, Conjunto_Problemas &conj_p, string nombre, string id_problema, int r)
 {
     Usuario u;
     conj_u.obtener(nombre, u);
@@ -45,8 +46,9 @@ void envio(Conjunto_Usuarios &conj_u, Conjunto_Cursos &conj_c, Conjunto_Problema
 	u.quitar_problema_enviable(id_problema);
 	Curso c;
 	conj_c.obtener_con_id(u.curso(), c);
+	string id_s = c.sesion_problema(id_problema);
 	Sesion s;
-	c.sesion_problema(id_problema, s);
+	conj_s.obtener_con_id(id_s, s);
 	u.actualizar_problemas_enviables(id_problema, s);
 	if (u.num_problemas_enviables() == 0) {
 	    u.finalizar_curso();

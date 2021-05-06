@@ -59,7 +59,7 @@ public:
       \pre El Usuario no está inscrito a ningún curso.
       \post El parámetro implícito cuenta con el registro de que está cursando un Curso y también de el id del Curso y además se le han añadido los problemas a los que tiene aceso del curso.
       */
-    void inscribir_a_curso(const Curso& c);
+    void inscribir_a_curso(Curso& c, const Conjunto_Sesiones& conj_s);
 
     /** @brief Prepara al Usuario para cursar otro curso.
 

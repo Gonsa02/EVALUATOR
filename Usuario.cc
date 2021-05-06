@@ -1,19 +1,27 @@
 #include "Usuario.hh"
+#include "Conjunto_Sesiones.hh"
 
 void Usuario::incrementar_envios_totales()
 {
     ++envios_totales;
 }
 
-void Usuario::inscribir_a_curso(const Curso& c)
+void Usuario::inscribir_a_curso(Curso& c, const Conjunto_Sesiones& conj_s)
 {
     id_curso_inscrito = c.obtener_id();
     inscrito = true;
-    vector<string> v(0);
-    c.problemas_iniciales(v);
-    for (int i = 0; i < v.size(); ++i) {
+    int n = c.tamano();
+    vector<string> v(n);
+    c.inizializar_iterador();
+    for (int i = 0; i < n; ++i) {
 	Sesion s;
-	c.sesion_problema(v[i], s);
+	conj_s.obtener_con_id(c.valor(), s);
+	v[i] = s.problema_inicial();
+	c.incrementar_iterador();
+    }
+    for (int i = 0; i < n; ++i) {
+	Sesion s;
+	conj_s.obtener_con_id(c.sesion_problema(v[i]), s);
 	if (problema_resuelto(v[i])) actualizar_problemas_enviables(v[i], s);
 	else pro_enviables.insert(v[i]);
     }

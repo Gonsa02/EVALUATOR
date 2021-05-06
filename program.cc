@@ -95,7 +95,7 @@ int main() {
 	    else if (not conj_c.existe(cur)) cout << "error: el curso no existe" << endl;
 	    else if (u.inscrito_a_curso()) cout << "error: usuario inscrito en otro curso" << endl;
 	    else {
-		inscribir_usuario_a_curso(conj_u, conj_c, u, cur);
+		inscribir_usuario_a_curso(conj_u, conj_c, conj_s, u, cur);
 		conj_u.actualizar(u);
 		conj_c.actualizar(cur);
 		cout << cur.usuarios_actuales() << endl;
@@ -120,11 +120,7 @@ int main() {
 	    if (not conj_c.existe(cur)) cout << "error: el curso no existe" << endl;
 	    else if (not conj_p.existe(p)) cout << "error: el problema no existe" << endl;
 	    else if (not cur.contiene_problema(p.obtener_id())) cout << "error: el problema no pertenece al curso" << endl;
-	    else {
-		Sesion s;
-		cur.sesion_problema(p.obtener_id(), s);
-		cout << s.obtener_id() << endl;
-	    }
+	    else cout << cur.sesion_problema(p.obtener_id()) << endl;
 	}
 	else if (c == "problemas_resueltos" or c == "pr") {
 	    Usuario u;
@@ -146,7 +142,7 @@ int main() {
 	    string nombre, id_problema;
 	    cin >> nombre >> id_problema >> r;
 	    cout << '#' << c << ' ' << nombre << ' ' << id_problema << ' ' << r << endl;
-	    envio(conj_u, conj_c, conj_p, nombre, id_problema, r);
+	    envio(conj_u, conj_c, conj_s, conj_p, nombre, id_problema, r);
 	}
 	else if (c == "listar_problemas" or c =="lp") {
 	    cout << '#' << c << endl;

@@ -93,11 +93,42 @@ public:
       */
     bool operator<(const Sesion& s) const;
 
+    // Iterador
+
+    /** @brief Inizializa el iterador de problemas al inicio de la Sesion.
+    
+      \pre <em>cierto</em>
+      \post El iterador del parámetro implícito apunta al primer Problema del parámetro implícito.
+    */
+    void inizializar_iterador();
+
+    /** @brief Icrementa el iterador para que apunte al siguiente Problema del parámetro implícito.
+    
+      \pre El iterador no apunta al elemento end().
+      \post El iterador del parámetro implícito apunta al siguiente Problema del parámetro implícito.
+    */
+    void incrementar_iterador();
+
+    /** @brief Consulta si el iterador ya ha llegado al final.
+
+      \pre <em>cierto</em>
+      \post Retorna si el iterador apunta al último elemento del parámetro implícito o no.
+    */
+    bool end() const;
+
+    /** @brief Consulta el valor al qual apunta el iterador de la Sesion.
+
+      \pre El iterador apunta a un Problema del parámetro implícito.
+      \post Retorna el identificador del Problema al cual apunta el iterador del parámetro implícito.
+    */
+    string valor() const;
+
 private:
     string id;
     int num_problemas;
     BinTree<string> prerequisitos;
     set<string> conj_id_problemas;
+    set<string>::const_iterator iterador_problemas;
 
     void escribir_postorden(const BinTree<string> &arbol) const;
     void leer_bin_tree(BinTree<string>& a, set<string>& conj_id_problemas, string marca);
