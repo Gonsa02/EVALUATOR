@@ -4,14 +4,13 @@
 
 #ifndef _CURSO_HH_
 #define _CURSO_HH_
-
 #include "Conjunto_Sesiones.hh"
-#include "Sesion.hh"
 
 #ifndef NO_DIAGRAM
 #include <vector>
 #include <map>
-#include <set>
+#include <string>
+using namespace std;
 #endif
 
 /** @class Curso

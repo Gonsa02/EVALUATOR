@@ -12,11 +12,6 @@ string Sesion::problema_inicial() const
     return prerequisitos.value();
 }
 
-int Sesion::problemas_sucesores(string id_problema, string& sucesor_1, string& sucesor_2) const 
-{ 
-    return problemas_sucesores_i(prerequisitos, id_problema, sucesor_1, sucesor_2);
-}
-
 bool Sesion::interseccion_vacia(const Sesion& s) const
 {
     set<string>::const_iterator const_it = conj_id_problemas.begin(); 
@@ -34,6 +29,18 @@ bool Sesion::contiene_problema(string id) const
     set<string>::const_iterator const_it = conj_id_problemas.find(id);
     if (const_it == conj_id_problemas.end()) return false;
     else return true;
+}
+
+void Sesion::problemas_enviables(Usuario &u) const
+{
+    problemas_enviables_i(prerequisitos, u);
+}
+
+void Sesion::problemas_envio(Usuario &u, string id_problema) const
+{
+    BinTree<string> a = prerequisitos;
+    bool found = false;
+    problemas_envio_i(a, u, id_problema, found);
 }
 
 void Sesion::escribir_sesion() const
@@ -73,36 +80,6 @@ void Sesion::escribir_postorden(const BinTree<string> &arbol) const
     }
 }
 
-int Sesion::problemas_sucesores_i(const BinTree<string>& a, string id_problema, string& sucesor_1, string& sucesor_2) const
-{
-    int n = -1;
-    if (not a.empty()) {
-	if (id_problema == a.value()) {
-	    ++n;
-	    if (a.left().empty()) {
-		if (not a.right().empty()) {
-		    sucesor_1 = a.right().value();
-		    ++n;
-		}
-	    }
-	    else {
-		sucesor_1 = a.left().value();
-		++n;
-		if (not a.right().empty()) {
-		    sucesor_2 = a.right().value();
-		    ++n;
-		}
-	    }
-	}
-	else {
-	    int l = problemas_sucesores_i(a.left(), id_problema, sucesor_1, sucesor_2);
-	    if (l != -1) n = l;
-	    else n = problemas_sucesores_i(a.right(), id_problema, sucesor_1, sucesor_2);
-	}
-    }
-    return n;
-}
-
 void Sesion::leer_bin_tree(BinTree<string>& a, set<string>& conj_p, string marca)
 {
   string x;
@@ -140,4 +117,31 @@ bool Sesion::end() const
 string Sesion::valor() const
 {
     return *iterador_problemas;
+}
+
+void Sesion::problemas_envio_i(const BinTree<string>& a, Usuario& u, string id_problema, bool& found) const
+
+{
+    if (not a.empty() and not found) {
+	if (id_problema == a.value()) {
+	    found = true;
+	    problemas_enviables_i(a.left(), u);
+	    problemas_enviables_i(a.right(), u);
+	}
+	else {
+	    problemas_envio_i(a.left(), u, id_problema, found);
+	    problemas_envio_i(a.right(), u, id_problema, found);
+	}
+    }
+}
+
+void Sesion::problemas_enviables_i(const BinTree<string>& a, Usuario& u) const
+{
+    if (not a.empty()) {
+	if (not u.problema_resuelto(a.value())) u.anadir_problema_enviable(a.value());
+	else {
+	    problemas_enviables_i(a.left(), u);
+	    problemas_enviables_i(a.right(), u);
+	}
+    }
 }

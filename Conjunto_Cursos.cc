@@ -13,6 +13,11 @@ void Conjunto_Cursos::actualizar(const Curso& c)
     it -> second = c;
 }
 
+void Conjunto_Cursos::usuario_baja_curso(int id_curso)
+{
+    conj_c.find(id_curso) -> second.usuario_dar_baja_curso();
+}
+
 bool Conjunto_Cursos::existe(Curso &c)
 {
     map<int, Curso>::const_iterator const_it = conj_c.find(c.obtener_id());

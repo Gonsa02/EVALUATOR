@@ -2,20 +2,16 @@
     @mainpage EVALUATOR: plataforma de gestión de problemas y cursos de programación.
 */
 
-#include "Conjunto_Usuarios.hh"
-#include "Conjunto_Problemas.hh"
-#include "Conjunto_Sesiones.hh"
-#include "Conjunto_Cursos.hh"
-#include "Usuario.hh"
-#include "Problema.hh"
-#include "Sesion.hh"
-#include "Curso.hh"
-#include "Operaciones_auxiliares.hh"
-
 #ifndef NO_DIAGRAM
 #include <iostream>
 using namespace std;
 #endif
+
+#include "Conjunto_Problemas.hh"
+#include "Conjunto_Cursos.hh"
+#include "Conjunto_Sesiones.hh"
+#include "Conjunto_Usuarios.hh"
+
 
 /** 
  @file main.cc
@@ -80,7 +76,8 @@ int main() {
 	    u.leer();
 	    cout << '#' << c << ' ' << u.obtener_nombre() << endl;
 	    if (conj_u.existe(u)) {
-		dar_baja(conj_u, conj_c, u);
+		if (u.inscrito_a_curso()) conj_c.usuario_baja_curso(u.curso());
+		conj_u.borrar(u);
 		cout << conj_u.numero_usuarios() << endl;
 	    }
 	    else cout << "error: el usuario no existe" << endl;
@@ -95,8 +92,10 @@ int main() {
 	    else if (not conj_c.existe(cur)) cout << "error: el curso no existe" << endl;
 	    else if (u.inscrito_a_curso()) cout << "error: usuario inscrito en otro curso" << endl;
 	    else {
-		inscribir_usuario_a_curso(conj_u, conj_c, conj_s, u, cur);
-		conj_u.actualizar(u);
+		//inscribir_usuario_a_curso(conj_u, conj_c, conj_s, u, cur);
+		conj_c.obtener_con_id(cur.obtener_id(), cur);
+		conj_u.inscribir_usuario_a_curso(u, cur, conj_s);
+		cur.usuario_inscribir_curso();
 		conj_c.actualizar(cur);
 		cout << cur.usuarios_actuales() << endl;
 	    }
@@ -142,7 +141,23 @@ int main() {
 	    string nombre, id_problema;
 	    cin >> nombre >> id_problema >> r;
 	    cout << '#' << c << ' ' << nombre << ' ' << id_problema << ' ' << r << endl;
-	    envio(conj_u, conj_c, conj_s, conj_p, nombre, id_problema, r);
+	    //envio(conj_u, conj_c, conj_s, conj_p, nombre, id_problema, r);
+	    Usuario u;
+	    conj_u.obtener(nombre, u);
+	    conj_u.envio_usuario(nombre, id_problema);
+	    Problema p;
+	    conj_p.obtener(id_problema, p);
+	    p.incrementar_envios_totales();
+	    if (r == 1) {
+		p.incrementar_envios_exitosos();
+		Curso c;
+		conj_c.obtener_con_id(u.curso(), c);
+		Sesion s;
+		conj_s.obtener_con_id(c.sesion_problema(id_problema), s);
+		if (conj_u.envio_correcto_usuario(nombre, id_problema, s)) c.usuario_finaliza_curso();
+		conj_c.actualizar(c);	
+	    }
+	    conj_p.actualizar(p);
 	}
 	else if (c == "listar_problemas" or c =="lp") {
 	    cout << '#' << c << endl;

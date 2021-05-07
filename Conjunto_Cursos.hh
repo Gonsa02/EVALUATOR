@@ -10,7 +10,6 @@
 
 #ifndef NO_DIAGRAM
 #include <map>
-#include <iostream>
 #endif
 
 /** @class Conjunto_Cursos
@@ -36,6 +35,13 @@ public:
     \post Se ha sustituido el Curso del parámetro implícito con el mismo identificador que "c" por "c".
     */
     void actualizar(const Curso& c);
+
+    /** @brief Da de baja de un Curso.
+
+      \pre Existe un Curso con identificador = "id_curso" en el parámetro implícito.
+      \post Se ha decrementado el número de usuarios inscritos al Curso con identificador = "id_curso" del parámetro implícito.
+      */
+    void usuario_baja_curso(int id_curso);
 
     //Consultoras
     

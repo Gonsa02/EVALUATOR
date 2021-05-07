@@ -4,12 +4,11 @@
 
 #ifndef _SESION_HH_
 #define _SESION_HH_
-
+#include "Usuario.hh"
 
 #ifndef NO_DIAGRAM
 #include "BinTree.hh"
 #include <set>
-#include <iostream>
 #endif
 
 /** @class Sesion
@@ -38,13 +37,6 @@ public:
       */
     string problema_inicial() const;
 
-    /** @brief Consulta a que problemas nos dará acceso el solucionar el Problema actual.
-
-      \pre En el parámetro "id_problema" se encuentra el identificador del problema el cual queremos consultar los problemas sucesores. Existe un problema en el arbol con identificador = "id_problema".
-      \post El método retorna el valor de sucesores que tenia el problema. En caso que tenga 2 sucesores, estos se encuentran en sucesor_1 y sucesor_2; en caso de que solo haya un sucesor, este se encuentra en sucesor_1.
-      */
-    int problemas_sucesores(string id_problema, string& sucesor_1, string& sucesor_2) const;
-
     /** @brief Consulta si hay intersección de problemas.
 
       \pre <em>Cierto</em>
@@ -59,6 +51,20 @@ public:
       \post El resultado indica si el parámetro implícito contiene el Problema que tiene el identificador "id"
       */
     bool contiene_problema(string id) const;
+
+    /** @brief Consulta los problemas enviables y no resueltos que tiene un Usuario y se los añade.
+     
+      \pre <em>cierto</em>
+      \post Se han consultado y añadido los problemas enviables a los que tiene acceso el Usuario pero no los había resuelto.
+    */
+    void problemas_enviables(Usuario& u) const;
+
+    /** @brief Consulta los problemas enviables y no resueltos que tiene un Usuario a partir de un Problema y se los añade.
+
+    \pre <em>cierto</em>
+    \post Se han consultado y añadido los problemas enviables a los que tiene acceso  el Usuario pero no los había resuelto a partir de un Problema.
+    */
+    void problemas_envio(Usuario& u, string id_problema) const;
 
     //Lectura y escritura
 
@@ -132,7 +138,8 @@ private:
 
     void escribir_postorden(const BinTree<string> &arbol) const;
     void leer_bin_tree(BinTree<string>& a, set<string>& conj_id_problemas, string marca);
-    int problemas_sucesores_i(const BinTree<string>& a, string id_problema, string& sucesor_1, string& sucesor_2) const;
+    void problemas_envio_i(const BinTree<string>& a, Usuario& u, string id_problema, bool& found) const;
+    void problemas_enviables_i(const BinTree<string>& a, Usuario& u) const;
 };
 
 #endif

@@ -4,13 +4,11 @@
 
 #ifndef _USUARIO_HH_
 #define _USUARIO_HH_
-#include "Conjunto_Sesiones.hh"
-#include "Curso.hh"
 
 #ifndef NO_DIAGRAM
-#include <iostream>
 #include <set>
 #include <map>
+#include <iostream>
 using namespace std;
 #endif
 
@@ -33,6 +31,13 @@ public:
       */
     void anadir_problema_correcto(string id_problema);
 
+    /** @brief Añade el identificador de un Problema nuevo al Usuario.
+     
+      \pre <em>cierto</em>
+      \post Se ha añadido el identificador del Problema al registro de problemas enviables del parámetro implícito.
+      */
+    void anadir_problema_enviable(string id_problema);
+
     /** @brief Quita un Problema enviable al Usuario.
 
       \pre Existe un problema con id "id_problema" en el registro de problemas enviables del parámetro implícito.
@@ -40,12 +45,12 @@ public:
       */
     void quitar_problema_enviable(string id_problema);
 
-    /** @brief Añade un Problema intentado al Usuario.
+    /** @brief Añade un intento a un Problema enviable.
 
-      \pre <em>cierto</em>
-      \post Se ha añadido al registro de problemas intentados del parámetro implícito el identificador del Problema.
+      \pre El parámetro implícito tiene acceso a hacer un intento a ese problema.
+      \post Se ha incrementado en una unidad los intentos al problema con "id_problema" i en caso de que sea el primer intento, se ha incrementado en una unidad el número de problemas intentados.
       */
-    void anadir_problema_intentado(string id_problema);
+    void anadir_intento_problema(string id_problema);
 
     /** @brief Incrementa el número de envios totales que el Usuario ha hecho.
 
@@ -64,9 +69,9 @@ public:
     /** @brief Inscribe al Usuario en un Curso.
 
       \pre El Usuario no está inscrito a ningún curso.
-      \post El parámetro implícito cuenta con el registro de que está cursando un Curso y también de el id del Curso y además se le han añadido los problemas a los que tiene aceso del curso.
+      \post El parámetro implícito cuenta con el registro de que está cursando un Curso y también de el id del Curso.
       */
-    void inscribir_a_curso(Curso& c, const Conjunto_Sesiones& conj_s);
+    void inscribir_a_curso(int id_curso);
 
     /** @brief Prepara al Usuario para cursar otro curso.
 
@@ -74,13 +79,6 @@ public:
       \post El parametro implícito está preparado para cursar otro curso correctamente.
       */
     void finalizar_curso();
-
-    /** @brief Actualiza los Problemas enviables del Usuario a partir de un Problema.
-     
-      \pre El id_problema se encuentra en la Sesion "s".
-      \post Se han añadido los problemas enviables a los que tiene acceso el parámetro implícito gracias a haber resuelto ahora o anteriormente el Problema con id_problema.
-    */
-    void actualizar_problemas_enviables(string id_problema, const Sesion& s);
 
     //Consultoras
 

@@ -9,7 +9,6 @@
 
 #ifndef NO_DIAGRAM
 #include <map>
-#include <iostream>
 #endif
 
 /** @class Conjunto_Sesiones

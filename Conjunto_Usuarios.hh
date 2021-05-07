@@ -6,6 +6,8 @@
 #define _CONJUNTO_USUARIOS_HH_
 
 #include "Usuario.hh"
+#include "Conjunto_Sesiones.hh"
+#include "Curso.hh"
 
 #ifndef NO_DIAGRAM
 #include <map>
@@ -41,6 +43,27 @@ public:
     \post Se ha sustituido el Usuario del parámetro implícito con el mismo nombre que "u" por "u".
     */
     void actualizar(const Usuario& u);
+
+    /* Inscribe un Usuario a un Curso.
+
+    \pre El Usuario "u" no está cursando ningún Curso.
+    \post El parámetro implícito cuenta con el registro de que "u" está cursando un Curso y también de el id del Curso y además se le han añadido los problemas a los que tiene aceso del curso.
+    */
+    void inscribir_usuario_a_curso(const Usuario& u, Curso& c, const Conjunto_Sesiones& conj_s);
+
+    /* @brief Actualiza las estadísticas de un Usuario por el envio que ha hecho.
+
+       \pre Existe un Usuario con nombre = "nombre" en el parámetro implícito y ese Usuario tiene acceso a hacer un envio al Problema con identificador = "id_problema".
+       \post Se han incrementado los envios totales i los intentos a ese problema, además en caso de que es la primera vez que se intenta ese Problema, también se ha incrementado el número de problemas intentados.
+       */
+    void envio_usuario(string nombre, string id_problema);
+
+    /* @brief Actualiza las estadísticas de un Usuario por el envio que ha hecho.
+
+       \pre Existe un Usuario con nombre = "nombre" en el parámetro implícito y ese Usuario tiene acceso a hacer un envio al Problema con identificador = "id_problema".
+       \post En el Usuario con nombre = "nombre" consta de que ha resuelto el problema i se le ha quitado de los problemas enviables que tenia. Además se han actualizado los problemas enviables a los que tiene acceso el Usuario y se ha consultado si con este envio correcto el Usuario ha terminado el Curso, en caso afirmativo el Usuario deja de estar inscrito en el Curso i la función retorna "true", si no lo termina retorna "false".
+       */
+    bool envio_correcto_usuario(string nombre, string id_problema, const Sesion& s);
 
     //Consultoras
     

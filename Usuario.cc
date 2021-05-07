@@ -1,5 +1,4 @@
 #include "Usuario.hh"
-#include "Conjunto_Sesiones.hh"
 
 void Usuario::incrementar_envios_totales()
 {
@@ -11,47 +10,16 @@ void Usuario::incrementar_problemas_intentados()
     ++problemas_intentados;
 }
 
-void Usuario::inscribir_a_curso(Curso& c, const Conjunto_Sesiones& conj_s)
+void Usuario::inscribir_a_curso(int id_curso)
 {
-    id_curso_inscrito = c.obtener_id();
     inscrito = true;
-    int n = c.tamano();
-    vector<string> v(n);
-    c.inizializar_iterador();
-    for (int i = 0; i < n; ++i) {
-	Sesion s;
-	conj_s.obtener_con_id(c.valor(), s);
-	v[i] = s.problema_inicial();
-	c.incrementar_iterador();
-    }
-    for (int i = 0; i < n; ++i) {
-	Sesion s;
-	conj_s.obtener_con_id(c.sesion_problema(v[i]), s);
-	if (problema_resuelto(v[i])) actualizar_problemas_enviables(v[i], s);
-	else pro_enviables.insert(make_pair(v[i],0));
-    }
+    id_curso_inscrito = id_curso;
 }
 
 void Usuario::finalizar_curso()
 {
     id_curso_inscrito = 0;
     inscrito = false;
-}
-
-void Usuario::actualizar_problemas_enviables(string id_problema, const Sesion& s)
-{
-    string sucesor_1, sucesor_2;
-    int sucesores = s.problemas_sucesores(id_problema, sucesor_1, sucesor_2);
-    if (sucesores == 1 or sucesores == 2) {
-	map<string,int>::const_iterator const_it = pro_resueltos.find(sucesor_1);
-	if (const_it == pro_resueltos.end()) pro_enviables.insert(make_pair(sucesor_1,0));
-	else actualizar_problemas_enviables(sucesor_1, s);
-    }
-    if (sucesores == 2) {
-	map<string,int>::const_iterator const_it = pro_resueltos.find(sucesor_2);
-	if (const_it == pro_resueltos.end()) pro_enviables.insert(make_pair(sucesor_2,0));
-	else actualizar_problemas_enviables(sucesor_2, s);
-    }
 }
 
 string Usuario::obtener_nombre() const
@@ -90,7 +58,7 @@ bool Usuario::problema_resuelto(string id_problema) const
 
 bool Usuario::problema_intentado(string id_problema) const
 {
-    return not (0 == pro_enviables.find(id_problema) -> second);
+    return  0 < pro_enviables.find(id_problema) -> second;
 }
 
 void Usuario::escribir_usuario() const
@@ -127,12 +95,19 @@ void Usuario::anadir_problema_correcto(string id_problema)
     pro_enviables.erase(id_problema);
 }
 
+void Usuario::anadir_problema_enviable(string id_problema)
+{
+    pro_enviables.insert(make_pair(id_problema, 0));
+}
+
 void Usuario::quitar_problema_enviable(string id_problema)
 {
     pro_enviables.erase(id_problema);
 }
 
-void Usuario::anadir_problema_intentado(string id_problema)
+void Usuario::anadir_intento_problema(string id_problema)
 {
-    pro_enviables.find(id_problema) -> second++;
+    map<string,int>::iterator it = pro_enviables.find(id_problema);
+    if (it -> second == 0) ++problemas_intentados;
+    it -> second++;
 }

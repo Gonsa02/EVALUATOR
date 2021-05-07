@@ -1,6 +1,4 @@
 #include "Curso.hh"
-#include "Conjunto_Sesiones.hh"
-#include <string>
 
 Curso::Curso()
 {
