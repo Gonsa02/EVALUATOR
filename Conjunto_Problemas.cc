@@ -2,7 +2,7 @@
 
 void Conjunto_Problemas::anadir(const Problema &p)
 {
-    conj_p.insert(make_pair(p.obtener_id(), p)); 
+    conj_p.emplace(make_pair(p.obtener_id(), p)); 
 }
 
 void Conjunto_Problemas::actualizar(const Problema &p)
@@ -37,7 +37,7 @@ void Conjunto_Problemas::inicializar()
     for (int i = 0; i < n; ++i) {
 	Problema p;
 	p.leer();
-	conj_p.insert(make_pair(p.obtener_id(), p));
+	conj_p.emplace(make_pair(p.obtener_id(), p));
     }
 }
 

@@ -38,14 +38,14 @@ public:
       \pre <em>cierto</em>
       \post El prarámetro implícito tiene el identficador = "id".
       */
-    void anadir_id(int id);
+    void anadir_id(const int& id);
 
     /** @brief Añade el identificador de un Problema y el identificador de una Sesion del Curso al Curso.
 
       \pre <em>cierto</em>
       \post Se le han añadido los identificadores de los problemas de la Sesion al parámetro implícito.  Además, en caso que haya intersección, queda registrado en el parámetro implícito  que existe esa intersección.
       */
-    void anadir_problema_sesion(string id_problema, string id_sesion);
+    void anadir_problema_sesion(const string& id_problema, const string& id_sesion);
 
     /** @brief Incrementa el numero de usuarios que estan cursando el Curso.
 
@@ -91,7 +91,7 @@ public:
 
     */
 
-    bool contiene_problema(string ID) const;
+    bool contiene_problema(const string& ID) const;
 
     /** @brief Consulta si existe intersección entre los problemas de las diferentes sesiones.
      
@@ -105,7 +105,7 @@ public:
 	\pre El Curso contiene un Problema con el "ID" que le pasen al parámetro de la función.
 	\post Retorna el identificador de la Sesion en la cual se encuentra el Problema con identificador "ID" en el parámetro implícito.
     */
-    string sesion_problema(string ID) const;
+    void sesion_problema(const string& ID, string& id_s) const;
 
     /** @brief Consulta el número de sesiones que tiene el Curso
 
@@ -171,9 +171,9 @@ public:
     /** @brief Consulta el valor al qual apunta el iterador del Curso.
 
       \pre El iterador apunta a una Sesion del parámetro implícito.
-      \post Retorna el identificador de la Sesion al cual apunta el iterador del parámetro implícito.
+      \post "id_s" és el identificador de la Sesion al cual apunta el iterador del parámetro implícito.
     */
-    string valor() const;
+    void valor(string& id_s) const;
 
 private:
     int id, usuarios_curso_completado, usuarios_cursando_curso;

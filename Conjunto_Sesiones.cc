@@ -2,7 +2,7 @@
 
 void Conjunto_Sesiones::anadir(const Sesion &s)
 {
-    conj_s.insert(make_pair(s.obtener_id(), s)); 
+    conj_s.emplace(make_pair(s.obtener_id(), s)); 
 }
 
 int Conjunto_Sesiones::tamano() const
@@ -27,7 +27,7 @@ void Conjunto_Sesiones::inicializar()
     for (int i = 0; i < n; ++i) {
 	Sesion s;
 	s.leer();
-	conj_s.insert(make_pair(s.obtener_id(), s));
+	conj_s.emplace(make_pair(s.obtener_id(), s));
     }
 }
 
@@ -37,7 +37,7 @@ void Conjunto_Sesiones::listar() const
 	const_it -> second.escribir_sesion();
 }
 
-void Conjunto_Sesiones::obtener_con_id(string id_sesion, Sesion &s) const
+void Conjunto_Sesiones::obtener_con_id(const string& id_sesion, Sesion &s) const
 {
     map<string, Sesion>::const_iterator const_it = conj_s.find(id_sesion);
     s = const_it -> second;

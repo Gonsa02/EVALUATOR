@@ -40,7 +40,7 @@ public:
       \pre Existe un Curso con identificador = "id_curso" en el parámetro implícito.
       \post Se ha decrementado el número de usuarios inscritos al Curso con identificador = "id_curso" del parámetro implícito.
       */
-    void usuario_baja_curso(int id_curso);
+    void usuario_baja_curso(const int& id_curso);
 
     //Consultoras
     
@@ -56,7 +56,7 @@ public:
     \pre Existe un Curso con identificador "id".
     \post En el Curso "c" se encuentra el Curso con identificador "id" del parámetro implícito.
     */
-    void obtener_con_id(int id, Curso& c);
+    void obtener_con_id(const int& id, Curso& c);
 
     /** @brief Consulta el número de cursos que tiene el Conjunto_Cursos
 

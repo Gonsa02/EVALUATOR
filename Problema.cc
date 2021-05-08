@@ -20,9 +20,9 @@ void Problema::incrementar_envios_exitosos()
     actualizar_ratio();
 };
 
-string Problema::obtener_id() const
+void Problema::obtener_id(string& id_s) const
 {
-    return id;
+    id_s = id;
 }
 
 void Problema::escribir_problema() const
@@ -44,6 +44,8 @@ void Problema::actualizar_ratio()
 
 bool Problema::operator<(const Problema &p) const
 {
+    string id_p;
+    p.obtener_id(id_p);
     if (ratio != p.ratio) return ratio < p.ratio;
-    else return id < p.obtener_id();
+    else return id < id_p;
 }

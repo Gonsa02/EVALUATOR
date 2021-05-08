@@ -4,7 +4,7 @@
 void Conjunto_Cursos::anadir(Curso &c)
 {
     c.anadir_id(conj_c.size()+1);
-    conj_c.insert(make_pair(c.obtener_id(), c));
+    conj_c.emplace(make_pair(c.obtener_id(), c));
 }
 
 void Conjunto_Cursos::actualizar(const Curso& c)
@@ -13,7 +13,7 @@ void Conjunto_Cursos::actualizar(const Curso& c)
     it -> second = c;
 }
 
-void Conjunto_Cursos::usuario_baja_curso(int id_curso)
+void Conjunto_Cursos::usuario_baja_curso(const int& id_curso)
 {
     conj_c.find(id_curso) -> second.usuario_dar_baja_curso();
 }
@@ -28,7 +28,7 @@ bool Conjunto_Cursos::existe(Curso &c)
     else return false;
 }
 
-void Conjunto_Cursos::obtener_con_id(int id, Curso &c)
+void Conjunto_Cursos::obtener_con_id(const int& id, Curso &c)
 {
     map<int, Curso>::const_iterator const_it = conj_c.find(id);
     c = const_it -> second;
@@ -56,7 +56,7 @@ void Conjunto_Cursos::inicializar(const Conjunto_Sesiones& conj_s)
 	    s.anadir_problemas_a_curso(c);
 	    c.incrementar_iterador();
 	}
-	conj_c.insert(make_pair(c.obtener_id(), c));
+	conj_c.emplace(make_pair(c.obtener_id(), c));
     }
 }
 

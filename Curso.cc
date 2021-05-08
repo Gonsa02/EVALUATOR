@@ -8,7 +8,7 @@ Curso::Curso()
    interseccion = false;
 }
 
-void Curso::anadir_id(int id)
+void Curso::anadir_id(const int& id)
 {
     this -> id = id;
 }
@@ -39,7 +39,7 @@ int Curso::usuarios_actuales() const
     return usuarios_cursando_curso;
 }
 
-bool Curso::contiene_problema(string ID) const
+bool Curso::contiene_problema(const string& ID) const
 {
     map<string,string>::const_iterator const_it = problema_sesion.find(ID);
     if (const_it == problema_sesion.end()) return false;
@@ -51,9 +51,9 @@ bool Curso::existe_interseccion() const
     return interseccion;
 }
 
-string Curso::sesion_problema(string ID) const
+void Curso::sesion_problema(const string& ID, string& id_s) const
 {
-    return problema_sesion.find(ID) -> second;
+    id_s = problema_sesion.find(ID) -> second;
 }
 
 int Curso::tamano() const
@@ -94,9 +94,9 @@ void Curso::leer_id()
     this -> id = id;
 }
 
-void Curso::anadir_problema_sesion(string id_problema, string id_sesion)
+void Curso::anadir_problema_sesion(const string& id_problema, const string& id_sesion)
 {
-    interseccion = not problema_sesion.insert(make_pair(id_problema, id_sesion)).second;
+    interseccion = not problema_sesion.emplace(make_pair(id_problema, id_sesion)).second;
 }
 
 void Curso::inizializar_iterador()
@@ -114,7 +114,7 @@ bool Curso::end() const
     return iterador == id_conj_s.size();
 }
 
-string Curso::valor() const
+void Curso::valor(string& id_s) const
 {
-    return id_conj_s[iterador];
+    id_s = id_conj_s[iterador];
 }

@@ -27,30 +27,23 @@ public:
     /** @brief Añade un problema correcto al Usuario.
 
       \pre En el parámetro "id_problema" se encuentra el identificador de un problema que ha sido resuelto correctamente por el parámetro implícito y que además, forma parte del curso que está cursando actualmente.
-      \post Se ha añadido al registro de problemas resueltos del parámetro implícito el identificador del problema resuelto y se ha quitado de la lista de problemas enviables.
+      \post Se ha añadido al registro de problemas resueltos del parámetro implícito el identificador del problema resuelto y se ha quitado de los problemas enviables.
       */
-    void anadir_problema_correcto(string id_problema);
+    void anadir_problema_correcto(const string& id_problema);
 
     /** @brief Añade el identificador de un Problema nuevo al Usuario.
      
       \pre <em>cierto</em>
       \post Se ha añadido el identificador del Problema al registro de problemas enviables del parámetro implícito.
       */
-    void anadir_problema_enviable(string id_problema);
-
-    /** @brief Quita un Problema enviable al Usuario.
-
-      \pre Existe un problema con id "id_problema" en el registro de problemas enviables del parámetro implícito.
-      \post Se ha quitado al registro de problemas enviables del parámetro implícito el identificador del Problema.
-      */
-    void quitar_problema_enviable(string id_problema);
+    void anadir_problema_enviable(const string& id_problema);
 
     /** @brief Añade un intento a un Problema enviable.
 
       \pre El parámetro implícito tiene acceso a hacer un intento a ese problema.
-      \post Se ha incrementado en una unidad los intentos al problema con "id_problema" i en caso de que sea el primer intento, se ha incrementado en una unidad el número de problemas intentados.
+      \post Se ha incrementado en una unidad los intentos al problema con "id_problema" i también los envios totales. En caso de que sea el primer intento, se ha incrementado en una unidad el número de problemas intentados.
       */
-    void anadir_intento_problema(string id_problema);
+    void anadir_intento_problema(const string& id_problema);
 
     /** @brief Incrementa el número de envios totales que el Usuario ha hecho.
 
@@ -71,7 +64,7 @@ public:
       \pre El Usuario no está inscrito a ningún curso.
       \post El parámetro implícito cuenta con el registro de que está cursando un Curso y también de el id del Curso.
       */
-    void inscribir_a_curso(int id_curso);
+    void inscribir_a_curso(const int& id_curso);
 
     /** @brief Prepara al Usuario para cursar otro curso.
 
@@ -85,9 +78,9 @@ public:
     /** @brief Consulta el nombre del Usuario
 
       \pre El parámetro implícito tiene un nombre asignado.
-      \post Retorna el nombre del parámetro implícito.
+      \post "nombre" = el nombre del parámetro implícito.
     */
-    string obtener_nombre() const; 
+    void obtener_nombre(string& nombre) const; 
 
     /** @brief Consulta si el parámetro implícito está cursando un curso.
 	
@@ -115,21 +108,21 @@ public:
       \pre El parámetro implícito está cursando un Curso. En el parámetro "id_problema" se encuentra el identificador del problema el cual queremos consultar si el parámetro implícitopuede hacer un envio o no.
       \post El resultado indica si el parametro implícito cumple los prerequisitos para poder hacer un envio al Problema con identificador = "id_problema".
     */
-    bool cumple_requisitos(string id_problema) const;
+    bool cumple_requisitos(const string& id_problema) const;
 
     /** @brief Consulta si el Usuario ha resuelto un Problema.
 
       \pre <em>cierto</em>
       \post El resultado indica si el Usuario ha resuelto el Problema con identificador "id_problema".
       */
-    bool problema_resuelto(string id_problema) const;
+    bool problema_resuelto(const string& id_problema) const;
 
     /** @brief Consulta si el Usuario ha intentado un Problema.
 
       \pre <em>cierto</em>
       \post El resultado indica si el Usuario ha intentado el Problema con identificador "id_problema".
       */
-    bool problema_intentado(string id_problema) const;
+    bool problema_intentado(const string& id_problema) const;
 
     //Escritura
 

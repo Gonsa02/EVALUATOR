@@ -9,13 +9,11 @@
 
 #ifndef NO_DIAGRAM
 #include "BinTree.hh"
-#include <set>
 #endif
 
 /** @class Sesion
     @brief Representa una Sesion.
 
-    Esta formada por diferentes problemas con strings identificadores y también cuenta con una estructura de relaciones de prerequisitos entre los diferentes problemas, donde todos los problemas son prerequisito directo de 0, 1 o 2 problemas excepto el primero.
 */
 
 class Sesion
@@ -29,30 +27,8 @@ public:
       \pre El parámetro implícito tiene un identificador asignado.
       \post Retorna el identificador del parámetro implícito.
     */
-    string obtener_id() const;
+    void obtener_id(string& id_s) const;
     
-    /** @brief Consulta el primer Problema de la Sesion.
-
-      \pre <em>cierto</em>
-      \post Devuelve el identificador del Problema inicial de la Sesion.
-      */
-    string problema_inicial() const;
-
-    /** @brief Consulta si hay intersección de problemas.
-
-      \pre <em>Cierto</em>
-      \post El resultado indica si la intersección es vacia entre el parámetro implícito y la Sesion "s".
-    */
-
-    bool interseccion_vacia(const Sesion & s) const;
-
-    /** @brief Consulta si existe un Problema en la Sesion
-
-      \pre <em>cierto</em>
-      \post El resultado indica si el parámetro implícito contiene el Problema que tiene el identificador "id"
-      */
-    bool contiene_problema(string id) const;
-
     /** @brief Consulta los problemas enviables y no resueltos que tiene un Usuario y se los añade.
      
       \pre <em>cierto</em>
@@ -65,7 +41,7 @@ public:
     \pre <em>cierto</em>
     \post Se han consultado y añadido los problemas enviables a los que tiene acceso  el Usuario pero no los había resuelto a partir de un Problema.
     */
-    void problemas_envio(Usuario& u, string id_problema) const;
+    void problemas_envio(Usuario& u, const string& id_problema) const;
 
     /** @brief Añade los problemas de las sesiones a un Curso
 
@@ -99,54 +75,14 @@ public:
     */
     void leer_id();
 
-    // Comparadoras
-    
-    /** @brief Operación de comparación de la Sesion
-
-      \pre <em>cierto</em>
-      \post El resultado indica si el parámetro implícito es menor que la Sesion "s".
-      */
-    bool operator<(const Sesion& s) const;
-
-    // Iterador
-
-    /** @brief Inizializa el iterador de problemas al inicio de la Sesion.
-    
-      \pre <em>cierto</em>
-      \post El iterador del parámetro implícito apunta al primer Problema del parámetro implícito.
-    */
-    void inizializar_iterador();
-
-    /** @brief Icrementa el iterador para que apunte al siguiente Problema del parámetro implícito.
-    
-      \pre El iterador no apunta al elemento end().
-      \post El iterador del parámetro implícito apunta al siguiente Problema del parámetro implícito.
-    */
-    void incrementar_iterador();
-
-    /** @brief Consulta si el iterador ya ha llegado al final.
-
-      \pre <em>cierto</em>
-      \post Retorna si el iterador apunta al último elemento del parámetro implícito o no.
-    */
-    bool end() const;
-
-    /** @brief Consulta el valor al qual apunta el iterador de la Sesion.
-
-      \pre El iterador apunta a un Problema del parámetro implícito.
-      \post Retorna el identificador del Problema al cual apunta el iterador del parámetro implícito.
-    */
-    string valor() const;
-
 private:
+    int num_problemas;
     string id;
     BinTree<string> prerequisitos;
-    set<string> conj_id_problemas;
-    set<string>::const_iterator iterador_problemas;
 
     void escribir_postorden(const BinTree<string> &arbol) const;
-    void leer_bin_tree(BinTree<string>& a, set<string>& conj_id_problemas, string marca);
-    void problemas_envio_i(const BinTree<string>& a, Usuario& u, string id_problema, bool& found) const;
+    void leer_bin_tree(BinTree<string>& a, const string& marca, int& num);
+    void problemas_envio_i(const BinTree<string>& a, Usuario& u, const string& id_problema, bool& found) const;
     void problemas_enviables_i(const BinTree<string>& a, Usuario& u) const;
     void anadir_problemas_a_curso_i(const BinTree<string>& a, Curso& c) const;
 };

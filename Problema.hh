@@ -53,9 +53,9 @@ public:
     /** @brief Consulta el identificador del Problema.
 
 	\pre <em>cierto</em>
-	\post Retorna el identificador del parametro implícito.
+	\post "id_p" = el identificador del parametro implícito.
     */
-    string obtener_id() const;
+    void obtener_id(string& id_p) const;
 
     //Escritura i lectura de Problema
 

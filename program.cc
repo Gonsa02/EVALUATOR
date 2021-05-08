@@ -32,7 +32,9 @@ int main() {
 	if (c == "nuevo_problema" or c == "np") {
 	    Problema p;
 	    p.leer();
-	    cout << '#' << c << ' ' << p.obtener_id() << endl;
+	    string id;
+	    p.obtener_id(id);
+	    cout << '#' << c << ' ' << id << endl;
 	    if (conj_p.existe(p)) cout << "error: el problema ya existe" << endl;
 	    else {
 		conj_p.anadir(p);
@@ -42,7 +44,9 @@ int main() {
 	else if (c == "nueva_sesion" or c == "ns") {
 	    Sesion s;
 	    s.leer();
-	    cout << '#' << c << ' ' << s.obtener_id() << endl;
+	    string id;
+	    s.obtener_id(id);
+	    cout << '#' << c << ' ' << id << endl;
 	    if (conj_s.existe(s)) cout << "error: la sesion ya existe" << endl;
 	    else {
 		conj_s.anadir(s);
@@ -53,25 +57,30 @@ int main() {
 	    cout << '#' << c << endl;
 	    Curso cur;
 	    cur.leer();
-	    cur.inizializar_iterador();
-	    while (not cur.end() and not cur.existe_interseccion()) {
-		string id_s = cur.valor();
-		Sesion s;
-		conj_s.obtener_con_id(id_s, s);
-		s.anadir_problemas_a_curso(cur);
-		cur.incrementar_iterador();
-	    }
 	    if (conj_c.existe(cur)) cout << "error: el curso ya existe" << endl;
-	    else if (cur.existe_interseccion()) cout << "error: curso mal formado" << endl;
 	    else {
-		conj_c.anadir(cur);
-		cout << conj_c.tamano() << endl;
+		cur.inizializar_iterador();
+		while (not cur.end() and not cur.existe_interseccion()) {
+		    string id_s;
+		    cur.valor(id_s);
+		    Sesion s;
+		    conj_s.obtener_con_id(id_s, s);
+		    s.anadir_problemas_a_curso(cur);
+		    cur.incrementar_iterador();
+		}
+		if (cur.existe_interseccion()) cout << "error: curso mal formado" << endl;
+		else {
+		    conj_c.anadir(cur);
+		    cout << conj_c.tamano() << endl;
+		}
 	    }
 	}
 	else if (c == "alta_usuario" or c == "a") {
 	    Usuario u;
 	    u.leer();
-	    cout << '#' << c << ' ' << u.obtener_nombre() << endl;
+	    string nombre;
+	    u.obtener_nombre(nombre);
+	    cout << '#' << c << ' ' << nombre << endl;
 	    if (conj_u.existe(u)) cout << "error: el usuario ya existe" << endl;
 	    else {
 		conj_u.anadir(u);
@@ -81,7 +90,9 @@ int main() {
 	else if (c == "baja_usuario" or c == "b") {
 	    Usuario u;
 	    u.leer();
-	    cout << '#' << c << ' ' << u.obtener_nombre() << endl;
+	    string nombre;
+	    u.obtener_nombre(nombre);
+	    cout << '#' << c << ' ' << nombre << endl;
 	    if (conj_u.existe(u)) {
 		if (u.inscrito_a_curso()) conj_c.usuario_baja_curso(u.curso());
 		conj_u.borrar(u);
@@ -93,23 +104,35 @@ int main() {
 	    Usuario u;
 	    Curso cur;
 	    u.leer();
-	    cur.leer_id();
-	    cout << '#' << c << ' ' << u.obtener_nombre() << ' ' << cur.obtener_id() << endl;
+	    string nombre;
+	    u.obtener_nombre(nombre);
+	    cout << '#' << c << ' ' << nombre << ' ' << cur.obtener_id() << endl;
 	    if (not conj_u.existe(u)) cout << "error: el usuario no existe" << endl;
 	    else if (not conj_c.existe(cur)) cout << "error: el curso no existe" << endl;
 	    else if (u.inscrito_a_curso()) cout << "error: usuario inscrito en otro curso" << endl;
 	    else {
-		conj_c.obtener_con_id(cur.obtener_id(), cur);
-		conj_u.inscribir_usuario_a_curso(u, cur, conj_s);
+		u.inscribir_a_curso(cur.obtener_id());
 		cur.usuario_inscribir_curso();
+		cur.inizializar_iterador();
+		while (not cur.end()) {
+		    string id_s;
+		    cur.valor(id_s);
+		    Sesion s;
+		    conj_s.obtener_con_id(id_s, s);
+		    s.problemas_enviables(u);
+		    cur.incrementar_iterador();
+		}
 		conj_c.actualizar(cur);
+		conj_u.actualizar(u);
 		cout << cur.usuarios_actuales() << endl;
 	    }
 	}
 	else if (c == "curso_usuario" or c == "cu") {
 	    Usuario u;
 	    u.leer();
-	    cout << '#' << c << ' ' << u.obtener_nombre() << endl;
+	    string nombre;
+	    u.obtener_nombre(nombre);
+	    cout << '#' << c << ' ' << nombre << endl;
 	    if (not conj_u.existe(u)) cout << "error: el usuario no existe" << endl;
 	    else {
 		if (u.inscrito_a_curso()) cout << u.curso() << endl;
@@ -121,23 +144,33 @@ int main() {
 	    Problema p;
 	    cur.leer_id();
 	    p.leer();
-	    cout << '#' << c << ' ' << cur.obtener_id() << ' ' << p.obtener_id() << endl;
+	    string id;
+	    p.obtener_id(id);
+	    cout << '#' << c << ' ' << cur.obtener_id() << ' ' << id << endl;
 	    if (not conj_c.existe(cur)) cout << "error: el curso no existe" << endl;
 	    else if (not conj_p.existe(p)) cout << "error: el problema no existe" << endl;
-	    else if (not cur.contiene_problema(p.obtener_id())) cout << "error: el problema no pertenece al curso" << endl;
-	    else cout << cur.sesion_problema(p.obtener_id()) << endl;
+	    else if (not cur.contiene_problema(id)) cout << "error: el problema no pertenece al curso" << endl;
+	    else {
+		string id_s;
+		cur.sesion_problema(id, id_s);
+		cout << id_s << endl;
+	    }
 	}
 	else if (c == "problemas_resueltos" or c == "pr") {
 	    Usuario u;
 	    u.leer();
-	    cout << '#' << c << ' ' << u.obtener_nombre() << endl;
+	    string nombre;
+	    u.obtener_nombre(nombre);
+	    cout << '#' << c << ' ' << nombre << endl;
 	    if (not conj_u.existe(u)) cout << "error: el usuario no existe" << endl;
 	    else u.escribir_problemas_resueltos();
 	}
 	else if (c == "problemas_enviables" or c == "pe") {
 	    Usuario u;
 	    u.leer();
-	    cout << '#' << c << ' ' << u.obtener_nombre() << endl;
+	    string nombre;
+	    u.obtener_nombre(nombre);
+	    cout << '#' << c << ' ' << nombre << endl;
 	    if (not conj_u.existe(u)) cout << "error: el usuario no existe" << endl;
 	    else if (not u.inscrito_a_curso()) cout << "error: usuario no inscrito en ningun curso" << endl;
 	    else u.escribir_problemas_enviables();
@@ -149,19 +182,27 @@ int main() {
 	    cout << '#' << c << ' ' << nombre << ' ' << id_problema << ' ' << r << endl;
 	    Usuario u;
 	    conj_u.obtener(nombre, u);
-	    conj_u.envio_usuario(nombre, id_problema);
+	    u.anadir_intento_problema(id_problema);
 	    Problema p;
 	    conj_p.obtener(id_problema, p);
 	    p.incrementar_envios_totales();
 	    if (r == 1) {
 		p.incrementar_envios_exitosos();
+		u.anadir_problema_correcto(id_problema);
 		Curso c;
 		conj_c.obtener_con_id(u.curso(), c);
 		Sesion s;
-		conj_s.obtener_con_id(c.sesion_problema(id_problema), s);
-		if (conj_u.envio_correcto_usuario(nombre, id_problema, s)) c.usuario_finaliza_curso();
-		conj_c.actualizar(c);	
+		string id_s;
+		c.sesion_problema(id_problema, id_s);
+		conj_s.obtener_con_id(id_s, s);
+		s.problemas_envio(u, id_problema);
+		if (u.num_problemas_enviables() == 0) {
+		    u.finalizar_curso();
+		    c.usuario_finaliza_curso();
+		    conj_c.actualizar(c);	
+		}
 	    }
+	    conj_u.actualizar(u);
 	    conj_p.actualizar(p);
 	}
 	else if (c == "listar_problemas" or c =="lp") {
@@ -171,7 +212,9 @@ int main() {
 	else if (c == "escribir_problema" or c == "ep") {
 	    Problema p;
 	    p.leer();
-	    cout << '#' << c << ' ' << p.obtener_id() << endl;
+	    string id;
+	    p.obtener_id(id);
+	    cout << '#' << c << ' ' << id << endl;
 	    if (conj_p.existe(p)) p.escribir_problema();
 	    else cout << "error: el problema no existe" << endl;
 	}
@@ -182,7 +225,9 @@ int main() {
 	else if (c == "escribir_sesion" or c == "es") {
 	    Sesion s;
 	    s.leer_id();
-	    cout << '#' << c << ' ' << s.obtener_id() << endl;
+	    string id;
+	    s.obtener_id(id);
+	    cout << '#' << c << ' ' << id << endl;
 	    if (conj_s.existe(s)) s.escribir_sesion();
 	    else cout << "error: la sesion no existe" << endl;
 	}
@@ -204,7 +249,9 @@ int main() {
 	else if (c == "escribir_usuario" or c == "eu") {
 	    Usuario u;
 	    u.leer();
-	    cout << '#' << c << ' ' << u.obtener_nombre() << endl;
+	    string nombre;
+	    u.obtener_nombre(nombre);
+	    cout << '#' << c << ' ' << nombre << endl;
 	    if (conj_u.existe(u)) u.escribir_usuario();
 	    else cout << "error: el usuario no existe" << endl;
 	}
