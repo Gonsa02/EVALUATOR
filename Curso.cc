@@ -78,23 +78,12 @@ void Curso::escribir_curso() const
     cout << ')' << endl;
 }
 
-void Curso::leer(const Conjunto_Sesiones& conjunto_sesiones)
+void Curso::leer()
 {
     int n;
     cin >> n;
     vector<string> v(n);
-    for (int i = 0; i < n; ++i) {
-	string id_s;
-	cin >> id_s;
-	Sesion s;
-	conjunto_sesiones.obtener_con_id(id_s, s);
-	s.inizializar_iterador();
-	while (not s.end() and not interseccion) {
-	    interseccion = not problema_sesion.insert(make_pair(s.valor(), id_s)).second;
-	    s.incrementar_iterador();
-	}
-	v[i] = id_s;
-    }
+    for (int i = 0; i < n; ++i) cin >> v[i];
     id_conj_s = v;
 }
 
@@ -103,6 +92,11 @@ void Curso::leer_id()
     int id;
     cin >> id;
     this -> id = id;
+}
+
+void Curso::anadir_problema_sesion(string id_problema, string id_sesion)
+{
+    interseccion = not problema_sesion.insert(make_pair(id_problema, id_sesion)).second;
 }
 
 void Curso::inizializar_iterador()

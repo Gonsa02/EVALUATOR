@@ -46,7 +46,16 @@ void Conjunto_Cursos::inicializar(const Conjunto_Sesiones& conj_s)
     for (int i = 0; i < n; ++i) {
 	Curso c;
 	c.anadir_id(conj_c.size()+1);
-	c.leer(conj_s);
+	c.leer();
+	Sesion s;
+	c.inizializar_iterador();
+	while (not c.end()) {
+	    string id_s = c.valor();
+	    Sesion s;
+	    conj_s.obtener_con_id(id_s, s);
+	    s.anadir_problemas_a_curso(c);
+	    c.incrementar_iterador();
+	}
 	conj_c.insert(make_pair(c.obtener_id(), c));
     }
 }

@@ -43,6 +43,11 @@ void Sesion::problemas_envio(Usuario &u, string id_problema) const
     problemas_envio_i(a, u, id_problema, found);
 }
 
+void Sesion::anadir_problemas_a_curso(Curso &c) const
+{
+    anadir_problemas_a_curso_i(prerequisitos, c);
+}
+
 void Sesion::escribir_sesion() const
 {
     cout << id << ' ' << conj_id_problemas.size() << ' ';
@@ -143,5 +148,14 @@ void Sesion::problemas_enviables_i(const BinTree<string>& a, Usuario& u) const
 	    problemas_enviables_i(a.left(), u);
 	    problemas_enviables_i(a.right(), u);
 	}
+    }
+}
+
+void Sesion::anadir_problemas_a_curso_i(const BinTree<string>& a, Curso& c) const
+{
+    if (not a.empty() and not c.existe_interseccion()) {
+	c.anadir_problema_sesion(a.value(), id);
+	anadir_problemas_a_curso_i(a.left(), c);
+	anadir_problemas_a_curso_i(a.right(), c);
     }
 }

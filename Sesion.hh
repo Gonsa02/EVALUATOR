@@ -5,6 +5,7 @@
 #ifndef _SESION_HH_
 #define _SESION_HH_
 #include "Usuario.hh"
+#include "Curso.hh"
 
 #ifndef NO_DIAGRAM
 #include "BinTree.hh"
@@ -65,6 +66,14 @@ public:
     \post Se han consultado y añadido los problemas enviables a los que tiene acceso  el Usuario pero no los había resuelto a partir de un Problema.
     */
     void problemas_envio(Usuario& u, string id_problema) const;
+
+    /** @brief Añade los problemas de las sesiones a un Curso
+
+      \pre <em>cierto</em>
+      \post Se han añadido los problemas del parámetro implícito al Curso "c".
+
+      */
+    void anadir_problemas_a_curso(Curso& c) const;
 
     //Lectura y escritura
 
@@ -131,7 +140,6 @@ public:
 
 private:
     string id;
-    int num_problemas;
     BinTree<string> prerequisitos;
     set<string> conj_id_problemas;
     set<string>::const_iterator iterador_problemas;
@@ -140,6 +148,7 @@ private:
     void leer_bin_tree(BinTree<string>& a, set<string>& conj_id_problemas, string marca);
     void problemas_envio_i(const BinTree<string>& a, Usuario& u, string id_problema, bool& found) const;
     void problemas_enviables_i(const BinTree<string>& a, Usuario& u) const;
+    void anadir_problemas_a_curso_i(const BinTree<string>& a, Curso& c) const;
 };
 
 #endif

@@ -9,7 +9,6 @@ using namespace std;
 
 #include "Conjunto_Problemas.hh"
 #include "Conjunto_Cursos.hh"
-#include "Conjunto_Sesiones.hh"
 #include "Conjunto_Usuarios.hh"
 
 
@@ -51,9 +50,17 @@ int main() {
 	    }
 	}
 	else if (c == "nuevo_curso" or c == "nc") {
-	    Curso cur;
-	    cur.leer(conj_s);
 	    cout << '#' << c << endl;
+	    Curso cur;
+	    cur.leer();
+	    cur.inizializar_iterador();
+	    while (not cur.end() and not cur.existe_interseccion()) {
+		string id_s = cur.valor();
+		Sesion s;
+		conj_s.obtener_con_id(id_s, s);
+		s.anadir_problemas_a_curso(cur);
+		cur.incrementar_iterador();
+	    }
 	    if (conj_c.existe(cur)) cout << "error: el curso ya existe" << endl;
 	    else if (cur.existe_interseccion()) cout << "error: curso mal formado" << endl;
 	    else {
@@ -92,7 +99,6 @@ int main() {
 	    else if (not conj_c.existe(cur)) cout << "error: el curso no existe" << endl;
 	    else if (u.inscrito_a_curso()) cout << "error: usuario inscrito en otro curso" << endl;
 	    else {
-		//inscribir_usuario_a_curso(conj_u, conj_c, conj_s, u, cur);
 		conj_c.obtener_con_id(cur.obtener_id(), cur);
 		conj_u.inscribir_usuario_a_curso(u, cur, conj_s);
 		cur.usuario_inscribir_curso();
@@ -141,7 +147,6 @@ int main() {
 	    string nombre, id_problema;
 	    cin >> nombre >> id_problema >> r;
 	    cout << '#' << c << ' ' << nombre << ' ' << id_problema << ' ' << r << endl;
-	    //envio(conj_u, conj_c, conj_s, conj_p, nombre, id_problema, r);
 	    Usuario u;
 	    conj_u.obtener(nombre, u);
 	    conj_u.envio_usuario(nombre, id_problema);

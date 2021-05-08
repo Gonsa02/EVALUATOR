@@ -6,7 +6,6 @@
 #define _CONJUNTO_CURSOS_HH_
 
 #include "Conjunto_Sesiones.hh"
-#include "Curso.hh"
 
 #ifndef NO_DIAGRAM
 #include <map>

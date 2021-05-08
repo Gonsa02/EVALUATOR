@@ -5,9 +5,7 @@
 #ifndef _CONJUNTO_USUARIOS_HH_
 #define _CONJUNTO_USUARIOS_HH_
 
-#include "Usuario.hh"
 #include "Conjunto_Sesiones.hh"
-#include "Curso.hh"
 
 #ifndef NO_DIAGRAM
 #include <map>

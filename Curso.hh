@@ -4,12 +4,11 @@
 
 #ifndef _CURSO_HH_
 #define _CURSO_HH_
-#include "Conjunto_Sesiones.hh"
 
 #ifndef NO_DIAGRAM
 #include <vector>
 #include <map>
-#include <string>
+#include <iostream>
 using namespace std;
 #endif
 
@@ -37,9 +36,16 @@ public:
     /** @brief Añade o modifica el id de un Curso.
 
       \pre <em>cierto</em>
-      \post El prarámetro implícidto tiene el identficador = "id".
+      \post El prarámetro implícito tiene el identficador = "id".
       */
     void anadir_id(int id);
+
+    /** @brief Añade el identificador de un Problema y el identificador de una Sesion del Curso al Curso.
+
+      \pre <em>cierto</em>
+      \post Se le han añadido los identificadores de los problemas de la Sesion al parámetro implícito.  Además, en caso que haya intersección, queda registrado en el parámetro implícito  que existe esa intersección.
+      */
+    void anadir_problema_sesion(string id_problema, string id_sesion);
 
     /** @brief Incrementa el numero de usuarios que estan cursando el Curso.
 
@@ -130,7 +136,7 @@ public:
       \pre En el canal standard de entrada se encuentra el numero de sesiones de las cuales va a constar el Curso (N) y posteriormente van a entrar N sesiones del curso.
       \post Se han añadido las sesiones al parámetro implícito.
     */
-    void leer(const Conjunto_Sesiones& conj_s);
+    void leer();
 
     /** @brief Operación de lectura del identificador
 
