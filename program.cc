@@ -57,21 +57,18 @@ int main() {
 	    int id = conj_c.tamano()+1;
 	    Curso cur(id);
 	    cur.leer();
-	    if (conj_c.existe(id)) cout << "error: el curso ya existe" << endl;
+	    cur.inizializar_iterador();
+	    while (not cur.end() and not cur.existe_interseccion()) {
+		string id_s;
+		cur.valor(id_s);
+		conj_s.apuntar(id_s);
+		conj_s.anadir_problemas_a_curso(cur);
+		cur.incrementar_iterador();
+	    }
+	    if (cur.existe_interseccion()) cout << "error: curso mal formado" << endl;
 	    else {
-		cur.inizializar_iterador();
-		while (not cur.end() and not cur.existe_interseccion()) {
-		    string id_s;
-		    cur.valor(id_s);
-		    conj_s.apuntar(id_s);
-		    conj_s.anadir_problemas_a_curso(cur);
-		    cur.incrementar_iterador();
-		}
-		if (cur.existe_interseccion()) cout << "error: curso mal formado" << endl;
-		else {
-		    conj_c.anadir(cur);
-		    cout << conj_c.tamano() << endl;
-		}
+		conj_c.anadir(id, cur);
+		cout << conj_c.tamano() << endl;
 	    }
 	}
 	else if (c == "alta_usuario" or c == "a") {
@@ -171,7 +168,7 @@ int main() {
 		conj_c.apuntar(id_c);
 		string id_s;
 		conj_c.curso_contiene_problema(id_p, id_s);
-		conj_s.sesion_problemas_enviables_usuario(conj_u, id_s);
+		conj_s.sesion_problemas_envio_usuario(conj_u, id_s, id_p);
 		if (conj_u.num_problemas_enviables_usuario() == 0) {
 		    conj_u.usuario_finaliza_curso();
 		    conj_c.usuario_finaliza_curso();

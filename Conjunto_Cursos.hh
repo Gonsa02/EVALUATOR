@@ -26,7 +26,7 @@ public:
     \pre El Curso cumple con la restricción de no repetición de problemas del mismo Curso.
     \post Se ha añadido el Curso "c" al parámetro implícito. 
     */
-    void anadir(Curso& c);
+    void anadir(const int& id, Curso& c);
 
     /** @brief Actualiza un Curso del Conjunto_Cursos
 

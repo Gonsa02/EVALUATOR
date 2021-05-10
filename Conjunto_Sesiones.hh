@@ -5,7 +5,6 @@
 #ifndef _CONJUNTO_SESIONES_HH_
 #define _CONJUNTO_SESIONES_HH_
 
-#include "Conjunto_Usuarios.hh"
 #include "Sesion.hh"
 
 #ifndef NO_DIAGRAM
@@ -59,6 +58,8 @@ public:
       \post Se han consultado y añadido los problemas enviables a los que tiene acceso el Usuario pero no los había resuelto de la sesión con identificador = "id_s".
       */
     void sesion_problemas_enviables_usuario(Conjunto_Usuarios& conj_u, const string& id_s) const;
+
+    void sesion_problemas_envio_usuario(Conjunto_Usuarios& conj_u, const string& id_s, const string& id_p) const;
 
     /** @brief Añade los problemas de una Sesion a un Curso
 

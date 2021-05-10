@@ -27,6 +27,12 @@ void Conjunto_Sesiones::sesion_problemas_enviables_usuario(Conjunto_Usuarios &co
     const_it -> second.problemas_enviables(conj_u);
 }
 
+void Conjunto_Sesiones::sesion_problemas_envio_usuario(Conjunto_Usuarios &conj_u, const string &id_s, const string &id_p) const
+{
+    map<string,Sesion>::const_iterator const_it = conj_s.find(id_s);
+    const_it -> second.problemas_envio(conj_u, id_p);
+}
+
 bool Conjunto_Sesiones::existe(const string& id_s)
 {
     map<string,Sesion>::const_iterator const_it = conj_s.find(id_s);

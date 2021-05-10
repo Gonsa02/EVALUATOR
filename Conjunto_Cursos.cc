@@ -1,11 +1,8 @@
 #include "Conjunto_Cursos.hh"
 #include "Conjunto_Sesiones.hh"
 
-void Conjunto_Cursos::anadir(Curso &c)
+void Conjunto_Cursos::anadir(const int& id, Curso &c)
 {
-    c.anadir_id(conj_c.size()+1);
-    int id;
-    c.obtener_id(id);
     conj_c.emplace(make_pair(id, c));
 }
 
