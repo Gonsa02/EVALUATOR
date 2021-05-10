@@ -1,8 +1,8 @@
 #include "Problema.hh"
 
-Problema::Problema()
+Problema::Problema(const string& id)
 {
-    id = "-1";
+    this -> id = id;
     env_exito = 0;
     env_totales = 0;
     ratio = 1;

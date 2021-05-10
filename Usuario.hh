@@ -22,6 +22,15 @@ class Usuario
 {
 public:
 
+    //Constructora
+
+    /** @brief Crea un Usuario con nombre.
+
+      \pre <em>cierto</em>
+      \post El resultado es un Usuario con nombre = "nombre"
+      */
+    Usuario(const string& nombre);
+
     //Modificadoras
 
     /** @brief Añade un problema correcto al Usuario.
@@ -41,7 +50,7 @@ public:
     /** @brief Añade un intento a un Problema enviable.
 
       \pre El parámetro implícito tiene acceso a hacer un intento a ese problema.
-      \post Se ha incrementado en una unidad los intentos al problema con "id_problema" i también los envios totales. En caso de que sea el primer intento, se ha incrementado en una unidad el número de problemas intentados.
+      \post Se ha incrementado en una unidad los intentos al problema con id = "id_problema" i también los envios totales. En caso de que sea el primer intento, se ha incrementado en una unidad el número de problemas intentados.
       */
     void anadir_intento_problema(const string& id_problema);
 
@@ -66,10 +75,10 @@ public:
       */
     void inscribir_a_curso(const int& id_curso);
 
-    /** @brief Prepara al Usuario para cursar otro curso.
+    /** @brief Prepara al Usuario para cursar otro Curso.
 
-      \pre El parametro implícito está cursando un curso actualmente y ya ha terminado todos sus problemas.
-      \post El parametro implícito está preparado para cursar otro curso correctamente.
+      \pre <em>cierto</em>
+      \post El parametro implícito no está incrito a ningún Curso.
       */
     void finalizar_curso();
 
@@ -129,21 +138,21 @@ public:
     /** @brief Escribe información del parámetro implícito.
 
       \pre <em>cierto</em>
-      \post Escribe cuantos envios en total ha realizado, cuantos problemas ha resuelto, cuentos ha intentado resolver y el id del curso en el cual está inscrito o cero si no está inscrito en ninguno.
+      \post Escribe cuantos envios en total ha realizado, cuantos problemas ha resuelto, cuantos problemas ha intentado resolver y el id del Curso en el cual está inscrito o cero si no está inscrito en ninguno.
     */
     void escribir_usuario() const;
 
     /** @brief Escribe los problemas enviables del parámetro implícito.
 
       \pre <em>cierto</em>
-      \post Se han escrito por orden creciente de identificador los problemas que el usuario no ha solucionado todavía en el curso en el que está inscrito actualmente, pero a los cuales ya puede realizar un envío.
+      \post Se han escrito por orden creciente de identificador los problemas que el Usuario no ha solucionado todavía en el Curso en el que está inscrito actualmente, pero a los cuales ya puede realizar un envío.
       */
     void escribir_problemas_enviables() const;
 
     /** @brief Escribe los problemas resueltos del parámetro implícito.
 
       \pre <em>cierto</em>
-      \post Se han escrito por orden creciente de identificador los problemas que el parámetro implícito ya ha solucionado con éxito, ya sea en el curso en el que está inscrito actualmente (si lo está) como los resueltos en curssos anteriores. Además también se imprime el número de enviós realizados por el usuario a cada problema del listado.
+      \post Se han escrito por orden creciente de identificador los problemas que el parámetro implícito ya ha solucionado con éxito, ya sea en el Curso en el que está inscrito actualmente (si lo está) como los resueltos en cursos anteriores. Además también se imprime el número de envios realizados por el usuario a cada problema del listado.
       */
     void escribir_problemas_resueltos() const;
 

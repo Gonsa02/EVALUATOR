@@ -1,5 +1,13 @@
 #include "Usuario.hh"
 
+Usuario::Usuario(const string& nombre) {
+    this -> nombre = nombre;
+    envios_totales = 0;
+    id_curso_inscrito = 0;
+    problemas_intentados = 0;
+    inscrito = false;
+}
+
 void Usuario::incrementar_envios_totales()
 {
     ++envios_totales;

@@ -27,30 +27,37 @@ public:
     \pre El Problema "p" no existe en el parámetro implícito.
     \post Se ha añadido el Problema "p" al parámetro implícito. 
     */
-    void anadir(const Problema& p);
+    void anadir(const string& id_p, const Problema& p);
 
-    /** @brief Actualiza un Problema del Conjunto_Problemas
+    /** @brief Apunta el iterador a un Problema.
+     
+      \pre Existe un Problema con identificador = "id_p" en el parámetro implícito.
+      \post El iterador del parámetro implícito apunta al Problema con identificador = "id_p".
+      */
+    void apuntar(const string& id_p);
 
-    \pre El Problema "p" existe en el parámetro implícito.
-    \post Se ha sustituido el Problema "p" del parámetro implícito con el mismo identificador que "p" por "p".
-    */
-    void actualizar(const Problema& p);
+    /** @brief Incrementa los envios totales de un Problema.
+
+      \pre El iterador apunta a un Problema del parámetro implícito.
+      \post Se ha incrementado en una unidad los envios totales del Problema el cual es apuntado por el iterador del parámetro implícito.
+      */
+    void incrementar_envios_totales_problema();
+
+    /** @brief Incrementa los envios exitosos de un Problema.
+
+      \pre El iterador apunta a un Problema del parámetro implícito.
+      \post Se ha incrementado en una unidad los envios exitosos del Problema el cual es apuntado por el iterador del parámetro implícito.
+      */
+    void incrementar_envios_exitosos_problema();
 
     //Consultoras
     
-    /** @brief Consulta si existe un Problema
+    /** @brief Consulta si existe un Problema.
 
       \pre <em>cierto</em>
-      \post El resultado indica si el parámetro implícito contiene el Problema "p", en caso de que exista "p" = al Problema "p" del parámetro implícito; en caso contrario, "p" no se modifica.
+      \post El resultado indica si el parámetro implícito contiene el Problema con identificador = "id", en caso de que exista, el iterador del parámetro implícito apunta a ese Problema.
       */
-    bool existe(Problema& p);
-
-    /** @brief Obtiene un Problema del Conjunto_Problemas
-
-	\pre Existe un Problema con identificador = "id_problema" en el parámetro implícito.
-	\post En "p" se encuentra el Problema con identificador = "id_problema" del parámetro implícito.	
-    */
-    void obtener(const string& id_problema, Problema& p);
+    bool existe(const string& id);
 
     /** @brief Consulta el número de problemas que tiene el Conjunto_Problemas
 
@@ -75,8 +82,16 @@ public:
       */
     void listar() const;
 
+    /** @brief Escribe un Problema del Conjunto_Problemas.
+
+      \pre El iterador del parámetro implícito apunta a un Problema.
+      \post Se ha escrito el número de envios totales, el número de envios con éxito de usuarios presentes o pasados y también se ha escrito el ratio (t+1)/(e+1) del Problema apuntado por el iterador del parámetro implícito.
+      */
+    void escribir_problema() const;
+
 
 private:
-    map<string, Problema> conj_p;
+    map<string,Problema> conj_p;
+    map<string,Problema>::iterator iterador;
 };
 #endif

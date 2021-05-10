@@ -21,14 +21,13 @@ class Problema
 public:
     //Constructoras
 
-    /** @brief Creadora por defecto de la clase Problema.
+    /** @brief Creadora con identificador de la clase Problema.
      
-	Se ejecuta automáticamente al declarar un Problema.
 	\pre <em>cierto</em>
-	\post El resultado es un Problema.
+	\post El resultado es un Problema con identificador = "id".
     */
 
-    Problema();
+    Problema(const string& id);
 
     //Modificadoras
 

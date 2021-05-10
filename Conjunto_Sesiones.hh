@@ -5,6 +5,7 @@
 #ifndef _CONJUNTO_SESIONES_HH_
 #define _CONJUNTO_SESIONES_HH_
 
+#include "Conjunto_Usuarios.hh"
 #include "Sesion.hh"
 
 #ifndef NO_DIAGRAM
@@ -19,6 +20,7 @@ class Conjunto_Sesiones
 {
 public:
 
+
     //Modificadoras
     
     /** @brief Añade una Sesion al Conjunto_Sesiones.
@@ -26,30 +28,45 @@ public:
     \pre La Sesion "s" no existe en el parámetro implícito.
     \post Se ha añadido la Sesion "s" al parámetro implícito. 
     */
-    void anadir(const Sesion& s);
+    void anadir(const string& id_s, const Sesion& s);
+
+    /** @brief Apunta el iterador a una Sesion
+     
+      \pre Existe una Sesion con identificador = "id_s" en el parámetro implícito.
+      \post El iterador del parámetro implícito apunta a la Sesion con identificador = "id_s".
+      */
+    void apuntar(const string& id_s);
 
     //Consultoras
     
     /** @brief Consulta si existe una Sesion con el mismo identificador.
 
       \pre <em>cierto</em>
-      \post El resultado indica si el parámetro implícito contiene una Sesion "s" con el mismo identificador y en caso, "s" = Sesion del parámetro implícito con el mismo identificador, en caso contrario "s" no se modifica.
+      \post El resultado indica si el parámetro implícito contiene una Sesion con el mismo identificador y en ese caso el iterador del parámetro implícito apunta a esa Sesion.
       */
-    bool existe(Sesion& s);
+    bool existe(const string& id_s);
 
-    /** @brief Obtiene una Sesion del Conjunto_Sesiones
-
-      \pre Existe una Sesión en el parámetro implícito con identificador "id_sesion".
-      \post En la Sesion "s" se encuentra la Sesion con identificador "id_sesion".
-    */
-    void obtener_con_id(const string& id_sesion, Sesion& s) const;
-    
     /** @brief Consulta el número de sesiones que tiene el Conjunto_Sesiones
 
       \pre <em>cierto</em>
       \post Retorna el número de sesiones que tiene el parámetro implícito.
     */
     int tamano() const;
+
+    /** @brief Consulta los problemas enviables y no resueltos de una Sesion y se los añade a un Usuario.
+
+      \pre El iterador de conj_u apunta a un Usuario de su repositorio de Usuarios.
+      \post Se han consultado y añadido los problemas enviables a los que tiene acceso el Usuario pero no los había resuelto de la sesión con identificador = "id_s".
+      */
+    void sesion_problemas_enviables_usuario(Conjunto_Usuarios& conj_u, const string& id_s) const;
+
+    /** @brief Añade los problemas de una Sesion a un Curso
+
+      \pre El iterador del parámetro implícito apunta a una Sesion.
+      \post Se han añadido los problemas de la Sesion apuntada por el parámetro implícito al Curso "c".
+      */
+    void anadir_problemas_a_curso(Curso& c) const;
+
     
     //Lectura y escritura
 
@@ -67,7 +84,15 @@ public:
       */
     void listar() const;    
 
+    /** @brief Escribe una Sesion.
+     
+      \pre El iterador del parámetro implícito apunta a una Sesion.
+      \post Escribe el número de problemas forman la Sesion apuntada por el identificador del parámetro implícito, los identificadores de dichos problemas, siguiendo su estructura de prerequisitos en postorden.
+      */
+    void escribir_sesion() const;
+
 private:
-    map<string, Sesion> conj_s;
+    map<string,Sesion> conj_s;
+    map<string,Sesion>::const_iterator iterador;
 };
 #endif

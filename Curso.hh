@@ -24,12 +24,12 @@ public:
 
     //Constructoras
 
-    /** @brief Constructora de la clase Curso.
+    /** @brief Constructora con identificador de la clase Curso.
 
       \pre <em>cierto</em>
-      \post Retorna una instancia de la clase Curso.
+      \post Retorna una instancia de la clase Curso con identificador = "id_c.
       */
-    Curso();
+    Curso(const int& id_c);
 
     //Modificadoras
 
@@ -50,7 +50,7 @@ public:
     /** @brief Incrementa el numero de usuarios que estan cursando el Curso.
 
 	\pre <em>cierto</em>
-	\post Se ha incrementado en una unidad el numero de estudiantes que estan cursando el Curso.
+	\post Se ha incrementado en una unidad el número de estudiantes que están cursando el Curso.
     */
     void usuario_inscribir_curso();
 
@@ -73,9 +73,9 @@ public:
     /** @brief Consulta el identificador de un Curso.
 
       \pre El parámetro implícito tiene asignado un identificador.
-      \post Retorna el identificador del parámetro implícito.
+      \post "id" = identificador del parámetro implícito.
     */
-    int obtener_id() const;
+    void obtener_id(int& id) const;
 
     /** @brief Consulta el numero de usuarios inscritos actualmente.
 
@@ -84,14 +84,14 @@ public:
       */
     int usuarios_actuales() const;
 
-    /** @brief Consulta si existe un problema en el curso
+    /** @brief Consulta si existe un Problema en el Curso
 	
-	\pre En "ID" se encuentra el identificador del problema que queremos consultar si esta o no en el curso.
-	\post El resultado indica si el parametro implícito contiene el problema.
+	\pre <em>cierto</em>
+	\post El resultado indica si el parametro implícito contiene el problema, en caso afirmativo "id_s" = identificador de la Sesion en la cual se encuentra el Problema en el parámetro implícito.
 
     */
 
-    bool contiene_problema(const string& ID) const;
+    bool contiene_problema(const string& id_p, string& id_s) const;
 
     /** @brief Consulta si existe intersección entre los problemas de las diferentes sesiones.
      
@@ -126,7 +126,7 @@ public:
     /** @brief Operación de escritura del parametro implícito
 
       \pre <em>cierto</em>
-      \post Escribe el numero de usuarios actuales o pasados que lo han completado, el numero de usuarios inscritos actualmente, el numero de sesiones qeu lo forman y los identificadores de dichas sesiones, en el mismo orden en el que se leyeron cuando se creó el curso.
+      \post Escribe el número de usuarios actuales o pasados que lo han completado, el número de usuarios inscritos actualmente, el número de sesiones que lo forman y los identificadores de dichas sesiones, en el mismo orden en el que se leyeron cuando se creó el Curso.
 
     */
     void escribir_curso() const;

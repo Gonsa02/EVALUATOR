@@ -1,8 +1,8 @@
 #include "Curso.hh"
 
-Curso::Curso()
+Curso::Curso(const int& id_c)
 {
-   id = 0;
+   id = id_c;
    usuarios_curso_completado = 0;
    usuarios_cursando_curso = 0;
    interseccion = false;
@@ -29,9 +29,9 @@ void Curso::usuario_finaliza_curso()
    --usuarios_cursando_curso;
 }
 
-int Curso::obtener_id() const
+void Curso::obtener_id(int& id) const
 {
-    return id;
+    id = this -> id;
 }
 
 int Curso::usuarios_actuales() const
@@ -39,11 +39,14 @@ int Curso::usuarios_actuales() const
     return usuarios_cursando_curso;
 }
 
-bool Curso::contiene_problema(const string& ID) const
+bool Curso::contiene_problema(const string &id_p, string &id_s) const
 {
-    map<string,string>::const_iterator const_it = problema_sesion.find(ID);
-    if (const_it == problema_sesion.end()) return false;
-    else return true;
+    map<string,string>::const_iterator const_it = problema_sesion.find(id_p);
+    if (const_it != problema_sesion.end()) {
+	id_s = const_it -> second;
+	return true;
+    }
+    else return false;
 }
 
 bool Curso::existe_interseccion() const
