@@ -24,21 +24,21 @@ public:
 
     //Constructoras
 
+    /** @brief Constructora de la clase Curso.
+
+      \pre <em>cierto</em>
+      \post Retorna una instancia de la clase Curso.
+      */
+    Curso();
+
     /** @brief Constructora con identificador de la clase Curso.
 
       \pre <em>cierto</em>
-      \post Retorna una instancia de la clase Curso con identificador = "id_c.
+      \post Retorna una instancia de la clase Curso con identificador = "id_c".
       */
     Curso(const int& id_c);
 
     //Modificadoras
-
-    /** @brief Añade o modifica el id de un Curso.
-
-      \pre <em>cierto</em>
-      \post El prarámetro implícito tiene el identficador = "id".
-      */
-    void anadir_id(const int& id);
 
     /** @brief Añade el identificador de un Problema y el identificador de una Sesion del Curso al Curso.
 
@@ -69,13 +69,6 @@ public:
     void usuario_finaliza_curso();
 
     //Consultoras
-
-    /** @brief Consulta el identificador de un Curso.
-
-      \pre El parámetro implícito tiene asignado un identificador.
-      \post "id" = identificador del parámetro implícito.
-    */
-    void obtener_id(int& id) const;
 
     /** @brief Consulta el numero de usuarios inscritos actualmente.
 
@@ -138,13 +131,6 @@ public:
     */
     void leer();
 
-    /** @brief Operación de lectura del identificador
-
-      \pre En el canal standard de entrada se encuentra el identificador del parámetro implícito.
-      \post Se ha añadido el identificador al parámetro implícito.
-    */
-    void leer_id();
-
     // Iterador
 
     /** @brief Inizializa el iterador de sesiones al inicio en la primera Sesion del Curso.
@@ -176,11 +162,10 @@ public:
     void valor(string& id_s) const;
 
 private:
-    int id, usuarios_curso_completado, usuarios_cursando_curso;
+    int id, usuarios_curso_completado, usuarios_cursando_curso, iterador;
     bool interseccion;
     vector<string> id_conj_s;
     map<string,string> problema_sesion;
-    int iterador;
 };
 
 #endif

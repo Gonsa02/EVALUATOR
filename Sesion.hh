@@ -31,13 +31,6 @@ public:
 
     //Consultoras
     
-    /** @brief Consulta el identificador de una Sesion.
-
-      \pre El parámetro implícito tiene un identificador asignado.
-      \post Retorna el identificador del parámetro implícito.
-    */
-    void obtener_id(string& id_s) const;
-    
     /** @brief Consulta los problemas enviables y no resueltos que tiene un Usuario y se los añade.
      
       \pre <em>cierto</em>
@@ -76,22 +69,43 @@ public:
     */
     void leer();
 
-    /** @brief Operación de lectura del identificador
-
-      \pre En el canal standard de entrada se encuentra el identificador del parámetro implícito.
-      \post Se ha añadido el identificador al parámetro implícito.
-    */
-    void leer_id();
-
 private:
     int num_problemas;
     string id;
     BinTree<string> prerequisitos;
 
+    /** @brief Operación de escritura de la estructura de prerequisitos de la Sesion
+
+      \pre <em>cierto</em>
+      \post Se ha escrito en postorden la estructura de prerequisitos del parámetro implícito.
+    */
     void escribir_postorden(const BinTree<string> &arbol) const;
+
+    /** @brief Operación de lectura de la estructura de prerequisitos de la Sesion
+
+      \pre <em>cierto</em>
+      \post Se ha leido en preorden la estructura de prerequisitos de la Sesion y se ha añadido al parámetro implícito.
+      */
     void leer_bin_tree(BinTree<string>& a, const string& marca, int& num);
+
+    /** @brief Función de immersión para el método problemas envio.
+
+      \pre El iterador del Conjunto_Usuarios apunta a un Usuario.
+      \post Primero se ha buscado el subarbol de "a" que tiene como raíz el "id_problema" y luego se han consultado y añadido al Usuario apuntado por el iterador del Conjunto_Usuarios los problemas enviables a los que tiene acceso el Usuario pero no los había resuelto a partir de un Problema.
+      */
     void problemas_envio_i(const BinTree<string>& a, Conjunto_Usuarios& conj_u, const string& id_problema, bool& found) const;
-    void problemas_enviables_i(const BinTree<string>& a, Conjunto_Usuarios& u) const;
+    
+    /** @brief Consulta los problemas a los que tiene acceso un Usuario y se los añade.
+
+      \pre El iterador del Conjunto_Usuarios aputna a un Usuario.
+      \post Se han consultado y añadido al Usuario apuntado por el iterador del Conjunto_Usuarios los problemas enviables a los que tiene acceso el Usuario pero no los había resuelto a partir de un Problema.
+    */
+    void obtener_problemas_enviables_i(const BinTree<string>& a, Conjunto_Usuarios& u) const;
+
+    /** @brief Añade los problemas de una Sesion a un Curso.
+      \pre <em>cierto</em>
+      \post Se han añadido los problemas de los que consta la Sesion al Curso.
+      */
     void anadir_problemas_a_curso_i(const BinTree<string>& a, Curso& c) const;
 };
 

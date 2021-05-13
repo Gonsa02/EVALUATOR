@@ -8,7 +8,6 @@
 #include "Conjunto_Sesiones.hh"
 
 #ifndef NO_DIAGRAM
-#include <map>
 #endif
 
 /** @class Conjunto_Cursos
@@ -22,21 +21,12 @@ public:
     //Modificadoras
     
     /** @brief Añade una Curso al Conjunto_Cursos.
-
     \pre El Curso cumple con la restricción de no repetición de problemas del mismo Curso.
     \post Se ha añadido el Curso "c" al parámetro implícito. 
     */
-    void anadir(const int& id, Curso& c);
-
-    /** @brief Actualiza un Curso del Conjunto_Cursos
-
-    \pre El Curso "c" existe en el parámetro implícito.
-    \post Se ha sustituido el Curso del parámetro implícito con el mismo identificador que "c" por "c".
-    */
-    void actualizar(const Curso& c);
+    void anadir(Curso& c);
 
     /** @brief Da de baja de un Curso.
-
       \pre Existe un Curso con identificador = "id_curso" en el parámetro implícito.
       \post Se ha decrementado el número de usuarios inscritos al Curso con identificador = "id_curso" del parámetro implícito.
       */
@@ -49,14 +39,12 @@ public:
     void inscribir_usuario_a_curso();
 
     /** @brief Iniciliza el iterador de un Curso.
-
      \pre El iterador del parámetro implícito apunta a un Curso del parámetro implícito.
      \post El iterador del Curso apuntado por el iterador del parámetro implícito apunta a la primera Sesión del Curso.
     */
     void curso_inizializar_iterador();
 
     /** @brief Incrementa el iterador de un Curso.
-
      \pre El iterador del parámetro implícito apunta a un Curso del parámetro implícito, dónde el apuntador del Curso no está apuntando a su final.
      \post El iterador del Curso apuntado por el iterador del parámetro implícito apunta a la siguiente Sesión del Curso.
     */
@@ -70,7 +58,6 @@ public:
     void apuntar(const int& id_p);
 
     /** @brief Incrementa el número de usuarios que han completado un Curso.
-
       \pre El iterador del parámetro implícito apunta a un Curso.
       \post Se ha incrementado en una unidad el número de usuarios que han completado el Curso apuntado por el parámetro implícito y se ha decrementado en una undiad el número de usuarios que están cursando el Curso actualmente.
       */
@@ -79,21 +66,12 @@ public:
     //Consultoras
     
     /** @brief Consulta si existe un Curso.
-
       \pre <em>cierto</em>
       \post El resultado indica si el parámetro implícito contiene un Curso con identificador identificador = "id" y además, en caso que exista el iterador del parámetro implícito apunta a ese Curso.
       */
     bool existe(const int& id);
     
-    /** @brief Obtiene el curso mediante identificador.
-
-    \pre Existe un Curso con identificador "id".
-    \post En el Curso "c" se encuentra el Curso con identificador "id" del parámetro implícito.
-    */
-    void obtener_con_id(const int& id, Curso& c);
-
     /** @brief Consulta el número de cursos que tiene el Conjunto_Cursos
-
       \pre <em>cierto</em>
       \post Retorna el número de cursos que tiene el parámetro implícito.
     */
@@ -106,8 +84,7 @@ public:
     bool curso_end() const;
 
     /** @brief Consulta la Sesión a la qual apunta el iterador de un Curso.
-
-      \pre El iterador del parámetro implícito apunta a un Curso que apunta a una Sesión.
+      \pre El iteradordel parámetro implícito apunta a un Curso que apunta a una Sesión.
       \post "id_s" = identificador de la Sesión apuntada por el iterador del Curso apuntado por el iterador del parámetro implícito.
       */
     void curso_sesion_iterador(string& id_s) const;
@@ -143,14 +120,13 @@ public:
     void listar() const;    
 
     /** @brief Escribe un Curso.
-
       \pre El iterador del parámetro implícito apunta a un Curso.
       \post Escribe el número de usuarios actuales o pasados que han completado el Curso apuntado por el iterador del parámetro implícito, el número de usuarios inscritos actualmente, el número de sesiones que lo forman y los identificadores de dichas sesiones, en el mimso orden en el que se leyeron cuando se creó el Curso.
       */
     void escribir_curso() const;
 
 private:
-    map<int,Curso> conj_c;
-    map<int,Curso>::iterator iterador;
+    vector<Curso> conj_c;
+    int iterador;
 };
-#endif
+#endif 

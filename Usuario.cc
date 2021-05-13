@@ -30,11 +30,6 @@ void Usuario::finalizar_curso()
     inscrito = false;
 }
 
-void Usuario::obtener_nombre(string& name) const
-{
-    name = nombre;
-}
-
 int Usuario::num_problemas_enviables() const
 {
     return pro_enviables.size();
@@ -50,23 +45,11 @@ int Usuario::curso() const
     return id_curso_inscrito;
 }
 
-bool Usuario::cumple_requisitos(const string& id_problema) const
-{
-    map<string,int>::const_iterator const_it = pro_enviables.find(id_problema);
-    if (const_it != pro_enviables.end()) return true;
-    else return false;
-}
-
 bool Usuario::problema_resuelto(const string& id_problema) const
 {
     map<string,int>::const_iterator const_it = pro_resueltos.find(id_problema);
     if (const_it == pro_resueltos.end()) return false;
     else return true;
-}
-
-bool Usuario::problema_intentado(const string& id_problema) const
-{
-    return  0 < pro_enviables.find(id_problema) -> second;
 }
 
 void Usuario::escribir_usuario() const

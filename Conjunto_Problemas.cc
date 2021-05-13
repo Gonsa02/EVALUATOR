@@ -50,6 +50,7 @@ void Conjunto_Problemas::inicializar()
 
 void Conjunto_Problemas::listar() const
 {
+    // Creamos un set auxiliar que nos ordenara los problemas por ratio para poder imprimirlos en el orden que necesitamos.
     set<Problema> aux;
     for (map<string, Problema>::const_iterator const_it = conj_p.begin(); const_it != conj_p.end(); ++const_it)
 	aux.insert(const_it -> second);

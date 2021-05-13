@@ -6,7 +6,6 @@
 #define _USUARIO_HH_
 
 #ifndef NO_DIAGRAM
-#include <set>
 #include <map>
 #include <iostream>
 using namespace std;
@@ -84,13 +83,6 @@ public:
 
     //Consultoras
 
-    /** @brief Consulta el nombre del Usuario
-
-      \pre El parámetro implícito tiene un nombre asignado.
-      \post "nombre" = el nombre del parámetro implícito.
-    */
-    void obtener_nombre(string& nombre) const; 
-
     /** @brief Consulta si el parámetro implícito está cursando un curso.
 	
 	\pre <em>cierto</em>
@@ -112,26 +104,12 @@ public:
       */
     int num_problemas_enviables() const;
 
-    /** @brief Consulta si un Usuario puede hacer un envio a un Problema.
-
-      \pre El parámetro implícito está cursando un Curso. En el parámetro "id_problema" se encuentra el identificador del problema el cual queremos consultar si el parámetro implícitopuede hacer un envio o no.
-      \post El resultado indica si el parametro implícito cumple los prerequisitos para poder hacer un envio al Problema con identificador = "id_problema".
-    */
-    bool cumple_requisitos(const string& id_problema) const;
-
     /** @brief Consulta si el Usuario ha resuelto un Problema.
 
       \pre <em>cierto</em>
       \post El resultado indica si el Usuario ha resuelto el Problema con identificador "id_problema".
       */
     bool problema_resuelto(const string& id_problema) const;
-
-    /** @brief Consulta si el Usuario ha intentado un Problema.
-
-      \pre <em>cierto</em>
-      \post El resultado indica si el Usuario ha intentado el Problema con identificador "id_problema".
-      */
-    bool problema_intentado(const string& id_problema) const;
 
     //Escritura
 

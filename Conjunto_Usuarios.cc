@@ -52,12 +52,6 @@ bool Conjunto_Usuarios::existe(const string& nombre)
     else return false;
 }
 
-void Conjunto_Usuarios::obtener(const string& nombre, Usuario &u)
-{
-    map<string, Usuario>::iterator it = conj_u.find(nombre);
-    u = it -> second;
-}
-
 int Conjunto_Usuarios::numero_usuarios() const
 {
     return conj_u.size();
@@ -65,8 +59,9 @@ int Conjunto_Usuarios::numero_usuarios() const
 
 bool Conjunto_Usuarios::usuario_inscrito_a_curso(int& id_c) const
 {
+    // Consultamos si el Usuario apuntado por el iterador esta inscrito a algun Curso.
     if (iterador -> second.inscrito_a_curso()) {
-	id_c = iterador -> second.curso();
+	id_c = iterador -> second.curso(); // Dejamos en id_c el identificador del Curso que está cursando.
 	return true;
     }
     else return false;

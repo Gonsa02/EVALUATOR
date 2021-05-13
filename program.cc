@@ -9,7 +9,6 @@ using namespace std;
 
 #include "Conjunto_Problemas.hh"
 #include "Conjunto_Cursos.hh"
-#include "Conjunto_Usuarios.hh"
 
 
 /** 
@@ -67,7 +66,7 @@ int main() {
 	    }
 	    if (cur.existe_interseccion()) cout << "error: curso mal formado" << endl;
 	    else {
-		conj_c.anadir(id, cur);
+		conj_c.anadir(cur);
 		cout << conj_c.tamano() << endl;
 	    }
 	}
@@ -110,6 +109,10 @@ int main() {
 		    conj_c.curso_sesion_iterador(id_s);
 		    conj_s.sesion_problemas_enviables_usuario(conj_u, id_s);
 		    conj_c.curso_incrementar_iterador();
+		}
+		if (conj_u.num_problemas_enviables_usuario() == 0) {
+		    conj_u.usuario_finaliza_curso();
+		    conj_c.usuario_finaliza_curso();
 		}
 		cout << conj_c.usuarios_actuales_curso() << endl;
 	    }

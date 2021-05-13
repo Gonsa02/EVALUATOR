@@ -20,11 +20,6 @@ void Problema::incrementar_envios_exitosos()
     actualizar_ratio();
 };
 
-void Problema::obtener_id(string& id_s) const
-{
-    id_s = id;
-}
-
 void Problema::escribir_problema() const
 {
     cout << id << '('<< env_totales << ',' << env_exito << "," << ratio << ')' << endl;
@@ -44,8 +39,6 @@ void Problema::actualizar_ratio()
 
 bool Problema::operator<(const Problema &p) const
 {
-    string id_p;
-    p.obtener_id(id_p);
     if (ratio != p.ratio) return ratio < p.ratio;
-    else return id < id_p;
+    else return id < p.id;
 }

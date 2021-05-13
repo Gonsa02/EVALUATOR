@@ -52,13 +52,18 @@ public:
     */
     int tamano() const;
 
-    /** @brief Consulta los problemas enviables y no resueltos de una Sesion y se los añade a un Usuario.
+    /** @brief Consulta los problemas a los que tiene acceso un Usuario pero no los ha resuelto de una Sesion y se los añade.
 
       \pre El iterador de conj_u apunta a un Usuario de su repositorio de Usuarios.
       \post Se han consultado y añadido los problemas enviables a los que tiene acceso el Usuario pero no los había resuelto de la sesión con identificador = "id_s".
       */
     void sesion_problemas_enviables_usuario(Conjunto_Usuarios& conj_u, const string& id_s) const;
 
+    /** @brief Consulta los problemas a los cuales el Usuario ha obtenido acceso por enviar un Problema correcto y se los añade al Usuario.
+     
+      /pre El iterador de conj_u apunta a un Usuario de su repositorio de Usuarios.
+      \post Se han consultado y añadido los problemas a los que el Usuario ha obtenido acceso por resolver el problema con identificador = "id_p" en la Sesion con identificador = "id_s".
+      */
     void sesion_problemas_envio_usuario(Conjunto_Usuarios& conj_u, const string& id_s, const string& id_p) const;
 
     /** @brief Añade los problemas de una Sesion a un Curso

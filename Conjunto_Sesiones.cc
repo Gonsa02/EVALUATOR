@@ -51,7 +51,7 @@ void Conjunto_Sesiones::inicializar()
 	string id;
 	cin >> id;
 	Sesion s(id);
-	s.leer();
+	s.leer(); // Lee la estructura de prerequisitos de la Sesion.
 	conj_s.emplace(make_pair(id, s));
     }
 }

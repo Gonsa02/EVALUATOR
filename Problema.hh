@@ -47,15 +47,6 @@ public:
     void incrementar_envios_exitosos();
 
 
-    //Consultoras
-
-    /** @brief Consulta el identificador del Problema.
-
-	\pre <em>cierto</em>
-	\post "id_p" = el identificador del parametro implícito.
-    */
-    void obtener_id(string& id_p) const;
-
     //Escritura i lectura de Problema
 
     /** @brief Operación de escritura
@@ -86,6 +77,12 @@ private:
     string id;
     int env_totales, env_exito;
     double ratio;
+    
+    /** @brief Actualiza el ratio de un Problema
+
+      \pre <em>cierto</em>
+      \post Se ha actualizado el ratio del parámetro implícito.
+      */
     void actualizar_ratio();
 };
 
