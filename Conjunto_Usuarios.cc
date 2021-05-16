@@ -1,3 +1,6 @@
+/** @file Conjunto_Usuarios.cc
+    @brief Implementación de la clase Conjunto_Usuarios
+*/
 #include "Conjunto_Usuarios.hh"
 
 void Conjunto_Usuarios::anadir(const string& nombre)

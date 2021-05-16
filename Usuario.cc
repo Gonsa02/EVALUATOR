@@ -1,3 +1,7 @@
+/** @file Usuario.cc
+    @brief Implementación de la clase Usuario
+*/
+
 #include "Usuario.hh"
 
 Usuario::Usuario(const string& nombre) {

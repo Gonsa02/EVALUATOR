@@ -11,10 +11,9 @@ using namespace std;
 #include "Conjunto_Cursos.hh"
 
 
-/** 
- @file main.cc
+/** @file main.cc
  @brief Programa principal para la <em>Gestión del EVALUATOR</em>.
- */
+*/
 
 int main() {
     Conjunto_Usuarios conj_u;
@@ -110,6 +109,7 @@ int main() {
 		    conj_s.sesion_problemas_enviables_usuario(conj_u, id_s);
 		    conj_c.curso_incrementar_iterador();
 		}
+		// Comprobamos que no haya completado todos los problemas del Curso si los ha ido haciendo en cursos anteriores
 		if (conj_u.num_problemas_enviables_usuario() == 0) {
 		    conj_u.usuario_finaliza_curso();
 		    conj_c.usuario_finaliza_curso();
@@ -149,7 +149,7 @@ int main() {
 	    string nombre;
 	    cin >> nombre;
 	    cout << '#' << c << ' ' << nombre << endl;
-	    int id_c; //para la función usuario_inscrito_a_curso
+	    int id_c; //para poder reutilizar la función usuario_inscrito_a_curso
 	    if (not conj_u.existe(nombre)) cout << "error: el usuario no existe" << endl;
 	    else if (not conj_u.usuario_inscrito_a_curso(id_c)) cout << "error: usuario no inscrito en ningun curso" << endl;
 	    else conj_u.usuario_escribir_problemas_enviables();

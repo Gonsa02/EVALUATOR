@@ -47,7 +47,7 @@ public:
     void incrementar_envios_exitosos();
 
 
-    //Escritura i lectura de Problema
+    //Escritura y lectura de Problema
 
     /** @brief Operación de escritura
 
@@ -74,8 +74,16 @@ public:
     bool operator<(const Problema &p) const;
 
 private:
+    /** @brief Guarda el identificador de un Problema.*/
     string id;
-    int env_totales, env_exito;
+
+    /** @brief Guarda el número de envios totales que le han hecho a se Problema.*/
+    int env_totales;
+
+    /** @brief Guarda el número de envios con éxito que le han hecho a se Problema.*/
+    int env_exito;
+
+    /** @brief Guarda el ratio del Problema. El ratio viene dado por la siguiente equación: (env_totales+1)/(env_exito+1).*/
     double ratio;
     
     /** @brief Actualiza el ratio de un Problema
@@ -84,6 +92,7 @@ private:
       \post Se ha actualizado el ratio del parámetro implícito.
       */
     void actualizar_ratio();
+
 };
 
 #endif

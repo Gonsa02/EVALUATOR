@@ -1,3 +1,6 @@
+/** @file Conjunto_Sesiones.cc
+    @brief Implementación de la clase Conjunto_Sesiones
+*/
 #include "Conjunto_Sesiones.hh"
 
 void Conjunto_Sesiones::anadir(const string& id_s, const Sesion& s)

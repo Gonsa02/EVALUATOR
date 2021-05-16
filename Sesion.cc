@@ -1,3 +1,7 @@
+/** @file Sesion.cc
+    @brief Implementación de la clase Sesion
+*/
+
 #include "Sesion.hh"
 #include "Conjunto_Usuarios.hh"
 

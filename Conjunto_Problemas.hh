@@ -91,7 +91,10 @@ public:
 
 
 private:
+    /** @brief Guarda el conjunto de Problemas con un diccionario que tiene como clave el identificador de un Problema y como valor la instáncia de la clase Problema con el mismo identificador que la clave del diccionario.*/
     map<string,Problema> conj_p;
+
+    /** @brief Iterador interno de la clase Conjunto_Problemas.*/
     map<string,Problema>::iterator iterador;
 };
 #endif

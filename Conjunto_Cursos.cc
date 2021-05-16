@@ -1,3 +1,7 @@
+/** @file Conjunto_Cursos.cc
+    @brief Implementación de la clase Conjunto_Cursos
+*/
+
 #include "Conjunto_Cursos.hh"
   
 void Conjunto_Cursos::anadir(Curso &c)

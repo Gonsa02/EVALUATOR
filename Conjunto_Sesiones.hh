@@ -98,7 +98,10 @@ public:
     void escribir_sesion() const;
 
 private:
+    /** @brief Guarda el conjunto de sesiones con un diccionario que tiene como clave el identificador de una Sesion y como valor la instáncia de la clase Sesion con el mismo identificador que la clave del diccionario.*/
     map<string,Sesion> conj_s;
+
+    /** @brief Iterador interno de la classe Conjunto_Sesiones. */
     map<string,Sesion>::const_iterator iterador;
 };
 #endif

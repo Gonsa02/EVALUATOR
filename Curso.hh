@@ -162,9 +162,25 @@ public:
     void valor(string& id_s) const;
 
 private:
-    int id, usuarios_curso_completado, usuarios_cursando_curso, iterador;
+    /** @brief Identificador de un Curso.*/
+    int id;
+    
+    /** @brief Guarda el número de usuarios que han completado el Curso.*/
+    int usuarios_curso_completado;
+
+    /** @brief Guarda el número de usuarios que actualmente están cursando el Curso.*/
+    int usuarios_cursando_curso; 
+
+    /** @brief Iterador interno del Curso para poder recorrer los identificadores de las sesiones que tiene un Curso.*/
+    int iterador;
+
+    /** @brief Indica si existe intersección entre los problemas que forman parte del Curso, és decir, si existen dos problemas iguales.*/
     bool interseccion;
+
+    /** @brief Guarda el conjunto de sesiones que conforman a un Curso.*/
     vector<string> id_conj_s;
+
+    /** @brief Diccionario que tiene como clave el identificador de un problema del Curso y como valor tiene el identificador de la Sesion a la cual pertenece en ese Curso.*/
     map<string,string> problema_sesion;
 };
 

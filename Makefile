@@ -7,10 +7,12 @@ object:
 	g++ -c *.cc $(OPCIONS)
 
 tar:
-	tar -cvf practica.tar *.hh *.cc Makefile
+	zip -r html.zip DOC/html
+	tar -cvf practica.tar *.hh *.cc Makefile html.zip
 
 clean:
 	rm *.o
 	rm *.exe
 	rm *.tar
+	rm *.zip
 	rm *.txt

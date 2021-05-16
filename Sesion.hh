@@ -70,8 +70,13 @@ public:
     void leer();
 
 private:
+    /** @brief Guarda el número de problemas que tiene una Sesion.*/
     int num_problemas;
+
+    /** @brief Guarda el identificador de una Sesion.*/
     string id;
+
+    /** @brief Guarda la estructura de prerequisitos de los problemas de la Sesion.*/
     BinTree<string> prerequisitos;
 
     /** @brief Operación de escritura de la estructura de prerequisitos de la Sesion

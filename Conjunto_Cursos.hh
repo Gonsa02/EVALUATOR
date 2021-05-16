@@ -126,7 +126,10 @@ public:
     void escribir_curso() const;
 
 private:
+    /** @brief Guarda el conjunto de Curso con un vector. Además este vector cuenta con la característica de que cada Curso de la posición v[i] será el Curso con identificador = i+1.*/
     vector<Curso> conj_c;
+
+    /** @brief Iterador interno de la clase Conjunto_Cursos.*/
     int iterador;
 };
 #endif 

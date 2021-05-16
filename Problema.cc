@@ -1,3 +1,7 @@
+/** @file Problema.cc
+    @brief Implementación de la clase Problema
+*/
+
 #include "Problema.hh"
 
 Problema::Problema(const string& id)

@@ -1,3 +1,7 @@
+/** @file Curso.cc
+    @brief Implementación de la clase Curso
+*/
+
 #include "Curso.hh"
 
 Curso::Curso()

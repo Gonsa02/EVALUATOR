@@ -159,7 +159,10 @@ public:
     void escribir_usuario() const;
 
 private:
+    /** @brief Guarda el conjunto de Usuarios con un diccionario que tiene como clave el nombre de un Usuario y como valor la instáncia de la clase Usuario con el mismo nombre que la clave del diccionario.*/
     map<string,Usuario> conj_u;
+
+    /** @brief Iterador interno de la classe Conjunto_Usuarios.*/
     map<string,Usuario>::iterator iterador;
 };
 #endif

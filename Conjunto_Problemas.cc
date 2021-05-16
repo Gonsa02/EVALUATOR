@@ -1,3 +1,7 @@
+/** @file Conjunto_Problemas.cc
+    @brief Implementación de la clase Conjunto_Problemas
+*/
+
 #include "Conjunto_Problemas.hh"
 
 void Conjunto_Problemas::anadir(const string& id_p, const Problema &p)

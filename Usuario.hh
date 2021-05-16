@@ -142,10 +142,25 @@ public:
     void leer();
 
 private:
-    int envios_totales, problemas_intentados, id_curso_inscrito;
+    /** @brief Guarda el número de envios totales que ha hecho un Usuario. */
+    int envios_totales;
+
+    /** @brief Guarda en número de problemas que ha intentado un Usuario. */
+    int problemas_intentados;
+
+    /** @brief Guarda en el identificador de un Curso en el cual un Usuario está inscrito en caso de que este inscrito en algún Curso. */
+    int id_curso_inscrito;
+
+    /** @brief Guarda si un Usuario de la clase está inscrito en algún Curso o no.*/
     bool inscrito;
+
+    /** @brief Guarda el nombre que tiene un Usuario.*/
     string nombre;
+
+    /** @brief Diccionario que guarda como clave el identificador de los problemas ya resueltos de un Usuario y como valor guarda el número de intentos que ha hecho al Problema con ese identificador. */
     map<string,int> pro_resueltos;
+
+    /** @brief Diccionario que guarda como clave el identificador de los problemas a los cuales el Usuario ya puede hacer un envio pero que todavía no ha resuelto y como valor guarda el número de intentos que ha hecho al Problema con ese indentificador. */
     map<string,int> pro_enviables;
 };
 
